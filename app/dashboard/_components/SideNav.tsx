@@ -49,7 +49,7 @@ function SideNav() {
 
       <hr className="my-6 border" />
 
-      <div className="mt-10">
+      <div className="mt-3">
         {MenuList.map((menu, index) => (
           <div  className={`flex gap-2 mb-2 p-3 hover:bg-primary hover:text-white rounded-lg cursor-pointer items-center
             ${path === menu.path&& 'bg-primary text-white'}
