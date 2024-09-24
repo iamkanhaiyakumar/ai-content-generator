@@ -1,6 +1,6 @@
 export default  [
     {
-        name: 'Write Code',
+        name: 'Write the Code',
         desc: 'AI Model to generate programming code in any language',
         icon:'https://cdn-icons-png.flaticon.com/128/6062/6062646.png',
         category: 'Coding',
@@ -18,7 +18,7 @@ export default  [
         ]
     },
     {
-        name: 'Explain Code',
+        name: 'Explain the Code',
         desc: 'AI Model to explain programming code in any language',
         icon:'https://cdn-icons-png.flaticon.com/128/8488/8488751.png',
         category: 'Coding',
@@ -62,7 +62,7 @@ export default  [
         slug:'generate-blog-title',
         form:[
             {
-                label:'Enter your blog niche',
+                label:'Enter your blog ',
                 field:'input',
                 name:'niche',
                 required:true
