@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FromSection from "./_components/FromSection";
 import OutputSection from "./_components/OutputSection";
 import { TEMPLATE } from "../../_components/TemplateListSection";
@@ -13,6 +13,9 @@ import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment"; // Correct moment import
+import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
+import { useRouter } from "next/navigation";
+
 
 interface PROPS {
   params: {
@@ -28,8 +31,15 @@ function CreateNewContent(props: PROPS) {
   const [loading, setLoading] = useState(false);
   const [aiOutput, setAiOutput] = useState<string>("");
   const { user } = useUser();
-
+  const router = useRouter();
+  const{ totalUsage,setTotalUsage}=useContext(TotalUsageContext);
   const GenerateAIContent = async (formData: any) => {
+      if(totalUsage>=100000){
+          
+          console.log('Please upgrade your plan');
+          router.push('/dashboard/billing');
+          return;
+      }
     setLoading(true);
 
     try {

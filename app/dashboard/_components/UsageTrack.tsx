@@ -41,7 +41,7 @@ function UsageTrack() {
         <h2 className='font-medium'>Credits</h2>
         <div className='h-2 bg-[#9981f9] w-full rounded-full mt-3'>
           <div className='h-2 bg-white rounded-full ' style={
-            { width: (totalUsage/10000000)*100+"%" }
+            { width: (totalUsage/100000)*100+"%" }
           }> </div>
         </div>
         <h2 className='text-sm my-2'>{totalUsage}/100,000 credit used</h2>
