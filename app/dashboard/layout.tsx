@@ -1,24 +1,34 @@
-import React from 'react'
+"use client"; // Enables client-side rendering for this component
+
+import React, { useState } from 'react';
 import SideNav from './_components/SideNav';
 import Header from './_components/Header';
+import { TotalUsageContext } from '../(context)/TotalUsageContext';
 
-function layout({
-    children,
-  }: Readonly<{
-    children: React.ReactNode;
-  }>) {
-  return (
-    <div className='h-screen'>
-      <div className= 'md:w-64 hidden md:block fixed'>
-        <SideNav />
-      </div>
-      <div className = 'md:ml-64'>
-        <Header/>
-        {children}
-      </div>
-        
-    </div>
-  )
+interface LayoutProps {
+  children: React.ReactNode;
 }
 
-export default layout
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  // Initialize state for total usage
+  const [totalUsage, setTotalUsage] = useState<number>(0);
+
+  return (
+    <TotalUsageContext.Provider value={{ totalUsage, setTotalUsage }}>
+      <div className="h-screen flex">
+        {/* Sidebar for larger screens */}
+        <aside className="md:w-64 hidden md:block fixed">
+          <SideNav />
+        </aside>
+
+        {/* Main content area */}
+        <div className="flex-1 md:ml-64">
+          <Header />
+          <main>{children}</main>
+        </div>
+      </div>
+    </TotalUsageContext.Provider>
+  );
+};
+
+export default Layout;
