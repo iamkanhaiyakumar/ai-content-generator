@@ -7,14 +7,14 @@ body:
     id: description
     attributes:
       label: Description
-      description: A clear and concise description of any alternative solution or features you've considered.
+      description: A clear and concise description of any alternative solutions or features you've considered.
     validations:
       required: true
   - type: textareas
     id: screenshots
     attributes:
       label: Screenshots
-      description: Please add screenshots if applicable
+      description: Please add screenshots if applicable.
     validations:
       required: false
   - type: checkboxes
@@ -24,11 +24,11 @@ body:
       options:
         - label: 'I have checked the existing issues'
           required: true
-
         - label: 'I have read the [Contributing Guidelines](https://github.com/YadavAkhileshh/Alien-Invasion-Defense/blob/main/Code_Of_Conduct.md)'
           required: true
         - label: "I'm a GSSoC'24-Extd contributor"
+          required: false
         - label: "I'm a Hacktoberfest'24 contributor"
-
+          required: false
         - label: 'I am willing to work on this issue (optional)'
           required: false
