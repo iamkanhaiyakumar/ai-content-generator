@@ -1,12 +1,9 @@
 import Template from "@/app/(data)/Template";       
-import { Button } from "@/components/ui/button";
 import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
 import { currentUser } from '@clerk/nextjs/server'
 import { desc, eq } from 'drizzle-orm';
-import Image from "next/image";
 import React from "react";
-import { TEMPLATE } from "@/app/dashboard/_components/TemplateListSection";
 
 export interface HISTORY{
     forEach(arg0: (element: any) => void): unknown;
@@ -40,7 +37,7 @@ async function History(){
         </div>
     );
 }
-
+export default History;
 
 
 
