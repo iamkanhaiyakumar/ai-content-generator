@@ -83,6 +83,37 @@ npm run build
 npm start
 ```
 
+## 📦 Settingup NeonDB  and Clerk 
+
+
+1. Go to [Neon](https://neon.tech/) and sign up for a new account or log in if you already have one.
+
+### Step 2: Create a Database
+1. In your Neon dashboard, click on **Create Database**.
+2. Enter a name for your database and select your preferred region.
+3. Click on **Create** to provision your new database.
+4. Choose next.js and go to tab .env just below and copy the 'DATABASE_URL'
+5. Update your `.env.local` file to include the connection string:
+
+
+## Creating Clerk 
+1. Create application in [Clerk](https://clerk.com/)
+2. Choose next.js
+3. In second step copy all the content of .env.local from ***clerk*** platform
+4. Paste it in .env.local in your local machine
+
+
+
+
+## .env.local
+ 1. NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY"
+ 2. CLERK_SECRET_KEY="your-CLERK_SECRET_KEY"
+
+ 3. NEXT_PUBLIC_DATABASE_URL = "neonDB datbase url"
+
+
+
+
  ## 🛠️ Contributing Guide
 
 We welcome contributions to the **videocall webapp** project! To contribute:
