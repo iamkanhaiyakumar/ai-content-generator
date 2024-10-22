@@ -60,6 +60,7 @@
 ├── postcss.config.mjs
 ├── public/
 │   └── logo.svg
+├── repo_structure.txt
 ├── tailwind.config.ts
 ├── tsconfig.json
 └── utils/
