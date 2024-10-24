@@ -17,6 +17,10 @@
 ![Visitors Count](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fiamkanhaiyakumar2023%2Fai-content-generator&label=visitors&countColor=%2337d67a&style=flat&labelStyle=upper)
 </p>
 
+## Project Structure ✨
+
+Check the project structure here [Project Structure](PROJECT_STRUCTURE.md)
+
 ## Table of Contents 
 1. [Introduction](#introduction)
 2. [Tech Stack](#tech-stack)
