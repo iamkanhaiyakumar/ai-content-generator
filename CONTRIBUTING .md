@@ -1,32 +1,134 @@
-
-# Contributing to AI Content Generator
+# Contributing to AI Content Generator 🎯
 
 First off, thanks for taking the time to contribute! This document explains the process and guidelines for contributing to the **AI Content Generator** repository.
 
-## Table of Contents
+<br>
+
+# Code of Conduct 📃
+
+Please read and follow our [Code of Conduct.](https://github.com/iamkanhaiyakumar/ai-content-generator/blob/master/CODE_OF_CONDUCT.md)
+
+<br>
+
+# <h1 align="center">Star our Repository ⭐</h1>
+
+### <div align = "center" style = "display:flex; justify-content:space-evenly; gap:100px;" > [![Stars](https://img.shields.io/github/stars/iamkanhaiyakumar/ai-content-generator?style=for-the-badge&logo=github)](https://github.com/iamkanhaiyakumar/ai-content-generator/stargazers) [![Forks](https://img.shields.io/github/forks/iamkanhaiyakumar/ai-content-generator?style=for-the-badge&logo=github)](https://github.com/iamkanhaiyakumar/ai-content-generator/network/members) [![Issues](https://img.shields.io/github/issues/iamkanhaiyakumar/ai-content-generator?style=for-the-badge&logo=github)](https://github.com/iamkanhaiyakumar/ai-content-generator/issues) [![PRs Open](https://img.shields.io/github/issues-pr/iamkanhaiyakumar/ai-content-generator?style=for-the-badge&logo=github)](https://github.com/iamkanhaiyakumar/ai-content-generator/pulls) [![PRs Closed](https://img.shields.io/github/issues-pr-closed/iamkanhaiyakumar/ai-content-generator?style=for-the-badge&logo=github&color=2cbe4e)](https://github.com/iamkanhaiyakumar/ai-content-generator/pulls?q=is%3Apr+is%3Aclosed)</div>
+
+<br>
+
+# Need Help With The Basics? 🤔
+
+If you're new to Git and GitHub, no worries! Here are some useful resources:
+
+- [Forking a Repository](https://help.github.com/en/github/getting-started-with-github/fork-a-repo)
+- [Cloning a Repository](https://help.github.com/en/desktop/contributing-to-projects/creating-an-issue-or-pull-request)
+- [How to Create a Pull Request](https://opensource.com/article/19/7/create-pull-request-github)
+- [Getting Started with Git and GitHub](https://towardsdatascience.com/getting-started-with-git-and-github-6fcd0f2d4ac6)
+- [Learn GitHub from Scratch](https://docs.github.com/en/get-started/start-your-journey/git-and-github-learning-resources)
+
+<br>
+
+# Table of Contents
 1. [How Can I Contribute?](#how-can-i-contribute)
-   - [Reporting Issues](#reporting-issues)
-   - [Submitting Pull Requests](#submitting-pull-requests)
-   - [Improving Documentation](#improving-documentation)
-2. [Code Style Guidelines](#code-style-guidelines)
-3. [Commit Message Guidelines](#commit-message-guidelines)
-4. [Git Workflow: Step-by-Step](#git-workflow-step-by-step)
-5. [Setting Up Development Environment](#setting-up-development-environment)
+   - [First Pull Request](#first-pull-request-)
+   - [Alternate Method To Contribute](#alternatively-contribute-using-github-desktop-️)
+   - [Submitting Pull Requests](#submitting-pull-requests-)
+   - [Reporting Issues](#reporting-issues-)
+   - [Improving Documentation](#improving-documentation-)
+2. [Good Coding Practices](#good-coding-practices-)
+3. [Commit Message Guidelines](#commit-message-guidelines-)
+4. [Help And Support](#for-help-and-support-)
+5. [Setting Up Development Environment](#setting-up-development-environment-)
 
-## How Can I Contribute?
+<br>
 
-### Reporting Issues
+# How Can I Contribute?
 
-If you've found a bug or have a suggestion for a new feature:
-1. **Check existing issues** to ensure it hasn’t been reported yet.
-2. **Create a new issue** and provide detailed information:
-   - A clear title.
-   - Detailed steps to reproduce the bug (if applicable).
-   - Any relevant screenshots or logs.
-   - Your environment (e.g., operating system, version of the AI Content Generator).
-3. Use labels like `bug`, `enhancement`, `question`, etc. to categorize your issue.
+## First Pull Request ✨
 
-### Submitting Pull Requests
+1. **Star this repository**
+    Click on the top right corner marked as **Stars** at last.
+
+2. **Fork this repository**
+    Click on the top right corner marked as **Fork** at second last.
+
+3. **Clone the forked repository**
+
+```bash
+git clone https://github.com/<your-github-username>/ai-content-generator.git
+```
+  
+4. **Navigate to the project directory**
+
+```bash
+cd ai-content-generator
+```
+
+5. **Create a new branch**
+
+```bash
+git checkout -b <your_branch_name>
+```
+
+6. **To make changes**
+
+```bash
+git add .
+```
+
+7. **Now to commit**
+
+```bash
+git commit -m "add comment according to your changes or addition of features inside this"
+```
+
+8. **Push your local commits to the remote repository**
+
+```bash
+git push -u origin <your_branch_name>
+```
+
+9. **Create a Pull Request**
+
+10. **Congratulations! 🎉 you've made your contribution**
+
+
+## Alternatively, contribute using GitHub Desktop 🖥️
+
+1. **Open GitHub Desktop:**
+  Launch GitHub Desktop and log in to your GitHub account if you haven't already.
+
+2. **Clone the Repository:**
+- If you haven't cloned the project repository yet, you can do so by clicking on the "File" menu and selecting "Clone Repository."
+- Choose the project repository from the list of repositories on GitHub and clone it to your local machine.
+
+3.**Switch to the Correct Branch:**
+- Ensure you are on the branch that you want to submit a pull request for.
+- If you need to switch branches, you can do so by clicking on the "Current Branch" dropdown menu and selecting the desired branch.
+
+4. **Make Changes:**
+- Make your changes to the code or files in the repository using your preferred code editor.
+
+5. **Commit Changes:**
+- In GitHub Desktop, you'll see a list of the files you've changed. Check the box next to each file you want to include in the commit.
+- Enter a summary and description for your changes in the "Summary" and "Description" fields, respectively. Click the "Commit to <branch-name>" button to commit your changes to the local branch.
+
+6. **Push Changes to GitHub:**
+- After committing your changes, click the "Push origin" button in the top right corner of GitHub Desktop to push your changes to your forked repository on GitHub.
+
+7. **Create a Pull Request:**
+- Go to the GitHub website and navigate to your fork of the project repository.
+- You should see a button to "Compare & pull request" between your fork and the original repository. Click on it.
+
+8. **Review and Submit:**
+- On the pull request page, review your changes and add any additional information, such as a title and description, that you want to include with your pull request.
+- Once you're satisfied, click the "Create pull request" button to submit your pull request.
+
+9. **Wait for Review:**
+Your pull request will now be available for review by the project maintainers. They may provide feedback or ask for changes before merging your pull request into the main branch of the project repository.
+
+
+## Submitting Pull Requests 🚀
 
 If you're ready to submit code to fix an issue or add a new feature:
 1. **Fork the repository** and clone it locally.
@@ -36,27 +138,61 @@ If you're ready to submit code to fix an issue or add a new feature:
 5. Push your branch to your forked repo and open a Pull Request (PR) on the original repo.
 6. Wait for feedback or approval from maintainers.
 
-### Improving Documentation
+## Reporting Issues 📌
+
+If you've found a bug or have a suggestion for a new feature:
+
+1. **Check existing issues** to ensure it hasn’t been reported yet. [Issues](https://github.com/iamkanhaiyakumar/ai-content-generator/issues/new/choose)
+2. **Create a new issue** and provide detailed information:
+   - A clear title.
+   - Detailed steps to reproduce the bug (if applicable).
+   - Any relevant screenshots or logs.
+   - Your environment (e.g., operating system, version of the AI Content Generator).
+3. Use labels like `bug`, `enhancement`, `question`, etc. to categorize your issue.
+
+## Improving Documentation 📖
 
 If you notice a typo, missing information, or outdated content in the documentation:
 1. **Create an issue** or **submit a pull request** directly with your changes.
 2. Ensure any new sections follow the existing documentation style.
 
-## Code Style Guidelines
+<br>
 
-To maintain consistency and readability, please follow these guidelines:
-1. Use **consistent indentation** (e.g., 4 spaces for Python).
-2. Ensure your code is **well-documented** with inline comments, especially for complex functions.
-3. Adhere to the project's existing coding style and conventions.
-4. Run **linters** and **code formatters** to avoid formatting errors.
+# Good Coding Practices 🧑‍💻
 
-For Python:
-- Follow **PEP 8** coding standards.
+1. **Follow the Project's Code Style**
 
-For JavaScript (if applicable):
-- Use **ESLint** and format your code according to **Prettier** guidelines.
+   - Maintain consistency with the existing code style (indentation, spacing, comments).
+   - Use meaningful and descriptive names for variables, functions, and classes.
+   - Keep functions short and focused on a single task.
+   - Avoid hardcoding values; instead, use constants or configuration files when possible.
 
-## Commit Message Guidelines
+2. **Write Clear and Concise Comments**
+
+   - Use comments to explain why you did something, not just what you did.
+   - Avoid unnecessary comments that state the obvious.
+   - Document complex logic and functions with brief explanations to help others understand your thought -process.
+
+3. **Keep Code DRY (Don't Repeat Yourself)**
+
+   - Avoid duplicating code. Reuse functions, methods, and components whenever possible.
+   - If you find yourself copying and pasting code, consider creating a new function or component.
+
+4. **Write Tests**
+
+   - Write unit tests for your functions and components.
+   - Ensure your tests cover both expected outcomes and edge cases.
+   - Run tests locally before making a pull request to make sure your changes don’t introduce new bugs.
+
+5. **Code Reviews and Feedback**
+
+   - Be open to receiving constructive feedback from other contributors.
+   - Conduct code reviews for others and provide meaningful suggestions to improve the code.
+   - Always refactor your code based on feedback to meet the project's standards.
+
+<br>
+
+# Commit Message Guidelines 📋
 
 - Use clear, descriptive commit messages.
 - **Format**:
@@ -71,109 +207,63 @@ Fix issue with AI response timeout
 Update documentation for installation instructions
 ```
 
-## Git Workflow: Step-by-Step
+<br>
 
-### Step 1: Fork the Repository
-To contribute, first **fork** the repository to your own GitHub account.
-1. Navigate to the repository on GitHub.
-2. Click the `Fork` button at the top right corner.
-3. This creates a copy of the repository under your own GitHub account.
+# For Help And Support 💬
 
-### Step 2: Clone the Forked Repository
-Once forked, clone the repository to your local machine:
-```bash
-git clone https://github.com/<your-username>/ai-content-generator.git
-cd ai-content-generator
-```
+- Admin Github Profile:- [Kanhaiya Kumar](https://github.com/iamkanhaiyakumar)
+- Contact :- [Email](kanhaiyak0104@gmail.com)
 
-### Step 3: Add the Original Repository as a Remote
-This ensures you can sync your fork with the original repository.
-```bash
-git remote add upstream https://github.com/iamkanhaiyakumar/ai-content-generator.git
-```
+<br>
 
-### Step 4: Create a New Branch
-Always create a new branch for your contributions instead of working directly on the `main` branch.
-```bash
-git checkout -b feature/your-feature-name
-```
-
-### Step 5: Make Your Changes
-Make your changes locally. After making changes, check which files have been modified:
-```bash
-git status
-```
-
-### Step 6: Stage the Changes
-Stage the files you’ve modified or added for commit:
-```bash
-git add <file-name>  # To add specific files
-git add .            # To add all modified files
-```
-
-### Step 7: Commit Your Changes
-Commit your changes with a clear and descriptive message:
-```bash
-git commit -m "Add feature to generate multiple content types"
-```
-
-### Step 8: Push Your Changes to Your Forked Repository
-Once committed, push the changes to your forked repository:
-```bash
-git push origin feature/your-feature-name
-```
-
-### Step 9: Create a Pull Request (PR)
-1. Visit your forked repository on GitHub.
-2. Click the **Compare & Pull Request** button.
-3. Provide a detailed description of what your pull request does and link to any related issues.
-
-### Step 10: Sync Your Fork (Optional)
-If the original repository has been updated since you forked it, you need to sync your fork:
-1. Fetch the changes from the upstream repository:
-   ```bash
-   git fetch upstream
-   ```
-2. Merge the changes into your `main` branch:
-   ```bash
-   git checkout main
-   git merge upstream/main
-   ```
-
-### Step 11: Push Merged Changes to Your Fork
-After merging, push the updated `main` branch back to your fork:
-```bash
-git push origin main
-```
-
-## Setting Up Development Environment
+# Setting Up Development Environment 🔧
 
 To get started with the project locally, follow these steps:
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/iamkanhaiyakumar/ai-content-generator.git
+   ```
+
+   ```bash
    cd ai-content-generator
    ```
 
 2. **Install dependencies** (if applicable):
+
    ```bash
    pip install -r requirements.txt  # For Python dependencies
+   ```
+
+   ```bash
    npm install                      # For Node.js dependencies (if applicable)
    ```
 
 3. **Run tests** to ensure everything is set up properly:
+
    ```bash
-   pytest   # If using Python's pytest for testing
-   npm test # If using JavaScript/Node.js
+   pytest      # If using Python's pytest for testing
+   ```
+
+   ```bash
+   npm test    # If using JavaScript/Node.js
    ```
 
 4. **Run the application** to verify your environment setup:
+
    ```bash
    python app.py     # For Python-based projects
+   ```
+
+   ```bash
    npm start         # For JavaScript-based projects
    ```
 
----
+<br>
 
-Feel free to submit an issue or a pull request if you need help! Thanks for contributing to **AI Content Generator**.
+# Thank you for contributing 💗
+
+We truly appreciate your time and effort to help improve our project. Feel free to reach out if you have any questions or need guidance. Happy coding! 🚀
+
+##
