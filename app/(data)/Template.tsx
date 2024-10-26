@@ -352,7 +352,7 @@ export default  [
         name: 'Book Recommender',
         desc: 'An AI tool to recommend books based on your favorite genres, authors, or books you have enjoyed.',
         category: 'Helper',
-        icon: "https://cdn-icons-png.flaticon.com/128/679/679922.png",
+        icon: "https://img.icons8.com/emoji/48/books-emoji.png",
         aiPrompt: 'Recommend books based on the givenGenres, givenAuthors, and givenBooks. Provide links to reviews and summaries.',
         slug: 'book-recommender',
         form: [
@@ -376,7 +376,83 @@ export default  [
             }
         ]
     },
-
+    {
+    name: 'Blog Title Generator',
+    desc: 'Suggests attention-grabbing blog titles based on a topic.',
+    category: 'Writing Tools',
+    icon: "https://img.icons8.com/color/50/blog.png",
+    aiPrompt: 'Generate blog titles based on the givenTopic. Provide multiple suggestions.',
+    slug: 'blog-title-generator',
+    form: [
+        {
+            label: 'Topic',
+            field: 'input',
+            name: 'givenTopic',
+            required: true
+        }
+    ]
+},
+{
+    name: 'Email Tone Checker',
+    desc: 'Analyzes email content to ensure it conveys the intended tone (e.g., formal, friendly, persuasive).',
+    category: 'Writing Tools',
+    icon: "https://img.icons8.com/fluency/48/mail--v1.png",
+    aiPrompt: 'Analyze the givenEmailContent and provide feedback on the tone. Suggest improvements if necessary.',
+    slug: 'email-tone-checker',
+    form: [
+        {
+            label: 'Email Content',
+            field: 'textarea',
+            name: 'givenEmailContent',
+            required: true
+        },
+        {
+            label: 'Intended Tone',
+            field: 'select',
+            name: 'intendedTone',
+            options: ['Formal', 'Friendly', 'Persuasive'],
+            required: true
+        }
+    ]
+},
+{
+    name: 'Paragraph Rephraser',
+    desc: 'Rewrites a paragraph while maintaining the original meaning.',
+    category: 'Writing Tools',
+    icon: "https://img.icons8.com/clouds/100/paragraph.png",
+    aiPrompt: 'Rephrase the givenParagraph while maintaining its original meaning.',
+    slug: 'paragraph-rephraser',
+    form: [
+        {
+            label: 'Paragraph',
+            field: 'textarea',
+            name: 'givenParagraph',
+            required: true
+        }
+    ]
+},
+{
+    name: 'Paraphrase Detector',
+    desc: 'Checks if two pieces of content are paraphrased versions of each other, useful for plagiarism checks.',
+    category: 'Writing Tools',
+    icon: "https://img.icons8.com/clouds/100/hand-with-pen.png",
+    aiPrompt: 'Check if the givenContent1 and givenContent2 are paraphrased versions of each other.',
+    slug: 'paraphrase-detector',
+    form: [
+        {
+            label: 'Content 1',
+            field: 'textarea',
+            name: 'givenContent1',
+            required: true
+        },
+        {
+            label: 'Content 2',
+            field: 'textarea',
+            name: 'givenContent2',
+            required: true
+        }
+    ]
+}
 
 
 ]
