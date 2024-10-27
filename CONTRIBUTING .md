@@ -233,28 +233,16 @@ To get started with the project locally, follow these steps:
 2. **Install dependencies** (if applicable):
 
    ```bash
-   pip install -r requirements.txt  # For Python dependencies
-   ```
-
-   ```bash
    npm install                      # For Node.js dependencies (if applicable)
    ```
 
 3. **Run tests** to ensure everything is set up properly:
 
    ```bash
-   pytest      # If using Python's pytest for testing
-   ```
-
-   ```bash
    npm test    # If using JavaScript/Node.js
    ```
 
 4. **Run the application** to verify your environment setup:
-
-   ```bash
-   python app.py     # For Python-based projects
-   ```
 
    ```bash
    npm start         # For JavaScript-based projects
