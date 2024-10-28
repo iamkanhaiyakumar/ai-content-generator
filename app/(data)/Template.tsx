@@ -528,4 +528,243 @@ export default [
       },
     ],
   },
+  {
+    name: "Homework Helper",
+    desc: "Assists students with their homework by providing explanations and solutions to various subjects.",
+    category: "Education and Assistance Tools",
+    icon: "https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-homework-university-flaticons-flat-flat-icons-3.png", 
+    aiPrompt:
+      "Provide explanations and solutions for the givenHomeworkQuestion.",
+    slug: "homework-helper",
+    form: [
+      {
+        label: "Homework Question",
+        field: "textarea",
+        name: "givenHomeworkQuestion",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "Dialogue Maker",
+    desc: "Generates engaging dialogues for stories, scripts, and other creative writing projects.",
+    category: "Education and Assistance Tools",
+    icon: "https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/external-dialogue-support-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png", 
+    aiPrompt:
+      "Generate a dialogue based on the givenCharacters and givenScenario.",
+    slug: "dialogue-maker",
+    form: [
+      {
+        label: "Characters",
+        field: "input",
+        name: "givenCharacters",
+        required: true,
+      },
+      {
+        label: "Scenario",
+        field: "textarea",
+        name: "givenScenario",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "Write a X (Twitter) Post",
+    desc: "Creates engaging and concise posts for Twitter to increase visibility and engagement.",
+    category: "Social Media and Writing Tools",
+    icon: "https://img.icons8.com/glassmorphism/48/twitterx.png",
+    aiPrompt:
+      "Generate a Twitter post based on the givenTopic and givenKeywords.",
+    slug: "write-a-twitter-post",
+    form: [
+      {
+        label: "Topic",
+        field: "input",
+        name: "givenTopic",
+        required: true,
+      },
+      {
+        label: "Keywords",
+        field: "input",
+        name: "givenKeywords",
+        required: false,
+      },
+    ],
+  },
+  {
+    name: "LinkedIn Post Generator",
+    desc: "Generates professional LinkedIn posts to enhance your professional presence and engagement.",
+    category: "Social Media and Writing Tools",
+    icon: "https://img.icons8.com/color/50/linkedin.png", 
+    aiPrompt:
+      "Generate a LinkedIn post based on the givenTopic and givenKeywords.",
+    slug: "linkedin-post-generator",
+    form: [
+      {
+        label: "Topic",
+        field: "input",
+        name: "givenTopic",
+        required: true,
+      },
+      {
+        label: "Keywords",
+        field: "input",
+        name: "givenKeywords",
+        required: false,
+      },
+    ],
+  },
+  {
+    name: "Schedule Maker",
+    desc: "Helps you create a daily or weekly schedule to manage your time effectively.",
+    category: "Lifestyle and Routine Tools",
+    icon: "https://img.icons8.com/fluency/48/overtime--v1.png", 
+    aiPrompt: "Create a schedule based on the givenTasks and givenTimeFrame.",
+    slug: "schedule-maker",
+    form: [
+      {
+        label: "Tasks",
+        field: "textarea",
+        name: "givenTasks",
+        required: true,
+      },
+      {
+        label: "Time Frame",
+        field: "input",
+        name: "givenTimeFrame",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "Workout Buddy",
+    desc: "Generates personalized workout plans to help you stay fit and healthy.",
+    category: "Lifestyle and Routine Tools",
+    icon: "https://img.icons8.com/external-smashingstocks-flat-smashing-stocks/66/external-Workout-fitness-smashingstocks-flat-smashing-stocks-3.png", 
+    aiPrompt:
+      "Generate a workout plan based on the givenFitnessGoals and givenPreferences.",
+    slug: "workout-buddy",
+    form: [
+      {
+        label: "Fitness Goals",
+        field: "input",
+        name: "givenFitnessGoals",
+        required: true,
+      },
+      {
+        label: "Preferences",
+        field: "textarea",
+        name: "givenPreferences",
+        required: false,
+      },
+    ],
+  },
+  {
+    name: "Recipe Generator",
+    desc: "Creates delicious recipes based on the ingredients you have and your dietary preferences.",
+    category: "Lifestyle and Routine Tools",
+    icon: "https://img.icons8.com/stickers/50/cooking-book.png",
+    aiPrompt:
+      "Generate a recipe based on the givenIngredients and givenDietaryPreferences.",
+    slug: "recipe-generator",
+    form: [
+      {
+        label: "Ingredients",
+        field: "textarea",
+        name: "givenIngredients",
+        required: true,
+      },
+      {
+        label: "Dietary Preferences",
+        field: "input",
+        name: "givenDietaryPreferences",
+        required: false,
+      },
+    ],
+  },
+  {
+    name: "Language Converter",
+    desc: "Translates text from one language to another, helping you communicate effectively across languages.",
+    category: "Language and Grammar Tools",
+    icon: "https://img.icons8.com/arcade/64/language-skill.png",
+    aiPrompt:
+      "Translate the givenText from givenSourceLanguage to givenTargetLanguage.",
+    slug: "language-converter",
+    form: [
+      {
+        label: "Text",
+        field: "textarea",
+        name: "givenText",
+        required: true,
+      },
+      {
+        label: "Source Language",
+        field: "input",
+        name: "givenSourceLanguage",
+        required: true,
+      },
+      {
+        label: "Target Language",
+        field: "input",
+        name: "givenTargetLanguage",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "Synonym and Antonym Finder",
+    desc: "Finds synonyms and antonyms for words to enhance your vocabulary and writing.",
+    category: "Language and Grammar Tools",
+    icon: "https://img.icons8.com/fluency/48/dictionary.png", 
+    aiPrompt: "Find synonyms and antonyms for the givenWord.",
+    slug: "synonym-antonym-finder",
+    form: [
+      {
+        label: "Word",
+        field: "input",
+        name: "givenWord",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "Pro Writer",
+    desc: "Provides advanced writing assistance to help you craft professional and polished content.",
+    category: "Specialized Writing and Content Creation Tools",
+    icon: "https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-writer-professions-flaticons-flat-flat-icons-2.png", 
+    aiPrompt:
+      "Provide advanced writing assistance for the givenText to make it more professional and polished.",
+    slug: "pro-writer",
+    form: [
+      {
+        label: "Text",
+        field: "textarea",
+        name: "givenText",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "Content Writer",
+    desc: "Helps you create high-quality content for blogs, articles, and other writing projects.",
+    category: "Specialized Writing and Content Creation Tools",
+    icon: "https://img.icons8.com/fluency/48/libre-office-writer.png", 
+    aiPrompt:
+      "Generate high-quality content based on the givenTopic and givenKeywords.",
+    slug: "content-writer",
+    form: [
+      {
+        label: "Topic",
+        field: "input",
+        name: "givenTopic",
+        required: true,
+      },
+      {
+        label: "Keywords",
+        field: "input",
+        name: "givenKeywords",
+        required: false,
+      },
+    ],
+  },
 ];
