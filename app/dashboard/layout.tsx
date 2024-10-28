@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import SideNav from './_components/SideNav';
 import Header from './_components/Header';
 import { TotalUsageContext } from '../(context)/TotalUsageContext';
+import ChatbotEmbed from '@/components/ui/Chatbot';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -27,6 +28,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <main>{children}</main>
         </div>
       </div>
+      <ChatbotEmbed />
     </TotalUsageContext.Provider>
   );
 };
