@@ -49,6 +49,7 @@
 │   └── page.tsx
 ├── components/
 │   └── ui/
+│       ├── Chatbot.tsx
 │       ├── button.tsx
 │       ├── input.tsx
 │       └── textarea.tsx
