@@ -17,6 +17,7 @@ import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import PublicHeader from "@/components/public-header";
 import PublicFooter from "@/components/public-footer";
+import FaqPage from "@/components/ui/faq";
 
 const words = [
   {
@@ -276,7 +277,7 @@ export default function LandingPage() {
           <BackgroundBeams />
         </section>
       </main>
-
+<FaqPage/>
       <PublicFooter />
     </div>
   );

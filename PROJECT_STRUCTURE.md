@@ -46,16 +46,24 @@
 │   │   └── GeistVF.woff
 │   ├── globals.css
 │   ├── layout.tsx
+│   ├── not-found.tsx
 │   └── page.tsx
 ├── components/
+│   ├── ChatbaseEmbed.tsx
+│   ├── public-footer.tsx
+│   ├── public-header.tsx
 │   └── ui/
-│       ├── Chatbot.tsx
+│       ├── background-beams.tsx
 │       ├── button.tsx
+│       ├── card.tsx
 │       ├── input.tsx
-│       └── textarea.tsx
+│       ├── sheet.tsx
+│       ├── textarea.tsx
+│       └── typewriter-effect.tsx
 ├── components.json
 ├── docker-compose.yml
 ├── drizzle.config.js
+├── global.d.ts
 ├── lib/
 │   └── utils.ts
 ├── middleware.ts
