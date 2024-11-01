@@ -172,6 +172,17 @@ HelpOps-Hub is proudly part of global initiatives engaging with passionate devel
 </p>
 </div>
 
+
+## 👥 Maintainers
+
+<p align="">
+  <a href="https://github.com/GauravKesh" target = "_blank">
+    <img src="https://avatars.githubusercontent.com/GauravKesh" alt="Gaurav Kesh" width="40" height="40" style="border-radius: 50%;"/>
+  </a>
+</p>
+
+
+
 ## 📑Code Of Conduct
 
 This project and everyone participating in it is governed by the [Code of Conduct](https://github.com/vansh-codes/Gityzer/blob/master/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
