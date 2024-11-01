@@ -3,6 +3,13 @@ import Template from '../../(data)/Template'; // assuming this exports an array 
 import React, { useEffect, useState } from 'react';
 import TemplateCard from './TemplateCard';
 
+// In TemplateListSection.tsx or wherever TEMPLATE is defined
+export const TEMPLATE = [
+  { slug: 'template1', name: 'Template 1' },
+  { slug: 'template2', name: 'Template 2' },
+  // Add more templates as needed
+];
+
 
 export interface TEMPLATE {
   name: string;
