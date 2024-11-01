@@ -1,4 +1,6 @@
 import { pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
+// Verify the schema file is in the utils directory
+import * as schema from '@/utils/schema'; // Update as needed
 
 export const AIOutput=pgTable('aiOutput',{
     id:serial('id').primaryKey(),

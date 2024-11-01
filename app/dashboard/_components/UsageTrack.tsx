@@ -1,5 +1,8 @@
 "user client"
-import { Button } from '@/components/ui/button'
+// Update this import path based on your directory structure
+import { Button } from '@/components/ui/button'; // Check if the file exists
+
+// import { Button } from '@/components/ui/button'
 import { db } from '@/utils/db';
 import { AIOutput } from '@/utils/schema';
 import { useUser } from '@clerk/nextjs'
