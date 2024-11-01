@@ -10,7 +10,8 @@ import { TEMPLATE } from "@/app/dashboard/_components/TemplateListSection";
 
 
 export interface HISTORY {
-  id: number;z: any
+  forEach: any;
+  id: number;
   formData: string;
   aiResponse: string;
   templateSlug: string;
@@ -22,17 +23,37 @@ async function History() {
   const user = await currentUser();
 
   // Fetching the history list from the database
-  const HistoryList: HISTORY[] = (await db
+  type HISTORY = {
+    aiResponse: string;
+    createdAt: string;
+    id: number;
+    formData: string;
+    templateSlug: string;
+    createdBy: string;
+};
+
+// Fetching the history list from the database
+const HistoryList: HISTORY[] = (await db
     .select({
-      id: AIOutput.id,
-      formData: AIOutput.formData,
-      aiResponse: AIOutput.aiResponse,
-      templateSlug: AIOutput.tempalateSlug, // Correcting the typo here
-      createdBy: AIOutput.createdBy,
-      createdAt: AIOutput.createdAt,
+        id: AIOutput.id,
+        formData: AIOutput.formData,
+        aiResponse: AIOutput.aiResponse,
+        createdAt: AIOutput.createdAt,
+        templateSlug: AIOutput.tempalateSlug,
+        createdBy: AIOutput.createdBy,
     })
+
+  // const HistoryList: HISTORY[] = (await db
+  //   .select({
+  //     id: AIOutput.id,
+  //     formData: AIOutput.formData,
+  //     aiResponse: AIOutput.aiResponse,
+  //     templateSlug: AIOutput.tempalateSlug, // Correcting the typo here
+  //     createdBy: AIOutput.createdBy,
+  //     createdAt: AIOutput.createdAt,
+  //   })
     .from(AIOutput)
-    .where(eq(AIOutput.createdBy, user?.primaryEmailAddressId))
+    .where(eq(AIOutput.createdBy, user?.primaryEmailAddressId ?? ""))
     .orderBy(desc(AIOutput.createdAt))).map(item => ({
       ...item,
       aiResponse: item.aiResponse ?? "",
