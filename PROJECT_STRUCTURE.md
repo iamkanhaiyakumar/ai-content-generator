@@ -56,6 +56,7 @@
 │       ├── background-beams.tsx
 │       ├── button.tsx
 │       ├── card.tsx
+│       ├── faq.tsx
 │       ├── input.tsx
 │       ├── sheet.tsx
 │       ├── textarea.tsx
