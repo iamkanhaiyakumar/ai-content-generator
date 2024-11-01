@@ -17,9 +17,14 @@
 │   │       └── [[...sign-up]]/
 │   │           └── page.tsx
 │   ├── (context)/
-│   │   └── TotalUsageContext.tsx
+│   │   ├── TotalUsageContext.tsx
+│   │   ├── UpdateCreditUsageContext.tsx
+│   │   └── UserSubscriptionContext.tsx
 │   ├── (data)/
 │   │   └── Template.tsx
+│   ├── api/
+│   │   └── crate-subscription/
+│   │       └── route.js
 │   ├── dashboard/
 │   │   ├── _components/
 │   │   │   ├── Header.tsx
@@ -48,6 +53,7 @@
 │   ├── layout.tsx
 │   ├── not-found.tsx
 │   └── page.tsx
+├── button.tsx
 ├── components/
 │   ├── ChatbaseEmbed.tsx
 │   ├── public-footer.tsx
@@ -71,15 +77,17 @@
 ├── next.config.mjs
 ├── package-lock.json
 ├── package.json
+├── page.tsx
 ├── postcss.config.mjs
 ├── public/
 │   └── logo.svg
 ├── repo_structure.txt
 ├── tailwind.config.ts
 ├── tsconfig.json
-└── utils/
-    ├── AiModal.tsx
-    ├── db.tsx
-    └── schema.tsx
+├── utils/
+│   ├── AiModal.tsx
+│   ├── db.tsx
+│   └── schema.tsx
+└── vercel.json
 ```
 <!-- END_STRUCTURE -->
