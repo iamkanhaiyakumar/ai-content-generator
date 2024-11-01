@@ -17,6 +17,7 @@ import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
 import { useRouter } from "next/navigation";
 
 
+
 interface PROPS {
   params: {
     "template-slug": string;
@@ -32,9 +33,20 @@ function CreateNewContent(props: PROPS) {
   const [aiOutput, setAiOutput] = useState<string>("");
   const { user } = useUser();
   const router = useRouter();
-  const{ totalUsage,setTotalUsage}=useContext(TotalUsageContext);
+  const { totalUsage } = useContext(TotalUsageContext);
+  const [userSubscription, setUserSubscription] = useState(false); // Define userSubscription state
+  // const { updateCreditUsage, setUpdateCreditUsage } = useContext(UpdateCreditUsageContext);
+  
+  /**
+   * Used to generate  content from AI 
+   * @param formData 
+   * @returns 
+   */
+
+
+
   const GenerateAIContent = async (formData: any) => {
-      if(totalUsage>=100000){
+      if(totalUsage>=100000&&!userSubscription){
           
           console.log('Please upgrade your plan');
           router.push('/dashboard/billing');
@@ -57,6 +69,8 @@ function CreateNewContent(props: PROPS) {
       console.error("Error generating AI content:", error);
     } finally {
       setLoading(false);
+      
+      // setUpdateCreditUsage(Date.now());
     }
   };
 

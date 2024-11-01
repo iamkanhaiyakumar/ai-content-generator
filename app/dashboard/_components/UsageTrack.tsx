@@ -1,5 +1,8 @@
 "user client"
-import { Button } from '@/components/ui/button'
+// Update this import path based on your directory structure
+import { Button } from '@/components/ui/button'; // Check if the file exists
+
+// import { Button } from '@/components/ui/button'
 import { db } from '@/utils/db';
 import { AIOutput } from '@/utils/schema';
 import { useUser } from '@clerk/nextjs'
@@ -26,7 +29,7 @@ function UsageTrack() {
 
     const GetTotalUsage=(results:HISTORY)=>{
       let total:number=0;
-      results.forEach(element => {
+      results.forEach((element: { aiResponse: string | any[]; }) => {
         total=total+Number(element.aiResponse?.length)
     });
      setTotalUsage(total);
