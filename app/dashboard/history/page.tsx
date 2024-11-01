@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Template from "@/app/(data)/Template";
 import { Button } from "@/components/ui/button";
 import { db } from "@/utils/db";
@@ -5,8 +6,14 @@ import { AIOutput } from "@/utils/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { desc, eq } from "drizzle-orm";
 import Image from "next/image";
+=======
+import Template from "@/app/(data)/Template";       
+import { db } from "@/utils/db";
+import { AIOutput } from "@/utils/schema";
+import { currentUser } from '@clerk/nextjs/server'
+import { desc, eq } from 'drizzle-orm';
+>>>>>>> da9f43d58dda20c4dde4924d05e5d0bff2b8fab7
 import React from "react";
-import { TEMPLATE } from "@/app/dashboard/_components/TemplateListSection";
 
 export interface HISTORY {
   id: number;
@@ -77,7 +84,10 @@ async function History() {
     </div>
   );
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> da9f43d58dda20c4dde4924d05e5d0bff2b8fab7
 export default History;
 
 
