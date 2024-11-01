@@ -173,7 +173,7 @@ const FaqPage: React.FC = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-[#06090F] text-gray-900`}>
+    <div className={`min-h-screen bg-[#080C14] text-gray-900`}>
       <header className="w-full"></header>
 
       <section className="w-full py-12 px-4 mt-16">

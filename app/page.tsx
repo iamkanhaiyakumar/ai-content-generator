@@ -18,7 +18,7 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 import PublicHeader from "@/components/public-header";
 import PublicFooter from "@/components/public-footer";
 import FaqPage from "@/components/ui/faq";
-
+import Pricing from "@/components/ui/pricing";
 const words = [
   {
     text: "AI-Powered",
@@ -278,6 +278,7 @@ export default function LandingPage() {
         </section>
       </main>
 <FaqPage/>
+<Pricing/>
       <PublicFooter />
     </div>
   );
