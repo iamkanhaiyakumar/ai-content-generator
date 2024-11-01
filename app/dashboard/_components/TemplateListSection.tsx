@@ -1,6 +1,8 @@
+"use client";
 import Template from '@/app/(data)/Template'; // assuming this exports an array of TEMPLATE objects
 import React, { useEffect, useState } from 'react';
 import TemplateCard from './TemplateCard';
+
 
 export interface TEMPLATE {
   name: string;
