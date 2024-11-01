@@ -64,7 +64,9 @@
 │       ├── card.tsx
 │       ├── faq.tsx
 │       ├── input.tsx
+│       ├── pricing.tsx
 │       ├── sheet.tsx
+│       ├── test.tsx
 │       ├── textarea.tsx
 │       └── typewriter-effect.tsx
 ├── components.json
@@ -75,7 +77,6 @@
 │   └── utils.ts
 ├── middleware.ts
 ├── next.config.mjs
-├── package-lock.json
 ├── package.json
 ├── page.tsx
 ├── postcss.config.mjs
