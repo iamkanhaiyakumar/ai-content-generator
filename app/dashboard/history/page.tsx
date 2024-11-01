@@ -8,8 +8,9 @@ import Image from "next/image";
 import React from "react";
 import { TEMPLATE } from "@/app/dashboard/_components/TemplateListSection";
 
+
 export interface HISTORY {
-  id: number;z
+  id: number;z: any
   formData: string;
   aiResponse: string;
   templateSlug: string;
