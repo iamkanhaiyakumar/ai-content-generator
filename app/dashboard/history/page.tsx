@@ -9,7 +9,7 @@ import React from "react";
 import { TEMPLATE } from "@/app/dashboard/_components/TemplateListSection";
 
 export interface HISTORY {
-  id: number;
+  id: number;z
   formData: string;
   aiResponse: string;
   templateSlug: string;

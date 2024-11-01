@@ -1,5 +1,5 @@
 "use client";
-import Template from '@/app/(data)/Template'; // assuming this exports an array of TEMPLATE objects
+import Template from '../../(data)/Template'; // assuming this exports an array of TEMPLATE objects
 import React, { useEffect, useState } from 'react';
 import TemplateCard from './TemplateCard';
 
