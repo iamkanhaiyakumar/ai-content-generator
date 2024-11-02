@@ -37,7 +37,7 @@ function TemplateListSection({ userSearchInput }: TemplateListSectionProps) {
 
   useEffect(() => {
     if (userSearchInput) {
-      const filteredData = Template.filter(item =>
+      const filteredData = Template.filter((item) =>
         item.name.toLowerCase().includes(userSearchInput.toLowerCase())
       );
       setTemplateList(filteredData);
@@ -47,7 +47,7 @@ function TemplateListSection({ userSearchInput }: TemplateListSectionProps) {
   }, [userSearchInput]);
 
   return (
-    <div className="p-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+    <div className="px-3 py-5 md:px-5 md:py-10 lg:px-10 lg:py-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
       {templateList.map((item: TEMPLATE, index: number) => (
         <TemplateCard key={index} {...item} />
       ))}
