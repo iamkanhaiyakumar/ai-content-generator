@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /private
+Allow: /
+Sitemap: http://localhost:3001/sitemap.xml
