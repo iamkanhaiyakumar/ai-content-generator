@@ -8,6 +8,7 @@
 ├── LICENSE
 ├── PROJECT_STRUCTURE.md
 ├── README.md
+├── SECURITY.md
 ├── app/
 │   ├── (auth)/
 │   │   ├── sign-in/
@@ -28,6 +29,7 @@
 │   ├── dashboard/
 │   │   ├── _components/
 │   │   │   ├── Header.tsx
+│   │   │   ├── MobileSidebar.tsx
 │   │   │   ├── SearchSection.tsx
 │   │   │   ├── SideNav.tsx
 │   │   │   ├── TemplateCard.tsx
@@ -51,6 +53,7 @@
 │   │   └── GeistVF.woff
 │   ├── globals.css
 │   ├── layout.tsx
+│   ├── metadata.tsx
 │   ├── not-found.tsx
 │   └── page.tsx
 ├── button.tsx
@@ -81,7 +84,9 @@
 ├── page.tsx
 ├── postcss.config.mjs
 ├── public/
-│   └── logo.svg
+│   ├── logo.svg
+│   ├── robots.txt
+│   └── sitemap.xml
 ├── repo_structure.txt
 ├── tailwind.config.ts
 ├── tsconfig.json
