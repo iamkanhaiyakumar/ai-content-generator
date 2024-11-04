@@ -19,6 +19,7 @@ import PublicHeader from "@/components/public-header";
 import PublicFooter from "@/components/public-footer";
 import FaqPage from "@/components/ui/faq";
 import Pricing from "@/components/ui/pricing";
+import Review from '@/components/ui/review'
 const words = [
   {
     text: "AI-Powered",
@@ -279,6 +280,7 @@ export default function LandingPage() {
       </main>
 <FaqPage/>
 <Pricing/>
+<Review/>
       <PublicFooter />
     </div>
   );
