@@ -64,6 +64,7 @@
 │       ├── faq.tsx
 │       ├── input.tsx
 │       ├── pricing.tsx
+│       ├── review.tsx
 │       ├── sheet.tsx
 │       ├── test.tsx
 │       ├── textarea.tsx
@@ -76,13 +77,19 @@
 │   └── utils.ts
 ├── middleware.ts
 ├── next.config.mjs
+├── package-lock.json
 ├── package.json
 ├── page.tsx
 ├── postcss.config.mjs
 ├── public/
+│   ├── Liam.jpg
+│   ├── ava.jpg
+│   ├── james.jpg
 │   ├── logo.svg
 │   ├── robots.txt
-│   └── sitemap.xml
+│   ├── sitemap.xml
+│   ├── sophia.jpg
+│   └── zara.jpg
 ├── repo_structure.txt
 ├── tailwind.config.ts
 ├── tsconfig.json
