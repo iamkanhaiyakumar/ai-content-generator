@@ -1,4 +1,4 @@
-'use client'; // Add this line at the top of your file
+'use client';
 import { useEffect, useState } from 'react';
 
 interface Contributor {
