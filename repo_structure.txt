@@ -22,6 +22,8 @@
 │   ├── api/
 │   │   └── crate-subscription/
 │   │       └── route.js
+|   |── contributors/
+│   │   └── page.tsx
 │   ├── dashboard/
 │   │   ├── _components/
 │   │   │   ├── Header.tsx

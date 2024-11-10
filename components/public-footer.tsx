@@ -5,6 +5,7 @@ const navItems = [
   { name: "Features", href: "#features" },
   { name: "How It Works", href: "#how-it-works" },
   { name: "Use Cases", href: "#use-cases" },
+  { name: "Contributors", href: "contributors/" },
 ];
 
 const PublicFooter = () => {
@@ -26,6 +27,7 @@ const PublicFooter = () => {
               <h4 className="font-semibold mb-4">Project</h4>
               <ul className="space-y-2">
                 {navItems.map((item) => (
+                  
                   <li key={item.name}>
                     <Link
                       href={item.href}
