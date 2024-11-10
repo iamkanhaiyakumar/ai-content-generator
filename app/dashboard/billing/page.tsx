@@ -16,7 +16,7 @@ function billing() {
         <h2 className="font-medium">Billing</h2>
       </div>
       <div className="mt-5 py-6 rounded">
-        <Card className="w-[350px]">
+        {/* <Card className="w-[350px]">
           <CardHeader>
             <CardTitle>$1 One-Time Purchase</CardTitle>
             <CardDescription>
@@ -30,7 +30,7 @@ function billing() {
               </p>
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
     </div>
   );

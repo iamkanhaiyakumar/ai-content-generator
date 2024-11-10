@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import '@toast-ui/editor/dist/toastui-editor.css';
-import { Editor } from '@toast-ui/react-editor';
+// import '@toast-ui/editor/dist/toastui-editor.css';
+// import { Editor } from '@toast-ui/react-editor';
 import { Button } from '@/components/ui/button';
 import { Copy } from 'lucide-react';
 
@@ -9,28 +9,28 @@ interface Props {
 }
 
 function OutputSection({ aiOutput }: Props) {
-  const editorRef = useRef<Editor>(null);
+  // const editorRef = useRef<Editor>(null);
 
   // Update editor's content when aiOutput changes
-  useEffect(() => {
-    const editorInstance = editorRef.current?.getInstance();
-    if (editorInstance) {
-      editorInstance.setMarkdown(aiOutput);
-    }
-  }, [aiOutput]);
+  // useEffect(() => {
+  //   const editorInstance = editorRef.current?.getInstance();
+  //   if (editorInstance) {
+  //     editorInstance.setMarkdown(aiOutput);
+  //   }
+  // }, [aiOutput]);
 
   // Function to handle copying the content to clipboard
-  const handleCopy = () => {
-    const editorInstance = editorRef.current?.getInstance();
-    if (editorInstance) {
-      const markdownContent = editorInstance.getMarkdown();
-      navigator.clipboard.writeText(markdownContent).then(() => {
-        alert('Content copied to clipboard!');
-      }).catch(err => {
-        console.error('Failed to copy text: ', err);
-      });
-    }
-  };
+  // const handleCopy = () => {
+  //   const editorInstance = editorRef.current?.getInstance();
+  //   if (editorInstance) {
+  //     const markdownContent = editorInstance.getMarkdown();
+  //     navigator.clipboard.writeText(markdownContent).then(() => {
+  //       alert('Content copied to clipboard!');
+  //     }).catch(err => {
+  //       console.error('Failed to copy text: ', err);
+  //     });
+  //   }
+  // };
 
   return (
     <div className='bg-white rounded-lg shadow-lg border'>
@@ -42,14 +42,14 @@ function OutputSection({ aiOutput }: Props) {
         </Button>
       </div>
 
-      <Editor
+      {/* <Editor
         ref={editorRef}
         initialValue="Your result will be displayed here"
         initialEditType="wysiwyg"
         height="600px"
         useCommandShortcut={true}
         onChange={() => console.log(editorRef.current?.getInstance().getMarkdown())}
-      />
+      /> */}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import SideNav from './_components/SideNav';
 import Header from './_components/Header';
 import { TotalUsageContext } from '../(context)/TotalUsageContext';
-import { UpdateCreditUsageContext } from '../(context)/UpdateCreditUsageContext';
+import UpdateCreditUsageContext from "../(context)/UpdateCreditUsageContext"
 import UserSubscriptionContext from '../(context)/UserSubscriptionContext';
 
 interface LayoutProps {
@@ -20,7 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <TotalUsageContext.Provider value={{ totalUsage, setTotalUsage }}>
       {/* <UserSubscriptionContext.Provider value={{userSubscription, setUserSubscription}}> */}
-      <UpdateCreditUsageContext.Provider value={{ UpdateCreditUsageContext, setUpdateCreditUsage }} >
+      {/* <UpdateCreditUsageContext.Provider value={{ UpdateCreditUsageContext, setUpdateCreditUsage }} > //Commenting out this line due to error */}
         <div className="flex min-h-screen">
           {/* Desktop Sidebar */}
           <aside className="sticky top-0 left-0 hidden w-64 bg-white text-gray-800 lg:block h-screen">
@@ -33,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <main className="flex-1 ">{children}</main>
           </div>
         </div>
-      </UpdateCreditUsageContext.Provider>
+      {/* </UpdateCreditUsageContext.Provider> */}
       {/* </UserSubscriptionContext.Provider> */}
     </TotalUsageContext.Provider>
   );

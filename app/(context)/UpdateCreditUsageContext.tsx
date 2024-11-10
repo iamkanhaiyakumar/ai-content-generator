@@ -1,3 +1,6 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 
-export const UpdateCreditUsageContext= createContext<any>(null);
+const UpdateCreditUsageContext= createContext<any>(null);
+
+
+export default { UpdateCreditUsageContext };

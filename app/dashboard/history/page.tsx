@@ -18,16 +18,16 @@ export interface HISTORY {
   createdAt: string;
 }
 
-export const LOCAL_TEMPLATE = [
-
-  { slug: "template1", name: "Template 1", icon: "/icon1.png" },
-
-  { slug: "template2", name: "Template 2", icon: "/icon2.png" },
-];
-
 async function History() {
   const user = await currentUser();
 
+  const LOCAL_TEMPLATE = [
+    { slug: "template1", name: "Template 1", icon: "/icon1.png" },
+    { slug: "template2", name: "Template 2", icon: "/icon2.png" },
+  ];
+
+
+  
   // Fetching the history list from the database
   const HistoryList: HISTORY[] = (await db
     .select({
@@ -35,7 +35,7 @@ async function History() {
       formData: AIOutput.formData,
       aiResponse: AIOutput.aiResponse,
       createdAt: AIOutput.createdAt,
-      templateSlug: AIOutput.tempalateSlug, // Corrected the typo here
+      templateSlug: AIOutput.templateSlug, // Corrected the typo here
       createdBy: AIOutput.createdBy,
     })
     .from(AIOutput)
@@ -49,7 +49,7 @@ async function History() {
 
   // Function to get the template name and icon by its slug
   const GetTemplateData = (slug: string) => {
-    const template = LOCAL_TEMPLATE.find((item) => item.slug === slug);
+    const template = LOCAL_TEMPLATE.find((item) => item?.slug === slug);
     return {
       name: template?.name || "Unknown Template",
       icon: template?.icon || "/default-icon.png" // Ensure this property exists
@@ -69,10 +69,10 @@ async function History() {
       </div>
 
       {HistoryList.length > 0 ? (
-        HistoryList.map((item: HISTORY) => {
+        HistoryList?.map((item: HISTORY) => {
           const { name, icon } = GetTemplateData(item.templateSlug);
           return (
-            <div key={item.id} className="grid grid-cols-7 my-5 py-3 px-3 border-b">
+            <div key={item?.id} className="grid grid-cols-7 my-5 py-3 px-3 border-b">
               <h2 className="col-span-2 flex gap-2 items-center">
                 <Image
                   src={icon}
@@ -82,14 +82,14 @@ async function History() {
                 />
                 {name}
               </h2>
-              <h2 className="col-span-2 line-clamp-3">{item.aiResponse}</h2>
-              <h2>{new Date(item.createdAt).toLocaleDateString()}</h2>
-              <h2>{item.aiResponse.split(" ").length}</h2>
+              <h2 className="col-span-2 line-clamp-3">{item?.aiResponse}</h2>
+              <h2>{new Date(item?.createdAt).toLocaleDateString()}</h2>
+              <h2>{item?.aiResponse?.split(" ").length}</h2>
               <h2>
                 <Button
                   variant="ghost"
                   className="text-primary"
-                  onClick={() => navigator.clipboard.writeText(item.aiResponse)}
+                  onClick={() => navigator.clipboard.writeText(item?.aiResponse)}
                 >
                   Copy
                 </Button>

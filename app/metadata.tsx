@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "AI Content Generator",
   description: "AI Content Generator is a web-based application built using Next.js and TypeScript. It is designed to create AI-driven content generation tools with modern development frameworks. The project aims to provide efficient and scalable content workflows to improve productivity, and it is deployable via Vercel for quick and easy hosting.",
   keywords: "AI, Content Generator, Next.js, TypeScript, Vercel, scalable workflows",
-  author: "Team AI Content Generator", 
+  authors: [{ name: "Team AI Content Generator" }],
 
   openGraph: {
     title: "AI Content Generator",
