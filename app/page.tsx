@@ -123,9 +123,13 @@ export default function LandingPage() {
               <div className="relative overflow-hidden rounded-3xl border border-violet-400/25 bg-gradient-to-br from-[#050b1f] via-[#0a1330] to-[#111938] px-5 py-14 sm:px-10 sm:py-16 lg:px-16 lg:py-20 text-center shadow-[0_0_60px_rgba(112,78,248,0.18)]">
                 <BackgroundBeams className="opacity-30" />
                 <div className="relative z-10 max-w-4xl mx-auto">
-                  <div className="inline-flex items-center rounded-full border border-violet-400/50 bg-violet-500/10 px-4 py-1.5 text-xs sm:text-sm font-medium tracking-wide text-violet-200">
+                  <span
+                    role="status"
+                    aria-label="Built for founders, marketers, and content teams"
+                    className="inline-flex items-center rounded-full border border-violet-400/50 bg-violet-500/10 px-4 py-1.5 text-xs sm:text-sm font-medium tracking-wide text-violet-200"
+                  >
                     Built for founders, marketers, and content teams
-                  </div>
+                  </span>
                   <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-balance">
                     <span className="text-white">Turn Ideas into </span>
                     <span className="bg-gradient-to-r from-[#8f73ff] via-[#704ef8] to-[#bc9aff] bg-clip-text text-transparent">
@@ -150,20 +154,20 @@ export default function LandingPage() {
                       </Button>
                     </Link>
                   </div>
-                  <dl className="mt-10 grid gap-4 sm:grid-cols-3 text-left">
-                    <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                      <dt className="text-2xl font-semibold text-white">50+</dt>
-                      <dd className="text-sm text-slate-300">Ready-to-use content templates</dd>
-                    </div>
-                    <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                      <dt className="text-2xl font-semibold text-white">{"< 60 sec"}</dt>
-                      <dd className="text-sm text-slate-300">Average first draft generation</dd>
-                    </div>
-                    <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                      <dt className="text-2xl font-semibold text-white">10k+</dt>
-                      <dd className="text-sm text-slate-300">Teams and creators served</dd>
-                    </div>
-                  </dl>
+                  <ul aria-label="Platform statistics" className="mt-10 grid gap-4 sm:grid-cols-3 text-left">
+                    <li className="rounded-xl border border-white/10 bg-white/5 px-4 py-3" aria-label="50 plus ready-to-use content templates">
+                      <p className="text-2xl font-semibold text-white">50+</p>
+                      <p className="text-sm text-slate-300">Ready-to-use content templates</p>
+                    </li>
+                    <li className="rounded-xl border border-white/10 bg-white/5 px-4 py-3" aria-label="Less than 60 seconds average first draft generation">
+                      <p className="text-2xl font-semibold text-white">{"< 60 sec"}</p>
+                      <p className="text-sm text-slate-300">Average first draft generation</p>
+                    </li>
+                    <li className="rounded-xl border border-white/10 bg-white/5 px-4 py-3" aria-label="10 thousand plus teams and creators served">
+                      <p className="text-2xl font-semibold text-white">10k+</p>
+                      <p className="text-sm text-slate-300">Teams and creators served</p>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </section>
