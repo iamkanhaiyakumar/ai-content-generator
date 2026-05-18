@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 // import { Editor } from '@toast-ui/react-editor';
 import { Button } from '@/components/ui/button';
 import { Copy } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 interface Props {
   aiOutput: string;
@@ -32,12 +33,24 @@ function OutputSection({ aiOutput }: Props) {
   //   }
   // };
 
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(aiOutput || '');
+      toast.success('Copied!');
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+      toast.error('Failed to copy');
+    }
+  };
+
   return (
     <div className='bg-white rounded-lg shadow-lg border'>
       <div className='flex justify-between items-center p-5'>
         <h2 className='text-black font-medium text-lg'>Your Result</h2>
-        <Button className='flex gap-2' onClick={()=>navigator.clipboard.writeText(aiOutput)}>
-         
+        <Button
+          className='flex gap-2'
+          onClick={handleCopy}
+        >
           <Copy className='w-4 h-4' /> Copy
         </Button>
       </div>

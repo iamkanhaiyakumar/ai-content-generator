@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import AppToaster from '@/components/ui/toaster';
 import { Outfit } from "next/font/google";
 import ChatbaseEmbed from "@/components/ChatbaseEmbed";
 
@@ -33,6 +34,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={outfit.className}>
+          <AppToaster />
           <main>
             {children}
             <ChatbaseEmbed />
