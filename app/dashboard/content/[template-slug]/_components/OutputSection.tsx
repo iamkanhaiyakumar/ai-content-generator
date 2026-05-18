@@ -66,6 +66,7 @@ function OutputSection({ aiOutput }: Props) {
         <div
           role='status'
           aria-live='polite'
+          aria-atomic='true'
           className={`absolute top-20 right-5 text-sm px-3 py-2 rounded-md shadow-md border ${
             isErrorToast ? 'bg-red-600 border-red-400 text-white' : 'bg-black border-white/20 text-white'
           }`}
