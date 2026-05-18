@@ -13,24 +13,24 @@ const TOAST_DISPLAY_DURATION = 2000;
 function OutputSection({ aiOutput }: Props) {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isErrorToast, setIsErrorToast] = useState(false);
-  const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const toastTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (toastTimeoutRef.current) {
-      clearTimeout(toastTimeoutRef.current);
+      window.clearTimeout(toastTimeoutRef.current);
       toastTimeoutRef.current = null;
     }
 
     if (!toastMessage) return;
 
-    toastTimeoutRef.current = setTimeout(() => {
+    toastTimeoutRef.current = window.setTimeout(() => {
       setToastMessage(null);
       toastTimeoutRef.current = null;
     }, TOAST_DISPLAY_DURATION);
 
     return () => {
       if (toastTimeoutRef.current) {
-        clearTimeout(toastTimeoutRef.current);
+        window.clearTimeout(toastTimeoutRef.current);
         toastTimeoutRef.current = null;
       }
     };
