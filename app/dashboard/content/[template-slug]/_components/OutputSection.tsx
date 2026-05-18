@@ -9,7 +9,8 @@ interface Props {
 }
 
 function OutputSection({ aiOutput }: Props) {
-  const [isCopied, setIsCopied] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [isErrorToast, setIsErrorToast] = useState(false);
   // const editorRef = useRef<Editor>(null);
 
   // Update editor's content when aiOutput changes
@@ -34,18 +35,21 @@ function OutputSection({ aiOutput }: Props) {
   // };
 
   useEffect(() => {
-    if (!isCopied) return;
-    const timeoutId = setTimeout(() => setIsCopied(false), 2000);
+    if (!toastMessage) return;
+    const timeoutId = setTimeout(() => setToastMessage(null), 2000);
     return () => clearTimeout(timeoutId);
-  }, [isCopied]);
+  }, [toastMessage]);
 
   const handleCopy = async () => {
     if (!aiOutput?.trim()) return;
     try {
       await navigator.clipboard.writeText(aiOutput);
-      setIsCopied(true);
+      setIsErrorToast(false);
+      setToastMessage('Copied!');
     } catch (error) {
       console.error('Failed to copy text:', error);
+      setIsErrorToast(true);
+      setToastMessage('Copy failed');
     }
   };
 
@@ -58,13 +62,15 @@ function OutputSection({ aiOutput }: Props) {
           <Copy className='w-4 h-4' /> Copy
         </Button>
       </div>
-      {isCopied && (
+      {toastMessage && (
         <div
           role='status'
           aria-live='polite'
-          className='absolute top-20 right-5 bg-black text-white text-sm px-3 py-2 rounded-md shadow-md'
+          className={`absolute top-20 right-5 text-sm px-3 py-2 rounded-md shadow-md border ${
+            isErrorToast ? 'bg-red-600 border-red-400 text-white' : 'bg-black border-white/20 text-white'
+          }`}
         >
-          Copied!
+          {toastMessage}
         </div>
       )}
 
