@@ -124,8 +124,6 @@ export default function LandingPage() {
                 <BackgroundBeams className="opacity-30" />
                 <div className="relative z-10 max-w-4xl mx-auto">
                   <span
-                    role="status"
-                    aria-label="Built for founders, marketers, and content teams"
                     className="inline-flex items-center rounded-full border border-violet-400/50 bg-violet-500/10 px-4 py-1.5 text-xs sm:text-sm font-medium tracking-wide text-violet-200"
                   >
                     Built for founders, marketers, and content teams
@@ -155,15 +153,15 @@ export default function LandingPage() {
                     </Link>
                   </div>
                   <ul aria-label="Platform statistics" className="mt-10 grid gap-4 sm:grid-cols-3 text-left">
-                    <li className="rounded-xl border border-white/10 bg-white/5 px-4 py-3" aria-label="50 plus ready-to-use content templates">
+                    <li className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
                       <p className="text-2xl font-semibold text-white">50+</p>
                       <p className="text-sm text-slate-300">Ready-to-use content templates</p>
                     </li>
-                    <li className="rounded-xl border border-white/10 bg-white/5 px-4 py-3" aria-label="Less than 60 seconds average first draft generation">
+                    <li className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
                       <p className="text-2xl font-semibold text-white">{"< 60 sec"}</p>
                       <p className="text-sm text-slate-300">Average first draft generation</p>
                     </li>
-                    <li className="rounded-xl border border-white/10 bg-white/5 px-4 py-3" aria-label="10 thousand plus teams and creators served">
+                    <li className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
                       <p className="text-2xl font-semibold text-white">10k+</p>
                       <p className="text-sm text-slate-300">Teams and creators served</p>
                     </li>
