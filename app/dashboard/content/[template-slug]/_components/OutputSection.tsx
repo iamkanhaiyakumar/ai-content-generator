@@ -13,28 +13,6 @@ const TOAST_DISPLAY_DURATION = 2000;
 function OutputSection({ aiOutput }: Props) {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isErrorToast, setIsErrorToast] = useState(false);
-  // const editorRef = useRef<Editor>(null);
-
-  // Update editor's content when aiOutput changes
-  // useEffect(() => {
-  //   const editorInstance = editorRef.current?.getInstance();
-  //   if (editorInstance) {
-  //     editorInstance.setMarkdown(aiOutput);
-  //   }
-  // }, [aiOutput]);
-
-  // Function to handle copying the content to clipboard
-  // const handleCopy = () => {
-  //   const editorInstance = editorRef.current?.getInstance();
-  //   if (editorInstance) {
-  //     const markdownContent = editorInstance.getMarkdown();
-  //     navigator.clipboard.writeText(markdownContent).then(() => {
-  //       alert('Content copied to clipboard!');
-  //     }).catch(err => {
-  //       console.error('Failed to copy text: ', err);
-  //     });
-  //   }
-  // };
 
   useEffect(() => {
     if (!toastMessage) return;
@@ -69,7 +47,7 @@ function OutputSection({ aiOutput }: Props) {
               aria-live='polite'
               aria-atomic='true'
               className={`absolute top-full right-0 mt-2 text-sm px-3 py-2 rounded-md shadow-md border whitespace-nowrap ${
-                isErrorToast ? 'bg-red-600 border-red-400 text-white' : 'bg-black border-white/20 text-white'
+                isErrorToast ? 'bg-red-700 border-red-500 text-white' : 'bg-black border-white/20 text-white'
               }`}
             >
               {toastMessage}
@@ -77,15 +55,6 @@ function OutputSection({ aiOutput }: Props) {
           )}
         </div>
       </div>
-
-      {/* <Editor
-        ref={editorRef}
-        initialValue="Your result will be displayed here"
-        initialEditType="wysiwyg"
-        height="600px"
-        useCommandShortcut={true}
-        onChange={() => console.log(editorRef.current?.getInstance().getMarkdown())}
-      /> */}
     </div>
   );
 }
