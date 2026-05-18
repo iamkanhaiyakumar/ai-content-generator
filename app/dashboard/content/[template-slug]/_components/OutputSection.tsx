@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 // import '@toast-ui/editor/dist/toastui-editor.css';
 // import { Editor } from '@toast-ui/react-editor';
 import { Button } from '@/components/ui/button';
@@ -13,11 +13,27 @@ const TOAST_DISPLAY_DURATION = 2000;
 function OutputSection({ aiOutput }: Props) {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isErrorToast, setIsErrorToast] = useState(false);
+  const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    if (toastTimeoutRef.current) {
+      clearTimeout(toastTimeoutRef.current);
+      toastTimeoutRef.current = null;
+    }
+
     if (!toastMessage) return;
-    const timeoutId = setTimeout(() => setToastMessage(null), TOAST_DISPLAY_DURATION);
-    return () => clearTimeout(timeoutId);
+
+    toastTimeoutRef.current = setTimeout(() => {
+      setToastMessage(null);
+      toastTimeoutRef.current = null;
+    }, TOAST_DISPLAY_DURATION);
+
+    return () => {
+      if (toastTimeoutRef.current) {
+        clearTimeout(toastTimeoutRef.current);
+        toastTimeoutRef.current = null;
+      }
+    };
   }, [toastMessage]);
 
   const handleCopy = async () => {
@@ -47,7 +63,7 @@ function OutputSection({ aiOutput }: Props) {
               aria-live='polite'
               aria-atomic='true'
               className={`absolute top-full right-0 mt-2 text-sm px-3 py-2 rounded-md shadow-md border whitespace-nowrap flex items-center gap-2 ${
-                isErrorToast ? 'bg-red-700 border-red-500 text-white' : 'bg-black border-white/20 text-white'
+                isErrorToast ? 'bg-red-900 border-red-700 text-white' : 'bg-black border-white/20 text-white'
               }`}
             >
               {isErrorToast ? <XCircle className='w-4 h-4' /> : <CheckCircle2 className='w-4 h-4' />}
