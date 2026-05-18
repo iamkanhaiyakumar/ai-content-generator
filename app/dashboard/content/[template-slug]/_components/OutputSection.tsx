@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import '@toast-ui/editor/dist/toastui-editor.css';
 // import { Editor } from '@toast-ui/react-editor';
 import { Button } from '@/components/ui/button';
-import { Copy } from 'lucide-react';
+import { CheckCircle2, Copy, XCircle } from 'lucide-react';
 
 interface Props {
   aiOutput: string;
@@ -46,10 +46,11 @@ function OutputSection({ aiOutput }: Props) {
               role='status'
               aria-live='polite'
               aria-atomic='true'
-              className={`absolute top-full right-0 mt-2 text-sm px-3 py-2 rounded-md shadow-md border whitespace-nowrap ${
+              className={`absolute top-full right-0 mt-2 text-sm px-3 py-2 rounded-md shadow-md border whitespace-nowrap flex items-center gap-2 ${
                 isErrorToast ? 'bg-red-700 border-red-500 text-white' : 'bg-black border-white/20 text-white'
               }`}
             >
+              {isErrorToast ? <XCircle className='w-4 h-4' /> : <CheckCircle2 className='w-4 h-4' />}
               {toastMessage}
             </div>
           )}
