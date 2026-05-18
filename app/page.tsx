@@ -156,7 +156,7 @@ export default function LandingPage() {
                       <p className="text-sm text-slate-300">Ready-to-use content templates</p>
                     </div>
                     <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                      <p className="text-2xl font-semibold text-white">{"<"} 60 sec</p>
+                      <p className="text-2xl font-semibold text-white">{"< 60 sec"}</p>
                       <p className="text-sm text-slate-300">Average first draft generation</p>
                     </div>
                     <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
