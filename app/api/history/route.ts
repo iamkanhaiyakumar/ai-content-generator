@@ -1,10 +1,27 @@
-import { db } from "@/utils/db";
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 import { AIOutput } from "@/utils/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { desc, eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
+function getDb() {
+  const url = process.env.NEXT_PUBLIC_DATABASE_URL;
+  if (!url) {
+    return null;
+  }
+  return drizzle(neon(url));
+}
+
 export async function GET() {
+  const db = getDb();
+  if (!db) {
+    return NextResponse.json(
+      { error: "Database connection string is not configured" },
+      { status: 500 }
+    );
+  }
+
   const user = await currentUser();
   if (!user?.primaryEmailAddress?.emailAddress) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -22,6 +39,14 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const db = getDb();
+  if (!db) {
+    return NextResponse.json(
+      { error: "Database connection string is not configured" },
+      { status: 500 }
+    );
+  }
+
   const user = await currentUser();
   if (!user?.primaryEmailAddress?.emailAddress) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
