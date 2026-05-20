@@ -29,7 +29,7 @@ function UsageTrack() {
 
     const GetTotalUsage=(results:HISTORY)=>{
       let total:number=0;
-      results.forEach((element: { aiResponse: string | any[]; }) => {
+      results.forEach((element) => {
         total=total+Number(element.aiResponse?.length)
     });
      setTotalUsage(total);
