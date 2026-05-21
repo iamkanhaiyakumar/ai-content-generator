@@ -100,12 +100,16 @@ interface FaqItemProps {
 
 const FaqItem: React.FC<FaqItemProps> = ({ faq, isOpen, onToggle }) => (
   <div className={`rounded-xl overflow-hidden transition-all duration-300 bg-black hover:bg-gray-800 shadow-md`}>
-    <button onClick={onToggle} className="w-full flex items-center justify-between p-6 text-left font-medium">
+    <button 
+      onClick={onToggle} 
+      aria-expanded={isOpen}
+      className="w-full flex items-center justify-between p-6 text-left font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#704EF8] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+    >
       <span className="flex items-center gap-3">
         <span className="text-2xl text-[#704EF8]">{faq.icon}</span> {/* Set icon color */}
         <span className="text-lg text-white font-bold">{faq.question}</span> {/* Set question color */}
       </span>
-      <FiChevronDown className={`transform transition-transform duration-300 ${isOpen ? "rotate-180" : ""} text-gray-600`} />
+      <FiChevronDown className={`transform transition-transform duration-300 ${isOpen ? "rotate-180" : ""} text-gray-600`} aria-hidden="true" />
     </button>
     <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
       <div className={`p-6 pt-0 text-white`}> {/* Set description color */}
@@ -124,11 +128,13 @@ const ContactSupport: React.FC<ContactSupportProps> = ({ methods }) => {
 
   return (
     <div className={`p-6 rounded-xl bg-black shadow-md`}>
-      <div className="flex flex-wrap gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4" role="tablist">
         {methods.map((method, index) => (
           <button
             key={index}
-            className={`px-4 py-2 font-semibold rounded-lg transition-all duration-300 ${selectedMethodIndex === index ? 'bg-[#704EF8] text-white' : 'text-gray-600 hover:bg-gray-100'}`}
+            role="tab"
+            aria-selected={selectedMethodIndex === index}
+            className={`px-4 py-2 font-semibold rounded-lg transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black ${selectedMethodIndex === index ? 'bg-[#704EF8] text-white' : 'text-gray-600 hover:bg-gray-100'}`}
             onClick={() => setSelectedMethodIndex(index)}
           >
             {method.title}
@@ -136,7 +142,7 @@ const ContactSupport: React.FC<ContactSupportProps> = ({ methods }) => {
         ))}
       </div>
       <div className="flex items-start space-x-4">
-        <div className='text-[#704EF8]'>{methods[selectedMethodIndex].icon}</div> {/* Set icon color */}
+        <div className='text-[#704EF8]' aria-hidden="true">{methods[selectedMethodIndex].icon}</div> {/* Set icon color */}
         <div>
           <h3 className="font-semibold mb-1 text-[#704EF8]">{methods[selectedMethodIndex].title}</h3> {/* Set title color */}
           <p className={`text-sm text-white mb-2`}> {/* Set description color */}
@@ -144,7 +150,7 @@ const ContactSupport: React.FC<ContactSupportProps> = ({ methods }) => {
           </p>
           <a
             href={methods[selectedMethodIndex].action}
-            className={`text-sm text-[#704EF8] font-medium hover:underline`}
+            className={`text-sm text-[#704EF8] font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded px-1`}
           >
             {methods[selectedMethodIndex].contact}
           </a>
@@ -186,12 +192,14 @@ const FaqPage: React.FC = () => {
           </p>
 
           {/* Category Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
+          <div className="flex flex-wrap justify-center gap-2 mb-8" role="tablist">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${selectedCategory === category ? 'bg-[#704EF8] text-white' : 'bg-black text-gray-600 hover:bg-gray-100'}`}
+                role="tab"
+                aria-selected={selectedCategory === category}
+                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#080C14] ${selectedCategory === category ? 'bg-[#704EF8] text-white' : 'bg-black text-gray-600 hover:bg-gray-100'}`}
               >
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </button>

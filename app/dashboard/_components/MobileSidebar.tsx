@@ -7,8 +7,13 @@ const MobileSidebar = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="lg:hidden text-black">
-          <Menu className="h-6 w-6" />
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="lg:hidden text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          aria-label="Toggle navigation menu"
+        >
+          <Menu className="h-6 w-6" aria-hidden="true" />
           <span className="sr-only">Toggle navigation menu</span>
         </Button>
       </SheetTrigger>

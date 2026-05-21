@@ -74,6 +74,7 @@ const Pricing = () => {
                 hover:scale-[1.02] 
                 transition-transform 
                 duration-300
+                focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:ring-offset-[#0B101B]
                 ${plan.isMostPopular ? 'ring-2 ring-indigo-600' : ''}
               `}
             >
@@ -93,7 +94,7 @@ const Pricing = () => {
               <ul className="space-y-4 mb-8 flex-grow">
                 {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center">
-                    <Check className="text-indigo-500 mr-3 w-5 h-5" />
+                    <Check className="text-indigo-500 mr-3 w-5 h-5" aria-hidden="true" />
                     <span className="text-gray-300">{feature}</span>
                   </li>
                 ))}
@@ -110,6 +111,12 @@ const Pricing = () => {
                   rounded-lg 
                   font-semibold 
                   transition-colors
+                  focus-visible:outline-none 
+                  focus-visible:ring-2 
+                  focus-visible:ring-white 
+                  focus-visible:ring-offset-2 
+                  focus-visible:ring-offset-[#0B101B]
+                  block
                 "
               >
                 Buy Now!
@@ -120,7 +127,7 @@ const Pricing = () => {
         
         <div className="text-center mt-12">
           <p className="text-gray-400 text-lg">
-            Need more options? <Link href="#" className="text-indigo-400 hover:underline">See More Plans</Link>
+            Need more options? <Link href="#" className="text-indigo-400 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B101B] rounded px-1">See More Plans</Link>
           </p>
         </div>
       </div>

@@ -8,11 +8,15 @@ function SearchSection({onSearchInput}:any) {
       <p>What would you like to create today?</p>
 
       <div className="w-full flex justify-center">
-        <div className=" flex gap-2 items-center p-2 border rounded-md bg-white my-5 w-[50%]" >
-          <Search className="text-primary" />
-          <input type=" text " placeholder="Search Templates"
-           onChange={(event)=>onSearchInput(event.target.value)}
-          className="bg-transparent w-full outline-none text-black" />
+        <div className=" flex gap-2 items-center p-2 border rounded-md bg-white my-5 w-[50%] focus-within:ring-2 focus-within:ring-purple-300 focus-within:ring-offset-2" >
+          <Search className="text-primary" aria-hidden="true" />
+          <input 
+            type="text" 
+            placeholder="Search Templates"
+            aria-label="Search templates"
+            onChange={(event)=>onSearchInput(event.target.value)}
+            className="bg-transparent w-full outline-none text-black focus:outline-none" 
+          />
         </div>
       </div>
     </div>

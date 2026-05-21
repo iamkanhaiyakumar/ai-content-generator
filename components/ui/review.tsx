@@ -132,10 +132,20 @@ const AITestimonialExperience: React.FC = () => {
               {currentTestimonial.techStack.map((tech) => (
                 <div
                   key={tech}
-                  className="px-3 py-1 rounded-full bg-[#4F46E5] border border-[#4F46E5] cursor-pointer
-                           transition-all duration-300 hover:bg-[#4338CA] hover:scale-105"
+                  className="px-3 py-1 rounded-full bg-[#4F46E5] border border-[#4F46E5]
+                           transition-all duration-300 hover:bg-[#4338CA] hover:scale-105
+                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D131F]"
                   onMouseEnter={() => setHoveredTech(tech)}
                   onMouseLeave={() => setHoveredTech(null)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setHoveredTech(hoveredTech === tech ? null : tech);
+                    }
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-pressed={hoveredTech === tech}
                 >
                   <span className="text-sm">{tech}</span>
                 </div>
@@ -152,14 +162,16 @@ const AITestimonialExperience: React.FC = () => {
         <div className="flex justify-center space-x-4 mt-8">
           <button
             onClick={() => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-            className="p-3 rounded-full bg-[#704EF8] hover:bg-[#4338CA] transition-colors duration-300"
+            aria-label="Previous testimonial"
+            className="p-3 rounded-full bg-[#704EF8] hover:bg-[#4338CA] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D131F]"
           >
             <ArrowLeft/>
           </button>
           
           <button
             onClick={() => setCurrentIndex((prev) => (prev + 1) % testimonials.length)}
-            className="p-3 rounded-full bg-[#704EF8] hover:bg-[#4338CA] transition-colors duration-300"
+            aria-label="Next testimonial"
+            className="p-3 rounded-full bg-[#704EF8] hover:bg-[#4338CA] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D131F]"
           >
             <ArrowRight />
           </button>

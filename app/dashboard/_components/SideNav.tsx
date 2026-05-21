@@ -59,11 +59,12 @@ function SideNav() {
           <Link
             key={index}
             href={menu.path}
-            className={`flex gap-2 mb-2 p-3 hover:bg-primary text-white rounded-lg cursor-pointer items-center
+            aria-current={isActiveLink(menu.path) ? 'page' : undefined}
+            className={`flex gap-2 mb-2 p-3 hover:bg-primary text-white rounded-lg cursor-pointer items-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black
             ${isActiveLink(menu.path) && 'bg-primary text-white'}
           `}
           >
-            <menu.icon className="md:size-6 size-4" />
+            <menu.icon className="md:size-6 size-4" aria-hidden="true" />
             <h2 className="text-sm md:text-lg">{menu.name}</h2>
           </Link>
         ))}

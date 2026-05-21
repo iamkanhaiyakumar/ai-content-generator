@@ -99,8 +99,11 @@ const PublicHeader = () => {
                 </Link>
               </SignedOut>
               <SheetTrigger asChild>
-                <button className="">
-                  <Menu className="h-6 w-6" />
+                <button 
+                  className="p-2 hover:bg-gray-800 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#704ef8] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+                  aria-label="Toggle navigation menu"
+                >
+                  <Menu className="h-6 w-6" aria-hidden="true" />
                 </button>
               </SheetTrigger>
             </div>
@@ -121,7 +124,7 @@ const PublicHeader = () => {
                   <SheetClose key={item.name} className="text-left">
                     <Link
                       href={item.href}
-                      className="text-gray-300 hover:text-white transition-colors"
+                      className="text-gray-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#704ef8] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800 rounded px-2 py-1 inline-block"
                     >
                       {item.name}
                     </Link>

@@ -49,7 +49,13 @@ function UsageTrack() {
         </div>
         <h2 className='text-sm my-2'>{totalUsage}/100,000 credit used</h2>
       </div>
-      <Button variant={'secondary'} className='text-primary w-full my-3 '>Upgrade Plan</Button>
+      <Button 
+        variant={'secondary'} 
+        className='text-primary w-full my-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
+        aria-label="Upgrade your plan to get more credits"
+      >
+        Upgrade Plan
+      </Button>
     </div>
   )
 }

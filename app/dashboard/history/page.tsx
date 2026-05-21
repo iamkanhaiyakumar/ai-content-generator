@@ -60,19 +60,19 @@ async function History() {
     <div className="m-5 p-5 border rounded-lg bg-white">
       <h2 className="font-bold text-3xl">History</h2>
       <p className="text-gray-500">Search your previously generated AI content history</p>
-      <div className="grid grid-cols-7 font-bold bg-secondary mt-5 py-3">
-        <h2 className="col-span-2">TEMPLATE</h2>
-        <h2 className="col-span-2">AI RESPONSE</h2>
-        <h2>DATE</h2>
-        <h2>WORDS</h2>
-        <h2>COPY</h2>
+      <div className="grid grid-cols-7 font-bold bg-secondary mt-5 py-3" role="row">
+        <h2 className="col-span-2" role="columnheader">TEMPLATE</h2>
+        <h2 className="col-span-2" role="columnheader">AI RESPONSE</h2>
+        <h2 role="columnheader">DATE</h2>
+        <h2 role="columnheader">WORDS</h2>
+        <h2 role="columnheader">COPY</h2>
       </div>
 
       {HistoryList.length > 0 ? (
         HistoryList?.map((item: HISTORY) => {
           const { name, icon } = GetTemplateData(item.templateSlug);
           return (
-            <div key={item?.id} className="grid grid-cols-7 my-5 py-3 px-3 border-b">
+            <div key={item?.id} className="grid grid-cols-7 my-5 py-3 px-3 border-b" role="row">
               <h2 className="col-span-2 flex gap-2 items-center">
                 <Image
                   src={icon}
@@ -90,6 +90,7 @@ async function History() {
                   variant="ghost"
                   className="text-primary"
                   onClick={() => navigator.clipboard.writeText(item?.aiResponse)}
+                  aria-label={`Copy content from ${name}`}
                 >
                   Copy
                 </Button>
