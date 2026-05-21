@@ -56,6 +56,17 @@ async function History() {
     };
   };
 
+  // Function to get word count with reading time 
+const getReadingStats = (text: string) => {
+  const words = text.trim()
+    ? text.trim().split(/\s+/).length
+    : 0;
+
+  const readingTime = Math.max(1, Math.ceil(words / 200)); // considering average reading speed = 200 words/minute
+
+  return { words, readingTime };
+};
+
   return (
     <div className="m-5 p-5 border rounded-lg bg-white">
       <h2 className="font-bold text-3xl">History</h2>
@@ -84,7 +95,9 @@ async function History() {
               </h2>
               <h2 className="col-span-2 line-clamp-3">{item?.aiResponse}</h2>
               <h2>{new Date(item?.createdAt).toLocaleDateString()}</h2>
-              <h2>{item?.aiResponse?.split(" ").length}</h2>
+              <h2>{getReadingStats(item?.aiResponse).words} words •{" "}
+                  {getReadingStats(item?.aiResponse).readingTime} min read</h2> // corrected according to new reading stats
+
               <h2>
                 <Button
                   variant="ghost"
