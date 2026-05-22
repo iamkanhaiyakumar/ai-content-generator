@@ -7,6 +7,7 @@ import { desc, eq } from "drizzle-orm";
 import Image from "next/image";
 import React from "react";
 import { TEMPLATE as TEMPLATE_LIST } from "@/app/dashboard/_components/TemplateListSection";
+import HistoryRow from './_components/HistoryRow';
 
 export interface HISTORY {
   [x: string]: any;
@@ -72,29 +73,14 @@ async function History() {
         HistoryList?.map((item: HISTORY) => {
           const { name, icon } = GetTemplateData(item.templateSlug);
           return (
-            <div key={item?.id} className="grid grid-cols-7 my-5 py-3 px-3 border-b">
-              <h2 className="col-span-2 flex gap-2 items-center">
-                <Image
-                  src={icon}
-                  width={25}
-                  height={25}
-                  alt={name}
-                />
-                {name}
-              </h2>
-              <h2 className="col-span-2 line-clamp-3">{item?.aiResponse}</h2>
-              <h2>{new Date(item?.createdAt).toLocaleDateString()}</h2>
-              <h2>{item?.aiResponse?.split(" ").length}</h2>
-              <h2>
-                <Button
-                  variant="ghost"
-                  className="text-primary"
-                  onClick={() => navigator.clipboard.writeText(item?.aiResponse)}
-                >
-                  Copy
-                </Button>
-              </h2>
-            </div>
+            <HistoryRow
+              key={item?.id}
+              item={{
+                ...item,
+                templateName: name,
+                templateIcon: icon,
+              }}
+            />
           );
         })
       ) : (

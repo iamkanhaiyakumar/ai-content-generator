@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 interface Contributor {
@@ -49,10 +50,12 @@ const ContributorsPage = () => {
         {contributors.map((contributor) => (
           <div key={contributor.login} className="contributor-card p-2 border rounded-lg shadow-md ">
             <a href={contributor.html_url} target="_blank" rel="noopener noreferrer">
-              <img
+              <Image
                 src={contributor.avatar_url}
                 alt={`${contributor.login}'s avatar`}
-                className="w-16 h-16 rounded-full mx-auto"
+                width={64}
+                height={64}
+                className="rounded-full mx-auto"
               />
               <p className="text-center mt-2 font-medium">{contributor.login}</p>
             </a>
