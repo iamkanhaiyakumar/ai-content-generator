@@ -65,13 +65,18 @@ function CreateNewContent(props: PROPS) {
       setAiOutput(aiResponse);
 
       await SaveInDb(formData, selectedTemplate?.slug, aiResponse);
-    } catch (error) {
-      console.error("Error generating AI content:", error);
-    } finally {
-      setLoading(false);
-      
-      // setUpdateCreditUsage(Date.now());
-    }
+    }  catch (error: any) {
+  console.error("Error generating AI content:", error);
+
+  if (
+    error.message?.includes("429") ||
+    error.message?.toLowerCase().includes("rate limit")
+  ) {
+    alert("API rate limit reached. Please try again later.");
+  } else {
+    alert("Something went wrong while generating AI content.");
+  }
+}
   };
 
   const SaveInDb = async (formData: any, slug: any, aiRes: string) => {
