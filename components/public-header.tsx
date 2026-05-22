@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
@@ -25,11 +26,12 @@ const PublicHeader = () => {
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center space-x-3">
               <div className="relative h-8 w-8 sm:h-10 sm:w-10">
-                <img
-                  src='https://cdni.iconscout.com/illustration/premium/thumb/confused-ai-robot-illustration-download-in-svg-png-gif-file-formats--server-storage-artificial-intelligence-database-pack-science-technology-illustrations-8990982.png?f=webp'
+                <Image
+                  src="https://cdni.iconscout.com/illustration/premium/thumb/confused-ai-robot-illustration-download-in-svg-png-gif-file-formats--server-storage-artificial-intelligence-database-pack-science-technology-illustrations-8990982.png?f=webp"
+                  alt="AI Content Generator logo"
                   className="rounded-lg"
-                  height={100}
-                  width={100}
+                  width={40}
+                  height={40}
                 />
               </div>
               <div className="flex flex-col">

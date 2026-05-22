@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import PublicHeader from '@/components/public-header';
 import Link from 'next/link';
 
@@ -9,13 +10,13 @@ const NotFound: React.FC = () => {
       <div className="max-w-4xl w-full flex flex-col md:flex-row items-center text-center md:text-left">
         {/* Left side image */}
         <div className="md:w-1/2 mb-8 md:mb-0 md:mr-8">
-          <img
+          <Image
             src="https://cdni.iconscout.com/illustration/premium/thumb/confused-ai-robot-illustration-download-in-svg-png-gif-file-formats--server-storage-artificial-intelligence-database-pack-science-technology-illustrations-8990982.png?f=webp"
             alt="Not Found Illustration"
             width={400}
             height={400}
             className="rounded-lg"
-            />
+          />
         </div>
 
         {/* Right side content */}
