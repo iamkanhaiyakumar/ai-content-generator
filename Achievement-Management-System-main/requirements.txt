@@ -1,0 +1,10 @@
+Flask
+Flask-SQLAlchemy
+Flask-WTF
+python-dotenv
+pytest
+pytest-cov
+pytest-mock
+pytesseract
+Pillow
+qrcode[pil]

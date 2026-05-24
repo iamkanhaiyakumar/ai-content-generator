@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teacher Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'styles.css') }}" />
+    <script src="{{ url_for('static', filename = 'script.js') }}"></script>
+
+    <style>
+        /* Additional styles to make select elements match input styling */
+        .input-box select {
+            width: 100%;
+            height: 45px;
+            padding-left: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            /* Remove default styling */
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            /* Add custom dropdown arrow for dark mode */
+            background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+
+        .input-box select:focus {
+            border-color: var(--primary-color);
+        }
+
+        /* Change dropdown arrow color in light mode */
+        body.light-mode .input-box select {
+            background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+        }
+
+        /* Style for dropdown options */
+        .input-box select option {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="toggle-container">
+        <button id="mode-toggle">Dark Mode 🌙</button>
+    </div>
+
+    <div class="container">
+        <div class="title">Teacher Registration</div>
+        <div class="content">
+            {% if error %}
+            <div style="color: red; text-align: center; margin-bottom: 10px; font-weight: bold;">
+                {{ error }}
+            </div>
+            {% endif %}
+            <form action="/teacher-new" method="POST" id="teacher-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Full Name</span>
+                        <input autocomplete="off" autofocus type="text" name="teacher_name"
+                            placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">Teacher ID</span>
+                        <input autocomplete="off" type="text" name="teacher_id" placeholder="Enter your Teacher ID"
+                            required>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input autocomplete="off" type="email" name="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">Phone Number</span>
+                        <input autocomplete="off" type="tel" name="phone_number" placeholder="Enter your phone number"
+                            required>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details" style="display:flex; justify-content:space-between;">
+                            Password
+                            <button type="button" class="password-toggle-btn" aria-label="Show password" data-target="password" style="background:none;border:none;cursor:pointer;padding:0;">👁️</button>
+                        </span>
+                        <input autocomplete="off" type="password" id="password" name="password"
+                            placeholder="Enter your Password" required>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details" style="display:flex; justify-content:space-between;">
+                            Confirm Password
+                            <button type="button" class="password-toggle-btn" aria-label="Show password" data-target="confirm-password" style="background:none;border:none;cursor:pointer;padding:0;">👁️</button>
+                        </span>
+                        <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+                        <small id="password-message" style="font-size: 14px; display: none;"></small>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">Gender</span>
+                        <select name="teacher_gender" required>
+                            <option disabled selected value="">Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">Department</span>
+                        <select name="teacher_dept" required>
+                            <option disabled selected value="">Department</option>
+                            <option value="CSE">CSE</option>
+                            <option value="CSE(E Tech)">CSE(E Tech)</option>
+                            <option value="ECE">ECE</option>
+                            <option value="MECH">MECH</option>
+                        </select>
+                    </div>
+                </div>
+
+                    <div class="input-box" style="width: 100%;">
+                        <span class="details">Teacher Code <small>(Required for verification)</small></span>
+                        <input autocomplete="off" type="password" name="teacher_code" placeholder="Enter Teacher Code"
+                            required style="width: 100%;">
+                    </div>
+                </div>
+
+                <div class="button">
+                    <input type="submit" value="Register" class="btn-submit">
+                </div>
+            </form>
+
+            <div class="back-link">
+                <a href="{{ url_for('teacher') }}">Back to Login</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle logic
+      const toggleButtons = document.querySelectorAll('.password-toggle-btn');
+      
+      toggleButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          const input = document.getElementById(targetId);
+          if (!input) return;
+
+          const isPassword = input.type === 'password';
+          input.type = isPassword ? 'text' : 'password';
+          btn.innerHTML = isPassword ? '🙈' : '👁️';
+        });
+      });
+
+      // Validation logic
+      const form = document.getElementById('teacher-form');
+      const inputs = form.querySelectorAll('input[required], select[required]');
+      const submitBtn = form.querySelector('.btn-submit');
+      
+      const phoneInput = document.querySelector('input[name="phone_number"]');
+      const passwordInput = document.getElementById('password');
+      const confirmInput = document.getElementById('confirm-password');
+      
+      const createMsg = () => {
+        const msg = document.createElement('small');
+        msg.style.display = 'none';
+        msg.style.marginTop = '4px';
+        msg.style.fontWeight = '500';
+        msg.style.display = 'block'; 
+        return msg;
+      };
+
+      const phoneMsg = createMsg();
+      if(phoneInput) phoneInput.parentNode.appendChild(phoneMsg);
+      
+      const passwordMsg = createMsg();
+      if(passwordInput) passwordInput.parentNode.appendChild(passwordMsg);
+      
+      const confirmMsg = document.getElementById('password-message') || createMsg();
+      if(confirmInput && !document.getElementById('password-message')) confirmInput.parentNode.appendChild(confirmMsg);
+
+      const phoneRegex = /^[0-9]{10}$/;
+      const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+      const setError = (input, msgElement, msgText) => {
+        if(msgElement) {
+            msgElement.textContent = msgText;
+            msgElement.style.color = 'var(--primary-color, red)';
+        }
+        input.style.borderColor = 'var(--primary-color, red)';
+      };
+
+      const setSuccess = (input, msgElement) => {
+        if(msgElement) msgElement.textContent = '';
+        input.style.borderColor = '#10b981'; // Green
+      };
+
+      function validate() {
+        let isValid = true;
+        
+        inputs.forEach(input => {
+            if (!input.value) {
+                isValid = false;
+                input.style.borderColor = '#ccc';
+            } else {
+                setSuccess(input, null);
+            }
+        });
+
+        if (phoneInput && phoneInput.value) {
+            if (!phoneRegex.test(phoneInput.value)) {
+                setError(phoneInput, phoneMsg, '❌ Mobile number must be exactly 10 digits');
+                isValid = false;
+            } else {
+                setSuccess(phoneInput, phoneMsg);
+            }
+        }
+
+        if (passwordInput && passwordInput.value) {
+            if (!passRegex.test(passwordInput.value)) {
+                setError(passwordInput, passwordMsg, '❌ Min 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char');
+                isValid = false;
+            } else {
+                setSuccess(passwordInput, passwordMsg);
+            }
+        }
+        
+        if (confirmInput && confirmInput.value) {
+            if (confirmInput.value !== passwordInput.value) {
+                setError(confirmInput, confirmMsg, '❌ Passwords do not match');
+                isValid = false;
+            } else {
+                setSuccess(confirmInput, confirmMsg);
+            }
+        }
+        
+        submitBtn.disabled = !isValid;
+        submitBtn.style.opacity = isValid ? '1' : '0.5';
+        submitBtn.style.cursor = isValid ? 'pointer' : 'not-allowed';
+        return isValid;
+      }
+
+      inputs.forEach(input => {
+        input.addEventListener('input', validate);
+        input.addEventListener('change', validate);
+      });
+
+      form.addEventListener('submit', (e) => {
+        if (!validate()) {
+            e.preventDefault();
+        }
+      });
+      
+      validate();
+    });
+  </script>
+</html>
