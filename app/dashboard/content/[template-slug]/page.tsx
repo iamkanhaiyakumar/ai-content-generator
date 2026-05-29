@@ -56,7 +56,10 @@ function CreateNewContent(props: PROPS) {
 
     try {
       const SelectedPrompt = selectedTemplate?.aiPrompt || "";
-      const FinalAIPrompt = JSON.stringify(formData) + ", " + SelectedPrompt;
+      const { tone, ...promptData } = formData;
+      const toneInstruction = tone ? ` Use a ${tone} tone.` : "";
+      const FinalAIPrompt =
+        JSON.stringify(promptData) + ", " + SelectedPrompt + toneInstruction;
 
       const result = await chatSession.sendMessage(FinalAIPrompt);
 
