@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+import PublicHeader from "@/components/public-header";
+import PublicFooter from "@/components/public-footer";
+import { BackgroundBeams } from "@/components/ui/background-beams";
+import { TypewriterEffect } from "@/components/ui/typewriter-effect";
+import { Pricing } from "@/components/ui/pricing";
+import { Faq } from "@/components/ui/faq";
+import { Review } from "@/components/ui/review";
+import UseCases from "@/components/ui/use-cases";   // ← NEW IMPORT
+=======
 'use client';
 import { Button } from "@/components/ui/button";
 import {
@@ -90,30 +100,53 @@ export default function LandingPage() {
     const timer = setTimeout(() => setLoading(false), 3000);
     return () => clearTimeout(timer); // Cleanup timer on component unmount
   }, []);
+>>>>>>> upstream/master
 
+export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
-      {loading ? (
-        <div className='flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-900 to-black'>
-        <div className='w-24 h-24'>
-          <Image
-            src={Loading}
-            alt='Loading'
-            className='animate-bounce transition ease-in-out'
-            width={96} // Adjust width
-            height={96} // Adjust height
+    <main className="relative min-h-screen overflow-hidden bg-white dark:bg-gray-950">
+      <PublicHeader />
+
+      {/* Hero Section */}
+      <section id="features" className="relative flex flex-col items-center justify-center px-4 py-24 text-center sm:px-6 lg:px-8">
+        <BackgroundBeams />
+        <div className="relative z-10 mx-auto max-w-3xl">
+          <h1 className="mb-6 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
+            AI-Powered Content Generation
+          </h1>
+          <TypewriterEffect
+            words={[
+              { text: "Write" },
+              { text: "faster." },
+              { text: "Think" },
+              { text: "smarter." },
+              { text: "Create" },
+              { text: "better.", className: "text-violet-500" },
+            ]}
+            className="mb-8 text-xl font-medium text-gray-600 dark:text-gray-300"
           />
-        </div>
-  
-        <div className='mt-6 w-3/4 max-w-xs'>
-          <div className='w-full text-white rounded-full h-2.5'>
-            <div
-              className='bg-[#704ef8] h-2.5 rounded-full text-white'
-              style={{ width: `${progress}%`, color:'white' }}
-            ></div>
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            
+              href="/sign-up"
+              className="rounded-xl bg-violet-600 px-8 py-3 text-base font-semibold text-white shadow-md transition hover:bg-violet-500"
+            >
+              Get Started Free
+            </a>
+            
+              href="#use-cases"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("use-cases")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="rounded-xl border border-gray-300 px-8 py-3 text-base font-semibold text-gray-700 transition hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+            >
+              See Use Cases
+            </a>
           </div>
-          <p className='text-center mt-2 text-gray-700'>{progress}%</p>
         </div>
+<<<<<<< HEAD
+      </section>
+=======
       </div>
       ) : (
         <>
@@ -169,70 +202,23 @@ export default function LandingPage() {
                 </div>
               </div>
             </section>
+>>>>>>> upstream/master
 
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent my-12 sm:my-16"></div>
+      {/* Use Cases Section — fixes issue #138 */}
+      <UseCases />    {/* ← NEW: renders the #use-cases section the navbar links to */}
 
-            <section id="features" className="mb-16 sm:mb-20">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-8 sm:mb-12 text-center">
-                Key Features
-              </h2>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-3 sm:px-4 md:px-0">
-                {features.map((feature, index) => (
-                  <div key={index}>
-                    <Card className="bg-gray-800 border-gray-700 hover:border-[#704ef8] transition-all hover:shadow-lg hover:shadow-[#704ef8]/20 h-full">
-                      <CardContent className="p-4 sm:p-6">
-                        <div className="flex items-center mb-4">
-                          <div className="bg-[#704ef8] p-2 sm:p-3 rounded-full mr-4 text-white">
-                            {feature.icon}
-                          </div>
-                          <h3 className="text-lg sm:text-xl font-semibold text-white">{feature.title}</h3>
-                        </div>
-                        <p className="text-sm sm:text-base text-gray-400">{feature.description}</p>
-                      </CardContent>
-                    </Card>
-                  </div>
-                ))}
-              </div>
-            </section>
+      {/* Pricing Section */}
+      <section id="pricing">
+        <Pricing />
+      </section>
 
-            <section id="how-it-works" className="mb-16 sm:mb-20">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-8 sm:mb-12 text-center">How It Works</h2>
-              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 px-3 sm:px-4 md:px-0">
-                {[
-                  { step: "1", title: "Input Your Requirements", description: "Specify your content needs, target audience, and desired tone." },
-                  { step: "2", title: "AI Processing", description: "Our advanced AI analyzes your input and generates tailored content." },
-                  { step: "3", title: "Review and Publish", description: "Edit the generated content if needed, then publish with confidence." },
-                ].map((item, index) => (
-                  <div key={index} className="bg-gray-800 p-6 rounded-lg relative overflow-hidden group">
-                    <div className="absolute top-0 left-0 w-2 h-full bg-[#704ef8] group-hover:w-4 transition-all"></div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-white">{item.title}</h3>
-                    <p className="text-sm sm:text-base text-gray-400 mt-2">{item.description}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
+      {/* Reviews */}
+      <Review />
 
-            <section id="pricing" className="mb-16 sm:mb-20">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-8 sm:mb-12 text-center">Pricing</h2>
-              <Pricing />
-            </section>
+      {/* FAQ */}
+      <Faq />
 
-            <section id="testimonials" className="mb-16 sm:mb-20">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-8 sm:mb-12 text-center">What Our Users Say</h2>
-              <Review />
-            </section>
-
-            <section id="faq" className="mb-16 sm:mb-20">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-8 sm:mb-12 text-center">FAQ</h2>
-              <FaqPage />
-            </section>
-
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent my-12 sm:my-16"></div>
-
-            <PublicFooter />
-          </main>
-        </>
-      )}
-    </div>
+      <PublicFooter />
+    </main>
   );
 }
