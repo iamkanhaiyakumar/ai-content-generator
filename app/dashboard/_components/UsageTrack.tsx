@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'; // Check if the file exists
 import { useUser } from '@clerk/nextjs'
 import React, { useContext, useEffect, useState } from 'react'
 import { getUserTotalUsage } from '@/app/actions/dbActions';
-import { HISTORY } from '../history/page';
+
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
 
 function UsageTrack() {
