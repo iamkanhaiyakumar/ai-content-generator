@@ -42,7 +42,7 @@ const PublicHeader = () => {
                   AI Content Generator
                 </span>
                 <span className="hidden sm:block text-xs text-gray-600 dark:text-gray-400 whitespace-nowrap">
-                  Your ideas , our intelligence
+                  Your ideas, our intelligence
                 </span>
               </div>
             </Link>
