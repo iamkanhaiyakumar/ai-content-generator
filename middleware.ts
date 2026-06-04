@@ -7,7 +7,7 @@ export default clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
     const session = await auth();
     if (!session.userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return NextResponse.redirect(new URL("/sign-in", request.url));
     }
   }
   return NextResponse.next();
