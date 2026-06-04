@@ -60,6 +60,7 @@ function SideNav() {
             key={index}
             href={menu.path}
             className={`flex gap-2 mb-2 p-3 hover:bg-primary text-white rounded-lg cursor-pointer items-center
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black
             ${isActiveLink(menu.path) && 'bg-primary text-white'}
           `}
           >
