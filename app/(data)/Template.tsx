@@ -878,4 +878,20 @@ export default [
       },
     ],
   },
+  {
+    name: "Project README Generator",
+    desc: "Analyze your GitHub repository and automatically generate a professional, custom README.md.",
+    category: "Coding",
+    icon: "https://cdn-icons-png.flaticon.com/128/6062/6062646.png",
+    aiPrompt: "Generate a fully detailed, professionally written, and structured GitHub README.md based on the provided GitHub repository structure, dependencies, and files.",
+    slug: "readme-generator",
+    form: [
+      {
+        label: "GitHub Repository URL",
+        field: "input",
+        name: "repoUrl",
+        required: true,
+      },
+    ],
+  },
 ];
