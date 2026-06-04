@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
@@ -9,7 +11,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu, Moon, Sun } from "lucide-react";
+import { useTheme } from "@/components/theme-provider";
 
 const navItems = [
   { name: "Features", href: "#features" },
@@ -18,8 +21,10 @@ const navItems = [
 ];
 
 const PublicHeader = () => {
+  const { theme, toggleTheme } = useTheme();
+
   return (
-    <header className="bg-gray-900 shadow-md px-2 sm:px-3 md:px-0">
+    <header className="bg-white dark:bg-gray-900 shadow-md px-2 sm:px-3 md:px-0">
       <div className="container mx-auto py-4">
         <nav className="flex justify-between items-center">
           <div className="flex-shrink-0 flex items-center">
@@ -33,11 +38,11 @@ const PublicHeader = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-base sm:text-lg font-bold text-white whitespace-nowrap">
+                <span className="text-base sm:text-lg font-bold text-gray-900 dark:text-white whitespace-nowrap">
                   AI Content Generator
                 </span>
-                <span className="hidden sm:block text-xs text-gray-600 whitespace-nowrap">
-                  Your ideas , our intelligence
+                <span className="hidden sm:block text-xs text-gray-600 dark:text-gray-400 whitespace-nowrap">
+                  Your ideas, our intelligence
                 </span>
               </div>
             </Link>
@@ -47,13 +52,22 @@ const PublicHeader = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-300 hover:text-white transition-colors"
+                className="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
               >
                 {item.name}
               </Link>
             ))}
           </div>
           <div className="hidden md:flex items-center space-x-4">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={toggleTheme}
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              className="border-[#704ef8] text-[#704ef8] hover:bg-[#704ef8] hover:text-white"
+            >
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
             <SignedIn>
               <Link href="/dashboard">
                 <Button className="w-full border-[#704ef8] text-[#704ef8] hover:bg-[#704ef8] hover:text-white bg-slate-200">
@@ -80,6 +94,15 @@ const PublicHeader = () => {
           </div>
           <Sheet>
             <div className="flex items-center gap-2 md:hidden">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={toggleTheme}
+                aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                className="border-[#704ef8] text-[#704ef8] hover:bg-[#704ef8] hover:text-white"
+              >
+                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </Button>
               <SignedIn>
                 <Link href="/dashboard">
                   <Button
@@ -106,10 +129,10 @@ const PublicHeader = () => {
             </div>
             <SheetContent
               side="right"
-              className="w-[300px] sm:w-[400px] bg-gray-800"
+              className="w-[300px] sm:w-[400px] bg-white dark:bg-gray-800"
             >
               <SheetHeader>
-                <SheetTitle className="text-left">
+                <SheetTitle className="text-left text-gray-900 dark:text-white">
                   AI Content Generator
                 </SheetTitle>
               </SheetHeader>
@@ -121,7 +144,7 @@ const PublicHeader = () => {
                   <SheetClose key={item.name} className="text-left">
                     <Link
                       href={item.href}
-                      className="text-gray-300 hover:text-white transition-colors"
+                      className="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
                     >
                       {item.name}
                     </Link>

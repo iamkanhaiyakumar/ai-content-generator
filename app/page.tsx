@@ -99,9 +99,9 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-100 to-white text-gray-900 dark:from-gray-900 dark:to-black dark:text-white">
       {loading ? (
-        <div className='flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-900 to-black'>
+        <div className='flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-slate-100 to-white dark:from-gray-900 dark:to-black'>
         <div className='w-24 h-24'>
           <Image
             src={Loading}
@@ -113,13 +113,13 @@ export default function LandingPage() {
         </div>
   
         <div className='mt-6 w-3/4 max-w-xs'>
-          <div className='w-full text-white rounded-full h-2.5'>
+        <div className='w-full text-gray-900 dark:text-white rounded-full h-2.5'>
             <div
               className='bg-[#704ef8] h-2.5 rounded-full text-white'
               style={{ width: `${progress}%`, color:'white' }}
             ></div>
           </div>
-          <p className='text-center mt-2 text-gray-700'>{progress}%</p>
+          <p className='text-center mt-2 text-gray-700 dark:text-gray-300'>{progress}%</p>
         </div>
       </div>
       ) : (
@@ -137,7 +137,7 @@ export default function LandingPage() {
                 <h1 className="text-3xl sm:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#704ef8] to-[#a78bfa] md:hidden">
                   AI-Powered Content Generation
                 </h1>
-                <p className="text-base sm:text-lg text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto">
+                <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto">
                   Revolutionize your content creation process with our advanced AI technology. Generate high-quality, engaging content in seconds.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
@@ -167,15 +167,15 @@ export default function LandingPage() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-3 sm:px-4 md:px-0">
                 {features.map((feature, index) => (
                   <div key={index}>
-                    <Card className="bg-gray-800 border-gray-700 hover:border-[#704ef8] transition-all hover:shadow-lg hover:shadow-[#704ef8]/20 h-full">
+                    <Card className="bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700 hover:border-[#704ef8] transition-all hover:shadow-lg hover:shadow-[#704ef8]/20 h-full">
                       <CardContent className="p-4 sm:p-6">
                         <div className="flex items-center mb-4">
                           <div className="bg-[#704ef8] p-2 sm:p-3 rounded-full mr-4 text-white">
                             {feature.icon}
                           </div>
-                          <h3 className="text-lg sm:text-xl font-semibold text-white">{feature.title}</h3>
+                          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">{feature.title}</h3>
                         </div>
-                        <p className="text-sm sm:text-base text-gray-400">{feature.description}</p>
+                        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">{feature.description}</p>
                       </CardContent>
                     </Card>
                   </div>
@@ -191,10 +191,10 @@ export default function LandingPage() {
                   { step: "2", title: "AI Processing", description: "Our advanced AI analyzes your input and generates tailored content." },
                   { step: "3", title: "Review and Publish", description: "Edit the generated content if needed, then publish with confidence." },
                 ].map((item, index) => (
-                  <div key={index} className="bg-gray-800 p-6 rounded-lg relative overflow-hidden group">
+                  <div key={index} className="bg-white dark:bg-gray-800 p-6 rounded-lg relative overflow-hidden group">
                     <div className="absolute top-0 left-0 w-2 h-full bg-[#704ef8] group-hover:w-4 transition-all"></div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-white">{item.title}</h3>
-                    <p className="text-sm sm:text-base text-gray-400 mt-2">{item.description}</p>
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">{item.title}</h3>
+                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-2">{item.description}</p>
                   </div>
                 ))}
               </div>
