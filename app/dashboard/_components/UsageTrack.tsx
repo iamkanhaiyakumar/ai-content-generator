@@ -3,11 +3,9 @@
 import { Button } from '@/components/ui/button'; // Check if the file exists
 
 // import { Button } from '@/components/ui/button'
-import { db } from '@/utils/db';
-import { AIOutput } from '@/utils/schema';
 import { useUser } from '@clerk/nextjs'
 import React, { useContext, useEffect, useState } from 'react'
-import { eq } from 'drizzle-orm';
+import { getUserTotalUsage } from '@/app/actions/dbActions';
 import { HISTORY } from '../history/page';
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
 
@@ -21,20 +19,11 @@ function UsageTrack() {
     }, [user])
 
     const GetData=async()=>{
-      {/*@ts-ignore */}
-      const results:HISTORY=await db.select().from(AIOutput).where(eq(AIOutput.createdBy,user?.primaryEmailAddress?.emailAddress));
-
-      GetTotalUsage(results);
-    }
-
-    const GetTotalUsage=(results:HISTORY)=>{
-      let total:number=0;
-      results.forEach((element: { aiResponse: string | any[]; }) => {
-        total=total+Number(element.aiResponse?.length)
-    });
-     setTotalUsage(total);
-     console.log(total);
-
+      if (user?.primaryEmailAddress?.emailAddress) {
+        const total = await getUserTotalUsage(user.primaryEmailAddress.emailAddress);
+        setTotalUsage(total);
+        console.log(total);
+      }
     }
 
 

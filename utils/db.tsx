@@ -3,7 +3,7 @@ import { drizzle } from 'drizzle-orm/neon-http';
 
 // ... existing imports ...
 
-const sql = neon(process.env.NEXT_PUBLIC_DATABASE_URL!);
+const sql = neon(process.env.DATABASE_URL!);
 const localDb = drizzle(sql);
 export { localDb as db };
 
