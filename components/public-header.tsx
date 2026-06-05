@@ -40,8 +40,16 @@ export default function PublicHeader() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo.svg" alt="AI Content Generator" width={32} height={32} />
-          <span className="text-lg font-bold text-gray-900 dark:text-white">
+          <div className="flex shrink-0 items-center justify-center" style={{ width: 32, height: 32 }}>
+            <Image
+              src="/logo.svg"
+              alt="AI Content Generator"
+              width={32}
+              height={32}
+              style={{ display: 'block' }}
+            />
+          </div>
+          <span className="self-center text-lg font-bold leading-none text-gray-900 dark:text-white">
             AI Content Generator
           </span>
         </Link>
