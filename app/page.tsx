@@ -1,221 +1,437 @@
-<<<<<<< HEAD
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import PublicHeader from "@/components/public-header";
 import PublicFooter from "@/components/public-footer";
-import { BackgroundBeams } from "@/components/ui/background-beams";
-import { TypewriterEffect } from "@/components/ui/typewriter-effect";
-import { Pricing } from "@/components/ui/pricing";
-import { Faq } from "@/components/ui/faq";
-import { Review } from "@/components/ui/review";
-import UseCases from "@/components/ui/use-cases";   // ← NEW IMPORT
-=======
-'use client';
-import { Button } from "@/components/ui/button";
-import {
-  Zap,
-  FileText,
-  MessageSquare,
-  ShoppingBag,
-  Mail,
-  Search,
-  Megaphone,
-  CheckCircle,
-  Clipboard,
-  Edit3,
-} from "lucide-react";
-import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/card";
-import { BackgroundBeams } from "@/components/ui/background-beams";
-import PublicHeader from "@/components/public-header";
-import PublicFooter from "@/components/public-footer";
-import FaqPage from "@/components/ui/faq";
 import Pricing from "@/components/ui/pricing";
-import Review from '@/components/ui/review';
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Loading from '@/public/LoadingPage.png';
-
-export default function LandingPage() {
-  const [loading, setLoading] = useState(true); // State to track loading
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    // Simulate loading progress
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 50); // Adjust the speed here
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const features = [
-    {
-      icon: <FileText className="h-6 w-6" />,
-      title: "AI-Powered Writing",
-      description: "Create SEO-optimized blog posts, social media captions, and product descriptions with AI, tailored to your audience.",
-    },
-    {
-      icon: <Zap className="h-6 w-6" />,
-      title: "Streamlined Content Creation",
-      description: "Automate your content workflows for blogs, YouTube, Instagram, and more, allowing faster turnaround on content production.",
-    },
-    {
-      icon: <CheckCircle className="h-6 w-6" />,
-      title: "Content Quality Checker",
-      description: "Automatically detect and correct grammar, spelling, and style issues to ensure your content is polished and professional.",
-    },
-    {
-      icon: <Clipboard className="h-6 w-6" />,
-      title: "Template Library",
-      description: "Access a growing library of pre-built templates for various content types, including blogs, social media, and marketing.",
-    },
-    {
-      icon: <Edit3 className="h-6 w-6" />,
-      title: "Plagiarism-Free Rewrite",
-      description: "Easily rewrite existing content while ensuring it remains plagiarism-free and optimized for search engines.",
-    },
-    {
-      icon: <MessageSquare className="h-6 w-6" />,
-      title: "Advanced Text Refinement",
-      description: "Refine your writing by eliminating redundancies, fixing grammar issues, and adding clarity, using Gemini-powered AI.",
-    },
-  ];
-
-  const useCases = [
-    { icon: <FileText />, title: "Blog Posts and Articles", description: "Generate engaging blog content and in-depth articles on various topics." },
-    { icon: <MessageSquare />, title: "Social Media Content", description: "Create catchy posts and captions for multiple social media platforms." },
-    { icon: <ShoppingBag />, title: "Product Descriptions", description: "Craft compelling product descriptions for e-commerce websites." },
-    { icon: <Mail />, title: "Email Newsletters", description: "Compose informative and engaging email newsletters for your subscribers." },
-    { icon: <Search />, title: "SEO Optimized Content", description: "Generate content optimized for search engines to improve rankings." },
-    { icon: <Megaphone />, title: "Marketing Copy", description: "Create persuasive marketing copy for various campaigns and platforms." },
-  ];
-
-  // Simulate loading time (e.g., 3 seconds)
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 3000);
-    return () => clearTimeout(timer); // Cleanup timer on component unmount
-  }, []);
->>>>>>> upstream/master
+import Faq from "@/components/ui/faq";
+import Review from "@/components/ui/review";
+import UseCases from "@/components/ui/use-cases";
+import { LuSparkles, LuCopy, LuCheck, LuArrowRight } from "react-icons/lu";
+import { PenLine, Megaphone, Mail, BookOpen, Code2, BarChart2, Sparkles, Check } from "lucide-react";
 
 export default function Home() {
+  const [selectedTab, setSelectedTab] = useState<"blog" | "social" | "email">("blog");
+  const [copied, setCopied] = useState(false);
+
+  const demoContent = {
+    blog: {
+      prompt: "Write a short hook about developer tools...",
+      title: "Building Tools for Developers",
+      body: "The best developer tools don't just solve problems; they fit into your workflow like second nature. When building for engineers, speed is your feature, clarity is your design, and trust is your currency. Simplify the complex.",
+    },
+    social: {
+      prompt: "Generate a LinkedIn post hook about shipping products...",
+      title: "Shipping fast > Shipping perfect",
+      body: "We shipped three small updates this week. None of them were perfect, but all of them are already in users' hands. Real user feedback is worth 10x more than internal debates. Keep momentum. 🚀",
+    },
+    email: {
+      prompt: "Draft a concise product feature announcement email...",
+      title: "New feature: AI sandbox is live",
+      body: "Hi team, we just shipped a live interactive playground directly to the landing page. Users can now test the model's capabilities before signing up. Check it out and let us know what you think.",
+    },
+  };
+
+  const handleCopy = () => {
+    const contentText = `${demoContent[selectedTab].title}\n\n${demoContent[selectedTab].body}`;
+    navigator.clipboard.writeText(contentText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <main className="relative min-h-screen overflow-hidden bg-white dark:bg-gray-950">
+    <main
+      className="relative min-h-screen overflow-hidden antialiased bg-brand-deep text-brand-cream"
+    >
       <PublicHeader />
 
-      {/* Hero Section */}
-      <section id="features" className="relative flex flex-col items-center justify-center px-4 py-24 text-center sm:px-6 lg:px-8">
-        <BackgroundBeams />
-        <div className="relative z-10 mx-auto max-w-3xl">
-          <h1 className="mb-6 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
-            AI-Powered Content Generation
-          </h1>
-          <TypewriterEffect
-            words={[
-              { text: "Write" },
-              { text: "faster." },
-              { text: "Think" },
-              { text: "smarter." },
-              { text: "Create" },
-              { text: "better.", className: "text-violet-500" },
-            ]}
-            className="mb-8 text-xl font-medium text-gray-600 dark:text-gray-300"
-          />
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            
+      {/* ── Bento Hero Section ────────────────────── */}
+      <section id="hero" className="relative grid grid-cols-1 md:grid-cols-2 gap-8 px-4 py-28 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        {/* Left Column: Text */}
+        <div className="flex flex-col justify-center space-y-6">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.03 }}
+            className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-widest bg-brand-mid/15 border border-brand-light/30 text-brand-light"
+          >
+            <LuSparkles className="w-3.5 h-3.5" />
+            <span>Experience Next‑Gen Copywriting</span>
+          </motion.div>
+
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.1 }}
+            className="font-bold tracking-tight leading-[1.04] text-brand-cream"
+            style={{ fontSize: "clamp(3rem,8vw,5.5rem)" }}
+          >
+            Copywriting that
+            <br />
+            <span className="text-brand-light">resonates at scale.</span>
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.2 }}
+            className="max-w-xl text-lg leading-relaxed text-brand-cream/60"
+          >
+            A minimalist workspace built to generate high‑performing blog posts, engaging social media copy, and personalized campaigns in seconds.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.3 }}
+            className="flex flex-col items-center gap-4 sm:flex-row sm:justify-start"
+          >
+            <motion.a
+              whileHover={{ scale: 1.03, boxShadow: "0 0 30px rgba(75,86,148,0.4)" }}
+              whileTap={{ scale: 0.97 }}
               href="/sign-up"
-              className="rounded-xl bg-violet-600 px-8 py-3 text-base font-semibold text-white shadow-md transition hover:bg-violet-500"
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-3.5 text-sm font-semibold bg-brand-mid text-brand-cream shadow-[0_0_20px_rgba(75,86,148,0.3)] hover:bg-brand-mid/90"
             >
               Get Started Free
-            </a>
-            
+              <LuArrowRight className="w-4 h-4" />
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               href="#use-cases"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById("use-cases")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="rounded-xl border border-gray-300 px-8 py-3 text-base font-semibold text-gray-700 transition hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+              onClick={(e) => { e.preventDefault(); document.getElementById("use-cases")?.scrollIntoView({ behavior: "smooth" }); }}
+              className="rounded-xl px-8 py-3.5 text-sm font-medium bg-brand-light/10 border border-brand-light/25 text-brand-cream/70 hover:bg-brand-light/20"
             >
               See Use Cases
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </div>
-<<<<<<< HEAD
+
+        {/* Right Column: Interactive Preview */}
+        <motion.div
+          initial={{ opacity: 0, y: 30, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.75, delay: 0.45 }}
+          className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden bg-[#0f1541]/60 border border-brand-light/20 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-[20px]"
+        >
+          {/* Window Chrome */}
+          <div className="flex items-center justify-between px-5 py-4 border-b border-brand-light/12">
+            <div className="flex gap-1.5">
+              <span className="w-3 h-3 rounded-full bg-brand-light/25" />
+              <span className="w-3 h-3 rounded-full bg-brand-light/25" />
+              <span className="w-3 h-3 rounded-full bg-brand-light/25" />
+            </div>
+            <div className="text-xs font-medium tracking-widest text-brand-light/60">demo_playground.json</div>
+            <div className="w-12" />
+          </div>
+          <div className="p-6 sm:p-8 text-left">
+            <label className="text-xs font-semibold uppercase tracking-widest mb-4 block text-brand-light/70">Select a template</label>
+            {/* Tabs */}
+            <div className="flex flex-wrap gap-2.5 mb-6">
+              {(["blog", "social", "email"] as const).map((tab) => (
+                <motion.button
+                  key={tab}
+                  onClick={() => setSelectedTab(tab)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  className={`px-5 py-2 rounded-lg text-xs font-semibold transition-all duration-200 capitalize border ${selectedTab === tab ? "bg-brand-mid/40 border-brand-light/50 text-brand-cream" : "bg-transparent border-brand-light/15 text-brand-cream/45 hover:bg-brand-light/5"}`}
+                >
+                  {tab === "blog" ? "Blog Hook" : tab === "social" ? "LinkedIn Post" : "Email Template"}
+                </motion.button>
+              ))}
+            </div>
+            {/* Prompt */}
+            <div className="rounded-xl p-4 mb-5 flex items-center justify-between gap-4 bg-brand-mid/8 border border-brand-light/15">
+              <span className="text-sm italic text-brand-cream/50">“{demoContent[selectedTab].prompt}”</span>
+              <span className="text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded bg-brand-mid/20 border border-brand-light/25 text-brand-light/90">Prompt</span>
+            </div>
+            {/* Output */}
+            <div className="rounded-xl p-6 relative group min-h-[160px] flex flex-col justify-between bg-[#0a0e2d]/70 border border-brand-light/12">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedTab}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h3 className="text-sm font-semibold mb-3 text-brand-cream">{demoContent[selectedTab].title}</h3>
+                  <p className="text-sm leading-relaxed text-brand-cream/55">{demoContent[selectedTab].body}</p>
+                </motion.div>
+              </AnimatePresence>
+              <div className="flex justify-end mt-6">
+                <motion.button
+                  onClick={handleCopy}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-2 text-xs font-medium py-2 px-4 rounded-lg bg-brand-mid/15 border border-brand-light/20 text-brand-cream/60 hover:bg-brand-mid/25"
+                >
+                  {copied ? (<><LuCheck className="w-3.5 h-3.5 text-brand-light" /><span className="text-brand-light">Copied!</span></>) : (<><LuCopy className="w-3.5 h-3.5" /><span>Copy output</span></>) }
+                </motion.button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </section>
-=======
-      </div>
-      ) : (
-        <>
-          <PublicHeader />
-          <main className="container mx-auto">
-            <section className="my-10 sm:my-14 px-3 sm:px-4 md:px-0">
-              <div className="relative overflow-hidden rounded-3xl border border-violet-400/25 bg-gradient-to-br from-[#050b1f] via-[#0a1330] to-[#111938] px-5 py-14 sm:px-10 sm:py-16 lg:px-16 lg:py-20 text-center shadow-[0_0_60px_rgba(112,78,248,0.18)]">
-                <BackgroundBeams className="opacity-30" />
-                <div className="relative z-10 max-w-4xl mx-auto">
-                  <span
-                    className="inline-flex items-center rounded-full border border-violet-400/50 bg-violet-500/10 px-4 py-1.5 text-xs sm:text-sm font-medium tracking-wide text-violet-200"
-                  >
-                    Built for founders, marketers, and content teams
-                  </span>
-                  <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-balance">
-                    <span className="text-white">Turn Ideas into </span>
-                    <span className="bg-gradient-to-r from-[#8f73ff] via-[#704ef8] to-[#bc9aff] bg-clip-text text-transparent">
-                      Brand-Ready Content
-                    </span>
-                  </h1>
-                  <p className="mt-6 text-base sm:text-lg text-slate-200/90 max-w-3xl mx-auto leading-relaxed">
-                    Plan, draft, and refine polished copy in minutes. AI Content Generator helps you ship blogs, social posts, and marketing campaigns with a consistent voice your audience trusts.
-                  </p>
-                  <div className="mt-9 flex flex-col sm:flex-row justify-center gap-4">
-                    <Link href="/dashboard">
-                      <Button className="bg-[#704ef8] text-white hover:bg-[#5a3cc7] w-fit mx-auto px-10 md:mx-0">
-                        Start Writing Free
-                      </Button>
-                    </Link>
-                    <Link href="#features">
-                      <Button
-                        variant="outline"
-                        className="border-violet-300/50 text-violet-100 hover:bg-violet-500/20 hover:text-white bg-white/5 w-fit mx-auto px-10 md:mx-0"
-                      >
-                        Explore Features
-                      </Button>
-                    </Link>
-                  </div>
-                  <ul aria-label="Platform statistics" className="mt-10 grid gap-4 sm:grid-cols-3 text-left">
-                    <li className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                      <p className="text-2xl font-semibold text-white">50+</p>
-                      <p className="text-sm text-slate-300">Ready-to-use content templates</p>
-                    </li>
-                    <li className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                      <p className="text-2xl font-semibold text-white">{"< 60 sec"}</p>
-                      <p className="text-sm text-slate-300">Average first draft generation</p>
-                    </li>
-                    <li className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                      <p className="text-2xl font-semibold text-white">10k+</p>
-                      <p className="text-sm text-slate-300">Teams and creators served</p>
-                    </li>
-                  </ul>
+
+      {/* ── BENTO GRID LANDING SECTION ── */}
+      <section className="py-28 px-4 sm:px-6 lg:px-8 bg-brand-deep border-t border-brand-light/12">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Intro */}
+          <div className="mb-20 text-center">
+            <motion.span
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="inline-block rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest bg-brand-mid/15 border border-brand-light/25 text-brand-light mb-4"
+            >
+              What You Can Do
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+              className="text-4xl sm:text-5xl font-bold tracking-tight text-brand-cream mb-4"
+            >
+              Everything You Need to Generate Content at Scale
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.2 }}
+              className="text-lg text-brand-cream/60 max-w-2xl mx-auto"
+            >
+              From blog posts to social media, AI-powered tools built for creators, marketers, and founders.
+            </motion.p>
+          </div>
+
+          {/* Bento Grid */}
+          <div className="landing-bento">
+            {/* ── ROW 1 ── */}
+            {/* Use Case 1 - Small Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="bento-card bento-col-quarter group"
+            >
+              <div className="icon-badge mb-4">
+                <PenLine className="w-5 h-5 text-brand-light" />
+              </div>
+              <h3 className="font-bold text-brand-cream mb-2">Blog Posts</h3>
+              <p className="text-sm text-brand-cream/60">SEO-optimized long-form content in seconds</p>
+            </motion.div>
+
+            {/* Use Case 2 - Small Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bento-card bento-col-quarter group"
+            >
+              <div className="icon-badge mb-4">
+                <Megaphone className="w-5 h-5 text-brand-light" />
+              </div>
+              <h3 className="font-bold text-brand-cream mb-2">Social Posts</h3>
+              <p className="text-sm text-brand-cream/60">Engaging content for all platforms</p>
+            </motion.div>
+
+            {/* Use Case 3 - Small Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="bento-card bento-col-quarter group"
+            >
+              <div className="icon-badge mb-4">
+                <Mail className="w-5 h-5 text-brand-light" />
+              </div>
+              <h3 className="font-bold text-brand-cream mb-2">Email Campaigns</h3>
+              <p className="text-sm text-brand-cream/60">High-converting subject lines & copy</p>
+            </motion.div>
+
+            {/* Use Case 4 - Small Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bento-card bento-col-quarter group"
+            >
+              <div className="icon-badge mb-4">
+                <BookOpen className="w-5 h-5 text-brand-light" />
+              </div>
+              <h3 className="font-bold text-brand-cream mb-2">Product Copy</h3>
+              <p className="text-sm text-brand-cream/60">Persuasive listings & descriptions</p>
+            </motion.div>
+
+            {/* Featured Pricing - Half Width, Taller */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="bento-card bento-col-half featured-pulse flex flex-col"
+              style={{
+                background: "linear-gradient(135deg, rgba(75,86,148,0.15) 0%, rgba(75,86,148,0.08) 100%)",
+                borderColor: "rgba(114,136,174,0.3)",
+              }}
+            >
+              <div className="mb-6">
+                <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-brand-light/15 border border-brand-light/30 text-brand-light mb-4">
+                  Most Popular
+                </span>
+                <h3 className="text-2xl font-bold text-brand-cream mb-2">Content Creator</h3>
+                <p className="text-brand-cream/60 text-sm mb-6">Perfect for bloggers and social creators</p>
+              </div>
+              <div className="mb-8">
+                <span className="text-4xl font-bold text-brand-light">$20</span>
+                <span className="text-brand-cream/60 text-sm">/month</span>
+              </div>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start gap-3 text-sm text-brand-cream/70">
+                  <Check className="w-4 h-4 text-brand-light mt-0.5 flex-shrink-0" />
+                  <span>Instagram tools & generators</span>
+                </li>
+                <li className="flex items-start gap-3 text-sm text-brand-cream/70">
+                  <Check className="w-4 h-4 text-brand-light mt-0.5 flex-shrink-0" />
+                  <span>YouTube SEO suggestions</span>
+                </li>
+                <li className="flex items-start gap-3 text-sm text-brand-cream/70">
+                  <Check className="w-4 h-4 text-brand-light mt-0.5 flex-shrink-0" />
+                  <span>Unlimited monthly prompts</span>
+                </li>
+              </ul>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full py-3 rounded-lg font-semibold bg-brand-light/20 border border-brand-light/40 text-brand-cream hover:bg-brand-light/30 transition-all mt-auto"
+              >
+                Get Started
+              </motion.button>
+            </motion.div>
+
+            {/* Testimonial Preview - Half Width */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="bento-card bento-col-half flex flex-col"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <Sparkles className="w-5 h-5 text-brand-light" />
+                <span className="text-xs font-bold uppercase tracking-widest text-brand-light">Success Stories</span>
+              </div>
+              <blockquote className="text-lg leading-relaxed italic text-brand-cream/75 mb-6 flex-grow">
+                "This AI is a game-changer! It's like having an entire research team that never sleeps. My productivity has skyrocketed."
+              </blockquote>
+              <div className="flex items-center gap-3 pt-4 border-t border-brand-light/10">
+                <div className="w-10 h-10 rounded-full bg-brand-mid/20 flex items-center justify-center">
+                  <span className="text-sm font-bold text-brand-light">LG</span>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-brand-cream">Liam Garcia</p>
+                  <p className="text-xs text-brand-light/60">AI Enthusiast</p>
                 </div>
               </div>
-            </section>
->>>>>>> upstream/master
+            </motion.div>
 
-      {/* Use Cases Section — fixes issue #138 */}
-      <UseCases />    {/* ← NEW: renders the #use-cases section the navbar links to */}
+            {/* More Use Cases - Row 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="bento-card bento-col-quarter group"
+            >
+              <div className="icon-badge mb-4">
+                <Code2 className="w-5 h-5 text-brand-light" />
+              </div>
+              <h3 className="font-bold text-brand-cream mb-2">Documentation</h3>
+              <p className="text-sm text-brand-cream/60">API docs & developer guides</p>
+            </motion.div>
 
-      {/* Pricing Section */}
-      <section id="pricing">
-        <Pricing />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="bento-card bento-col-quarter group"
+            >
+              <div className="icon-badge mb-4">
+                <BarChart2 className="w-5 h-5 text-brand-light" />
+              </div>
+              <h3 className="font-bold text-brand-cream mb-2">Ad Copy</h3>
+              <p className="text-sm text-brand-cream/60">High-converting ad headlines</p>
+            </motion.div>
+
+            {/* CTA Feature Card - Half Width */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.45 }}
+              className="bento-card bento-col-half"
+            >
+              <h3 className="text-xl font-bold text-brand-cream mb-3">Trusted by Creators & Teams</h3>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-sm text-brand-cream/70">
+                  <div className="w-2 h-2 rounded-full bg-brand-light" />
+                  <span>10,000+ content creators</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-brand-cream/70">
+                  <div className="w-2 h-2 rounded-full bg-brand-light" />
+                  <span>50M+ words generated</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-brand-cream/70">
+                  <div className="w-2 h-2 rounded-full bg-brand-light" />
+                  <span>99% uptime guaranteed</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* FAQ Preview - Full Width CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="bento-card bento-col-full flex flex-col sm:flex-row items-center justify-between gap-8"
+            >
+              <div>
+                <h3 className="text-2xl font-bold text-brand-cream mb-2">Ready to Transform Your Content?</h3>
+                <p className="text-brand-cream/60">Start generating high-quality content in seconds. No credit card required.</p>
+              </div>
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="/sign-up"
+                className="px-8 py-3 rounded-xl font-semibold bg-brand-mid text-brand-cream shadow-lg hover:bg-brand-mid/90 transition-all whitespace-nowrap"
+              >
+                Start Free Trial
+              </motion.a>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
-      {/* Reviews */}
+      {/* ── FULL COMPONENTS BELOW BENTO (Detailed Sections) ── */}
+      <UseCases />
+      <section id="pricing"><Pricing /></section>
       <Review />
-
-      {/* FAQ */}
       <Faq />
 
       <PublicFooter />

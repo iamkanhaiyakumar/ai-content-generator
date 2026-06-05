@@ -1,7 +1,10 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import { Sparkles, Brain, Zap, Stars, ArrowRight, ArrowLeft } from 'lucide-react';
-import Image from 'next/image';
+"use client";
+import '@/styles/bento.css';
+
+import React, { useState } from "react";
+import { Sparkles, Zap, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Testimonial {
   text: string;
@@ -10,7 +13,7 @@ interface Testimonial {
   emotion: string;
   techStack: string[];
   aiContribution: string;
-  image: string; // New property for image path
+  image: string;
 }
 
 const testimonials: Testimonial[] = [
@@ -21,34 +24,34 @@ const testimonials: Testimonial[] = [
     emotion: "amazed",
     techStack: ["Deep Learning", "Predictive Analytics", "GPT"],
     aiContribution: "Productivity boosted by 400%",
-    image: "/Liam.jpg" // Path to specific image
+    image: "/Liam.jpg",
   },
   {
-    text: "It feels like magic – the AI adjusts to each project’s needs! From generating fresh ideas to refining complex designs, it's my creative assistant.",
+    text: "It feels like magic – the AI adjusts to each project's needs! From generating fresh ideas to refining complex designs, it's my creative assistant.",
     author: "Ava Thompson",
     position: "Tech Explorer",
     emotion: "inspired",
     techStack: ["Adaptive Learning", "Creative Networks", "AI Art"],
     aiContribution: "Idea generation speed increased by 5x",
-    image: "/ava.jpg"
+    image: "/ava.jpg",
   },
   {
-    text: "I never imagined AI could understand niche industry jargon so well. It’s been a lifesaver for technical content creation.",
+    text: "I never imagined AI could understand niche industry jargon so well. It's been a lifesaver for technical content creation.",
     author: "James Kim",
     position: "Content AI Specialist",
     emotion: "mindblown",
     techStack: ["Natural Language Processing", "Custom GPT Models", "Content AI"],
     aiContribution: "Content accuracy improved by 85%",
-    image: "/james.jpg"
+    image: "/james.jpg",
   },
   {
-    text: "AI-powered insights have made data visualization so intuitive! Now I can see trends that would’ve taken weeks to identify before.",
+    text: "AI-powered insights have made data visualization so intuitive! Now I can see trends that would've taken weeks to identify before.",
     author: "Sophia Perez",
     position: "Data Enthusiast",
     emotion: "amazed",
     techStack: ["Data Visualization", "Machine Learning", "NLP"],
     aiContribution: "Data insight speed increased by 3x",
-    image: "/sophia.jpg"
+    image: "/sophia.jpg",
   },
   {
     text: "Using AI to handle customer support queries was the best decision ever! It provides immediate responses, keeping customers happy and saving me time.",
@@ -57,116 +60,130 @@ const testimonials: Testimonial[] = [
     emotion: "inspired",
     techStack: ["Customer AI", "Sentiment Analysis", "Automated Support"],
     aiContribution: "Customer response time reduced by 75%",
-    image: "/zara.jpg"
-  }
+    image: "/zara.jpg",
+  },
 ];
 
-const AITestimonialExperience: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true);
-  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
+export default function Review() {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isAutoPlaying) {
-      interval = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-      }, 5000);
-    }
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  const next = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
 
-  const currentTestimonial = testimonials[currentIndex];
-
-  const getEmotionColor = (emotion: string) => {
-    const colors: Record<string, string> = {
-      amazed: 'bg-purple-600',
-      inspired: 'bg-blue-600',
-      mindblown: 'bg-green-600'
-    };
-    return colors[emotion] || 'bg-gray-600';
+  const prev = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
   return (
-    <div className="min-h-screen bg-[#0D131F] text-white p-8">
-      <div className="max-w-4xl mx-auto rounded-2xl bg-black/30 backdrop-blur-lg p-8">
-        <div className="flex items-center justify-center mb-8">
-          <Sparkles className="w-8 h-8 mr-2 text-[#704EF8]" />
-          <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-white">
+    <section className="py-28 px-4 sm:px-6 lg:px-8 bg-brand-deep border-t border-brand-light/12">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center justify-center mb-16 gap-3">
+          <Sparkles className="w-5 h-5 text-brand-light" />
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-brand-cream">
             Our Success Stories
           </h2>
         </div>
 
-        <div className="space-y-6 transition-opacity duration-500">
-          <div className="relative hover:transform hover:scale-105 transition-transform duration-300">
-            <blockquote className="text-2xl font-light italic text-center mb-8">
-              "{currentTestimonial.text}"
-            </blockquote>
-            <div className="absolute -top-4 -left-4">
-              <Brain className="w-8 h-8 text-[#704EF8]" />
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center space-y-4">
-            <div className="relative">
-              <Image
-                src={currentTestimonial.image} // Dynamically set image for each testimonial
-                alt={currentTestimonial.author}
-                className="w-20 h-20 rounded-full ring-4 ring-[#704EF8] transition-transform duration-300 hover:scale-110"
-                width={200}
-                height={200}
-              />
-              <div className={`absolute -bottom-2 -right-2 w-6 h-6 rounded-full ${getEmotionColor(currentTestimonial.emotion)} flex items-center justify-center`}>
-                <Stars className="w-4 h-4" />
+        {/* Carousel Container */}
+        <div className="relative">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
+              className="bento-card flex flex-col h-auto"
+            >
+              <div className="mb-8">
+                <blockquote className="text-lg leading-relaxed italic text-brand-cream/75">
+                  "{testimonials[currentIndex].text}"
+                </blockquote>
               </div>
-            </div>
-            
-            <div className="text-center">
-              <h3 className="text-xl font-semibold">{currentTestimonial.author}</h3>
-              <p className="text-white">{currentTestimonial.position}</p>
-            </div>
-          </div>
 
-          <div className="space-y-4">
-            <div className="flex flex-wrap gap-2 justify-center">
-              {currentTestimonial.techStack.map((tech) => (
-                <div
-                  key={tech}
-                  className="px-3 py-1 rounded-full bg-[#4F46E5] border border-[#4F46E5] cursor-pointer
-                           transition-all duration-300 hover:bg-[#4338CA] hover:scale-105"
-                  onMouseEnter={() => setHoveredTech(tech)}
-                  onMouseLeave={() => setHoveredTech(null)}
-                >
-                  <span className="text-sm">{tech}</span>
+              <div className="mt-auto pt-8 border-t border-brand-light/10 flex flex-col gap-4">
+                <div className="flex items-center gap-4">
+                  <Image 
+                    src={testimonials[currentIndex].image} 
+                    alt={testimonials[currentIndex].author} 
+                    className="w-12 h-12 rounded-full object-cover" 
+                    width={48} 
+                    height={48} 
+                  />
+                  <div>
+                    <h3 className="text-sm font-semibold text-brand-cream">
+                      {testimonials[currentIndex].author}
+                    </h3>
+                    <p className="text-xs text-brand-light/60">
+                      {testimonials[currentIndex].position}
+                    </p>
+                  </div>
                 </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {testimonials[currentIndex].techStack.slice(0, 2).map((tech) => (
+                    <span 
+                      key={tech} 
+                      className="px-3 py-1 rounded-md text-xs font-medium bg-brand-mid/10 border border-brand-light/15 text-brand-light/70"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-2 text-xs text-brand-light/60">
+                  <Zap className="w-3.5 h-3.5" />
+                  <span>{testimonials[currentIndex].aiContribution}</span>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation Buttons */}
+          <div className="flex items-center justify-between mt-10">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={prev}
+              className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-brand-mid/15 border border-brand-light/20 text-brand-light hover:bg-brand-mid/25 transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </motion.button>
+
+            {/* Indicators */}
+            <div className="flex gap-2">
+              {testimonials.map((_, i) => (
+                <motion.button
+                  key={i}
+                  onClick={() => setCurrentIndex(i)}
+                  className={`h-2 rounded-full transition-all ${
+                    i === currentIndex 
+                      ? "w-8 bg-brand-light" 
+                      : "w-2 bg-brand-light/30"
+                  }`}
+                  whileHover={{ scale: 1.2 }}
+                />
               ))}
             </div>
 
-            <div className="flex items-center justify-center space-x-2 text-sm text-white">
-              <Zap className="w-4 h-4" />
-              <span>{currentTestimonial.aiContribution}</span>
-            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={next}
+              className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-brand-mid/15 border border-brand-light/20 text-brand-light hover:bg-brand-mid/25 transition-colors"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </motion.button>
+          </div>
+
+          {/* Counter */}
+          <div className="text-center mt-6 text-xs text-brand-light/60">
+            {currentIndex + 1} / {testimonials.length}
           </div>
         </div>
-
-        <div className="flex justify-center space-x-4 mt-8">
-          <button
-            onClick={() => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-            className="p-3 rounded-full bg-[#704EF8] hover:bg-[#4338CA] transition-colors duration-300"
-          >
-            <ArrowLeft/>
-          </button>
-          
-          <button
-            onClick={() => setCurrentIndex((prev) => (prev + 1) % testimonials.length)}
-            className="p-3 rounded-full bg-[#704EF8] hover:bg-[#4338CA] transition-colors duration-300"
-          >
-            <ArrowRight />
-          </button>
-        </div>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default AITestimonialExperience;
+}

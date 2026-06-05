@@ -2,91 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Brand Tokens ─────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-deep:    #111844;   /* darkest navy */
+  --brand-mid:     #4B5694;   /* medium indigo */
+  --brand-light:   #7288AE;   /* steel blue */
+  --brand-cream:   #EAE0CF;   /* warm cream */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base Reset ────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--brand-deep);
+  color: var(--brand-cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #111844; }
+::-webkit-scrollbar-thumb { background: #4B5694; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #7288AE; }
+
+/* ── Selection ─────────────────────────────────── */
+::selection {
+  background: #4B5694;
+  color: #EAE0CF;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .text-balance { text-wrap: balance; }
+
+  /* Brand background/border utilities */
+  .bg-brand-card {
+    background: rgba(75, 86, 148, 0.08);
+  }
+  .bg-brand-card-hover {
+    background: rgba(75, 86, 148, 0.15);
+  }
+  .border-brand {
+    border-color: rgba(114, 136, 174, 0.2);
+  }
+  .border-brand-hover {
+    border-color: rgba(114, 136, 174, 0.45);
+  }
+
+  /* Glow effects (re-styled to be flat solid shadows/accents) */
+  .glow-brand {
+    box-shadow: 0 0 40px rgba(75, 86, 148, 0.2);
+  }
+  .glow-brand-sm {
+    box-shadow: 0 0 20px rgba(75, 86, 148, 0.15);
   }
 }
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --background: 225 57% 17%;
+    --foreground: 38 30% 87%;
+    --card: 225 57% 14%;
+    --card-foreground: 38 30% 87%;
+    --popover: 225 57% 14%;
+    --popover-foreground: 38 30% 87%;
+    --primary: 38 30% 87%;
+    --primary-foreground: 225 57% 17%;
+    --secondary: 228 33% 43%;
+    --secondary-foreground: 38 30% 87%;
+    --muted: 226 43% 22%;
+    --muted-foreground: 214 27% 57%;
+    --accent: 228 33% 43%;
+    --accent-foreground: 38 30% 87%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-  }
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --border: 228 33% 30%;
+    --input: 228 33% 25%;
+    --ring: 214 27% 57%;
+    --radius: 0.75rem;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
 }
