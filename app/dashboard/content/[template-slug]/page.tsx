@@ -108,7 +108,7 @@ function CreateNewContent(props: PROPS) {
 
         {/* Output Section */}
         <div className="col-span-2">
-          <OutputSection aiOutput={aiOutput} />
+          <OutputSection aiOutput={aiOutput} loading={loading} />
         </div>
       </div>
     </div>
