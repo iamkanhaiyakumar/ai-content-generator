@@ -1,0 +1,120 @@
+/* styles/bento.css */
+@tailwind utilities;
+@layer utilities {
+  /* ── Spacing System ── */
+  :root {
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+  }
+
+  /* ── Bento Grid: 3-column responsive ── */
+  .bento-grid {
+    @apply grid gap-6 md:gap-8 lg:gap-10;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  /* ── Bento Card: Optimized for text & content ── */
+  .bento-card {
+    @apply rounded-2xl border backdrop-blur-md transition-all duration-300;
+    @apply p-6 md:p-8;
+    background-color: rgba(75, 86, 148, 0.08);
+    border-color: rgba(114, 136, 174, 0.15);
+  }
+
+  .bento-card:hover {
+    background-color: rgba(75, 86, 148, 0.12);
+    border-color: rgba(114, 136, 174, 0.25);
+    box-shadow: 0 12px 48px rgba(75, 86, 148, 0.12);
+  }
+
+  .bento-card-lg {
+    @apply bento-card p-8 md:p-12;
+  }
+
+  /* ── Typography Control ── */
+  .text-truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .text-truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* ── Icon Badges ── */
+  .icon-badge {
+    @apply inline-flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300;
+    background-color: rgba(75, 86, 148, 0.15);
+    border-color: rgba(114, 136, 174, 0.2);
+  }
+
+  .icon-badge:hover {
+    background-color: rgba(75, 86, 148, 0.25);
+    border-color: rgba(114, 136, 174, 0.3);
+  }
+
+  /* ── Landing Page Bento Grid: Full-width with varying cell sizes ── */
+  .landing-bento {
+    @apply grid gap-6 md:gap-8 lg:gap-10;
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  /* ── Bento Cell Spans for Landing Page ── */
+  .bento-col-full {
+    grid-column: 1 / -1;
+  }
+
+  .bento-col-half {
+    grid-column: span 6;
+  }
+
+  .bento-col-third {
+    grid-column: span 4;
+  }
+
+  .bento-col-quarter {
+    grid-column: span 3;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .bento-col-half,
+    .bento-col-third,
+    .bento-col-quarter {
+      grid-column: 1 / -1 !important;
+    }
+  }
+
+  /* Tablet adjustments */
+  @media (min-width: 769px) and (max-width: 1023px) {
+    .bento-col-third,
+    .bento-col-quarter {
+      grid-column: span 6 !important;
+    }
+  }
+
+  /* ── Pulse animation for featured cards ── */
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.01); }
+  }
+
+  .featured-pulse {
+    animation: pulse 3s infinite ease-in-out;
+  }
+
+  /* ── Smooth transitions ── */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-out;
+  }
+}

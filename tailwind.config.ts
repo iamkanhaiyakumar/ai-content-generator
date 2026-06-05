@@ -17,6 +17,12 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
+  			brand: {
+  				deep: "#111844",
+  				mid: "#4B5694",
+  				light: "#7288AE",
+  				cream: "#EAE0CF",
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

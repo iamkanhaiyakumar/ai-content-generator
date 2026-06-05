@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Outfit } from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
 import ChatbaseEmbed from "@/components/ChatbaseEmbed";
 
-const outfit = Outfit({ subsets: ["latin"] });
+const bricolage = Bricolage_Grotesque({ subsets: ["latin"] });
 
 // Define metadata
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={outfit.className}>
+        <body className={bricolage.className}>
           <main>
             {children}
             <ChatbaseEmbed />

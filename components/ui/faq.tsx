@@ -1,11 +1,27 @@
-'use client';
-import { useState } from 'react';
-import { FiChevronDown, FiMail, FiPhone } from 'react-icons/fi';
+"use client";
+import '@/styles/bento.css';
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  LuBrain,
+  LuRocket,
+  LuZap,
+  LuDollarSign,
+  LuUsers,
+  LuMessageSquare,
+  LuCpu,
+  LuWrench,
+  LuFileText,
+  LuChevronDown,
+  LuMail,
+  LuPhone,
+} from "react-icons/lu";
 
 interface Faq {
   question: string;
   answer: string;
-  icon: string;
+  icon: React.ReactNode;
   category: string;
 }
 
@@ -17,80 +33,90 @@ interface ContactMethod {
   action: string;
 }
 
-// Updated FAQs relevant to AI content generation
 const faqs: Faq[] = [
   {
     category: "Getting Started",
     question: "What is AI Content Generator?",
-    answer: "AI Content Generator is a powerful tool that uses artificial intelligence to create high-quality content automatically, helping users save time and enhance their writing process.",
-    icon: "🤖"
+    answer:
+      "AI Content Generator is a powerful tool that uses artificial intelligence to create high-quality content automatically, helping users save time and enhance their writing process.",
+    icon: <LuBrain className="w-5 h-5" />,
   },
   {
     category: "Getting Started",
     question: "How do I get started with AI Content Generator?",
-    answer: "To start using our AI Content Generator, sign up for an account on our website, choose a pricing plan, and explore our user-friendly interface.",
-    icon: "🚀"
+    answer:
+      "To start using our AI Content Generator, sign up for an account on our website, choose a pricing plan, and explore our user-friendly interface.",
+    icon: <LuRocket className="w-5 h-5" />,
   },
   {
     category: "Features",
     question: "What features does AI Content Generator offer?",
-    answer: "Our AI Content Generator offers features like content creation, editing, optimization, SEO suggestions, and support for multiple languages to enhance your writing.",
-    icon: "⚡"
+    answer:
+      "Our AI Content Generator offers features like content creation, editing, optimization, SEO suggestions, and support for multiple languages to enhance your writing.",
+    icon: <LuZap className="w-5 h-5" />,
   },
   {
     category: "Pricing",
     question: "What are the pricing plans for AI Content Generator?",
-    answer: "We offer flexible pricing plans including a free tier, monthly subscriptions, and annual plans to suit different needs. Check our pricing page for more details.",
-    icon: "💰"
+    answer:
+      "We offer flexible pricing plans including a free tier, monthly subscriptions, and annual plans to suit different needs. Check our pricing page for more details.",
+    icon: <LuDollarSign className="w-5 h-5" />,
   },
   {
     category: "Community",
     question: "How can I contribute to the development of AI Content Generator?",
-    answer: "You can contribute by providing feedback, reporting bugs, or suggesting features that can enhance our AI Content Generator.",
-    icon: "🤝"
+    answer:
+      "You can contribute by providing feedback, reporting bugs, or suggesting features that can enhance our AI Content Generator.",
+    icon: <LuUsers className="w-5 h-5" />,
   },
   {
     category: "Features",
     question: "Is there a collaboration feature in AI Content Generator?",
-    answer: "Yes, our AI Content Generator supports collaborative features, allowing multiple users to work on content simultaneously.",
-    icon: "👥"
+    answer:
+      "Yes, our AI Content Generator supports collaborative features, allowing multiple users to work on content simultaneously.",
+    icon: <LuMessageSquare className="w-5 h-5" />,
   },
   {
     category: "Technical",
     question: "What technologies power AI Content Generator?",
-    answer: "Our AI Content Generator is built using advanced machine learning algorithms, natural language processing, and state-of-the-art cloud infrastructure for optimal performance.",
-    icon: "⚙️"
+    answer:
+      "Our AI Content Generator is built using advanced machine learning algorithms, natural language processing, and state-of-the-art cloud infrastructure for optimal performance.",
+    icon: <LuCpu className="w-5 h-5" />,
   },
   {
     category: "Support",
     question: "How can I get support for AI Content Generator?",
-    answer: "For support, you can reach out through our contact methods provided on the website. We're here to help you with any issues or questions.",
-    icon: "🛠️"
+    answer:
+      "For support, you can reach out through our contact methods provided on the website. We're here to help you with any issues or questions.",
+    icon: <LuWrench className="w-5 h-5" />,
   },
   {
     category: "Features",
     question: "Are there templates available in AI Content Generator?",
-    answer: "Yes, we provide a variety of templates for different types of content, including blog posts, social media updates, and marketing copy.",
-    icon: "📄"
+    answer:
+      "Yes, we provide a variety of templates for different types of content, including blog posts, social media updates, and marketing copy.",
+    icon: <LuFileText className="w-5 h-5" />,
   },
 ];
 
 const contactMethods: ContactMethod[] = [
   {
-    icon: <FiMail className="w-6 h-6 text-[#704EF8]" />, // Set icon color
+    icon: <LuMail className="w-5 h-5 text-brand-light" />,
     title: "Email Support",
     description: "Get help via email",
     contact: "support@aicontentgenerator.com",
-    action: "mailto:support@aicontentgenerator.com"
+    action: "mailto:support@aicontentgenerator.com",
   },
   {
-    icon: <FiPhone className="w-6 h-6 text-[#704EF8]" />, // Set icon color
+    icon: <LuPhone className="w-5 h-5 text-brand-light" />,
     title: "Phone Support",
     description: "Call us directly",
     contact: "+1 (555) 123-4567",
-    action: "tel:+15551234567"
-  }
+    action: "tel:+15551234567",
+  },
 ];
+
+/* ── Sub-components ── */
 
 interface FaqItemProps {
   faq: Faq;
@@ -99,20 +125,47 @@ interface FaqItemProps {
 }
 
 const FaqItem: React.FC<FaqItemProps> = ({ faq, isOpen, onToggle }) => (
-  <div className={`rounded-xl overflow-hidden transition-all duration-300 bg-black hover:bg-gray-800 shadow-md`}>
-    <button onClick={onToggle} className="w-full flex items-center justify-between p-6 text-left font-medium">
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.35 }}
+    className={`rounded-xl overflow-hidden transition-all duration-300 border ${
+      isOpen
+        ? "bg-brand-mid/12 border-brand-light/30"
+        : "bg-brand-mid/6 border-brand-light/12"
+    }`}
+  >
+    <button
+      onClick={onToggle}
+      className="w-full flex items-center justify-between p-6 text-left font-medium transition-colors duration-200"
+    >
       <span className="flex items-center gap-3">
-        <span className="text-2xl text-[#704EF8]">{faq.icon}</span> {/* Set icon color */}
-        <span className="text-lg text-white font-bold">{faq.question}</span> {/* Set question color */}
+        <span className="text-brand-light">{faq.icon}</span>
+        <span className="text-sm font-medium text-brand-cream">
+          {faq.question}
+        </span>
       </span>
-      <FiChevronDown className={`transform transition-transform duration-300 ${isOpen ? "rotate-180" : ""} text-gray-600`} />
+      <LuChevronDown
+        className={`transform transition-transform duration-300 text-brand-light ${isOpen ? "rotate-180" : ""}`}
+      />
     </button>
-    <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
-      <div className={`p-6 pt-0 text-white`}> {/* Set description color */}
-        {faq.answer}
-      </div>
-    </div>
-  </div>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.25, ease: "easeInOut" }}
+          className="overflow-hidden"
+        >
+          <div className="px-6 pb-6 text-sm leading-relaxed text-brand-cream/55">
+            {faq.answer}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </motion.div>
 );
 
 interface ContactSupportProps {
@@ -123,12 +176,18 @@ const ContactSupport: React.FC<ContactSupportProps> = ({ methods }) => {
   const [selectedMethodIndex, setSelectedMethodIndex] = useState(0);
 
   return (
-    <div className={`p-6 rounded-xl bg-black shadow-md`}>
+    <div
+      className="p-6 rounded-xl bg-brand-mid/10 border border-brand-light/18"
+    >
       <div className="flex flex-wrap gap-2 mb-4">
         {methods.map((method, index) => (
           <button
             key={index}
-            className={`px-4 py-2 font-semibold rounded-lg transition-all duration-300 ${selectedMethodIndex === index ? 'bg-[#704EF8] text-white' : 'text-gray-600 hover:bg-gray-100'}`}
+            className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-200 ${
+              selectedMethodIndex === index
+                ? "bg-brand-mid/30 border border-brand-light/40 text-brand-cream"
+                : "bg-transparent border border-transparent text-brand-cream/50"
+            }`}
             onClick={() => setSelectedMethodIndex(index)}
           >
             {method.title}
@@ -136,15 +195,17 @@ const ContactSupport: React.FC<ContactSupportProps> = ({ methods }) => {
         ))}
       </div>
       <div className="flex items-start space-x-4">
-        <div className='text-[#704EF8]'>{methods[selectedMethodIndex].icon}</div> {/* Set icon color */}
+        <div className="mt-1">{methods[selectedMethodIndex].icon}</div>
         <div>
-          <h3 className="font-semibold mb-1 text-[#704EF8]">{methods[selectedMethodIndex].title}</h3> {/* Set title color */}
-          <p className={`text-sm text-white mb-2`}> {/* Set description color */}
+          <h3 className="font-semibold text-sm mb-1 text-brand-cream">
+            {methods[selectedMethodIndex].title}
+          </h3>
+          <p className="text-xs mb-2 text-brand-cream/45">
             {methods[selectedMethodIndex].description}
           </p>
           <a
             href={methods[selectedMethodIndex].action}
-            className={`text-sm text-[#704EF8] font-medium hover:underline`}
+            className="text-xs transition-colors duration-200 hover:underline text-brand-light hover:text-brand-light/85"
           >
             {methods[selectedMethodIndex].contact}
           </a>
@@ -154,18 +215,16 @@ const ContactSupport: React.FC<ContactSupportProps> = ({ methods }) => {
   );
 };
 
+/* ── Main FAQ Page ── */
+
 const FaqPage: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
-  const categories = ["all", ...new Set(faqs.map(faq => faq.category))];
+  const categories = ["all", ...new Set(faqs.map((faq) => faq.category))];
 
-  const filteredFaqs = faqs.filter(faq => {
-    const matchesSearch = faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         faq.answer.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === "all" || faq.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+  const filteredFaqs = faqs.filter((faq) => {
+    return selectedCategory === "all" || faq.category === selectedCategory;
   });
 
   const toggleFaq = (index: number) => {
@@ -173,58 +232,81 @@ const FaqPage: React.FC = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-[#080C14] text-gray-900`}>
-      <header className="w-full"></header>
-
-      <section className="w-full py-12 px-4 mt-16">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className={`text-4xl md:text-5xl font-bold mb-6 bg-white bg-clip-text text-transparent`}>
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-brand-deep border-t border-brand-light/12">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <motion.span
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-4 inline-block rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-widest bg-brand-mid/15 border border-brand-light/25 text-brand-light"
+          >
+            FAQ
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.1 }}
+            className="mt-3 font-bold tracking-tight text-brand-cream text-3xl sm:text-4xl"
+          >
             Frequently Asked Questions
-          </h1>
-          <p className={`text-lg mb-8 text-gray-600`}>
-            Everything you need to know about AI Content Generator
-          </p>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.2 }}
+            className="mx-auto mt-4 max-w-2xl text-base text-brand-cream/55"
+          >
+            Everything you need to know about AI Content Generator. Can't find what you're looking for? Contact our support team.
+          </motion.p>
 
           {/* Category Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
+          <div className="flex flex-wrap justify-center gap-2 mt-10">
             {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${selectedCategory === category ? 'bg-[#704EF8] text-white' : 'bg-black text-gray-600 hover:bg-gray-100'}`}
+                onClick={() => {
+                  setSelectedCategory(category);
+                  setOpenIndex(null);
+                }}
+                className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-200 ${
+                  selectedCategory === category
+                    ? "bg-brand-mid text-brand-cream border border-brand-mid"
+                    : "bg-brand-mid/10 border border-brand-light/15 text-brand-cream/60 hover:bg-brand-mid/15"
+                }`}
               >
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </button>
             ))}
           </div>
         </div>
-      </section>
 
-      <main className="max-w-6xl mx-auto px-4 pb-16">
-        <div className="grid lg:grid-cols-3 gap-8">
+        {/* Content grid */}
+        <div className="grid lg:grid-cols-4 gap-8">
           <aside className="flex flex-col space-y-4">
-            <h2 className="text-lg font-semibold text-white">Contact Support</h2>
+            <h3 className="text-sm font-semibold text-brand-cream uppercase tracking-wide">
+              Need Help?
+            </h3>
             <ContactSupport methods={contactMethods} />
           </aside>
 
-          <div className="lg:col-span-2 space-y-4">
-
-
-            {/* FAQ List */}
-            <div className="space-y-4">
-              {filteredFaqs.map((faq, index) => (
-                <FaqItem
-                  key={index}
-                  faq={faq}
-                  isOpen={openIndex === index}
-                  onToggle={() => toggleFaq(index)}
-                />
-              ))}
-            </div>
+          <div className="lg:col-span-3 space-y-3">
+            {filteredFaqs.map((faq, index) => (
+              <FaqItem
+                key={index}
+                faq={faq}
+                isOpen={openIndex === index}
+                onToggle={() => toggleFaq(index)}
+              />
+            ))}
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </section>
   );
 };
 

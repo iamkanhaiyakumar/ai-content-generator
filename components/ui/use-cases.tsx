@@ -1,3 +1,8 @@
+"use client";
+import '@/styles/bento.css';
+
+
+
 import {
   PenLine,
   Megaphone,
@@ -6,6 +11,7 @@ import {
   Code2,
   BarChart2,
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 const useCases = [
   {
@@ -46,48 +52,78 @@ const useCases = [
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.08, ease: "easeOut" },
+  }),
+};
+
 export default function UseCases() {
   return (
     <section
       id="use-cases"
-      className="bg-white py-20 px-4 dark:bg-gray-950 sm:px-6 lg:px-8"
+      className="py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-brand-deep via-[#0e1340] to-brand-deep border-t border-brand-light/12"
       aria-labelledby="use-cases-heading"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
-        <div className="mb-14 text-center">
-          <span className="mb-3 inline-block rounded-full bg-violet-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-violet-700 dark:bg-violet-900/30 dark:text-violet-300">
+        <div className="mb-16 text-center">
+          <motion.span
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-4 inline-block rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-widest bg-brand-mid/15 border border-brand-light/25 text-brand-light"
+          >
             Use Cases
-          </span>
-          <h2
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.1 }}
             id="use-cases-heading"
-            className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl"
+            className="mt-3 font-bold tracking-tight text-brand-cream text-3xl sm:text-4xl"
           >
             Built for Every Content Need
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-gray-500 dark:text-gray-400">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.2 }}
+            className="mx-auto mt-4 max-w-2xl text-base text-brand-cream/55"
+          >
             From solo creators to enterprise marketing teams, our AI adapts to your
             workflow and helps you produce content that resonates with your audience.
-          </p>
+          </motion.p>
         </div>
 
         {/* Cards Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {useCases.map(({ icon: Icon, title, description }) => (
-            <div
+        <div className="bento-grid">
+          {useCases.map(({ icon: Icon, title, description }, i) => (
+            <motion.div
               key={title}
-              className="group rounded-2xl border border-gray-200 bg-gray-50 p-6 transition-all duration-200 hover:border-violet-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-900 dark:hover:border-violet-700"
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-40px" }}
+              variants={cardVariants}
+              className="bento-card group flex flex-col"
             >
-              <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-violet-100 transition-colors group-hover:bg-violet-200 dark:bg-violet-900/40 dark:group-hover:bg-violet-900/60">
-                <Icon className="h-5 w-5 text-violet-600 dark:text-violet-400" />
+              <div className="icon-badge mb-4">
+                <Icon className="w-6 h-6 text-brand-light" />
               </div>
-              <h3 className="mb-2 text-base font-semibold text-gray-900 dark:text-white">
+              <h3 className="text-lg font-semibold mb-3 text-brand-cream leading-snug">
                 {title}
               </h3>
-              <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              <p className="text-sm leading-relaxed text-brand-cream/60 flex-grow">
                 {description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
