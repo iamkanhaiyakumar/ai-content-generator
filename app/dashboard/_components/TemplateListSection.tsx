@@ -1,15 +1,13 @@
 "use client";
-import Template from '../../(data)/Template'; // assuming this exports an array of TEMPLATE objects
-import React, { useEffect, useState } from 'react';
+
+import templates from '../../(data)/Template';
+
+import React, {
+  useEffect,
+  useState,
+} from 'react';
+
 import TemplateCard from './TemplateCard';
-
-// In TemplateListSection.tsx or wherever TEMPLATE is defined
-export const TEMPLATE = [
-  { slug: 'template1', name: 'Template 1' },
-  { slug: 'template2', name: 'Template 2' },
-  // Add more templates as needed
-];
-
 
 export interface TEMPLATE {
   name: string;
@@ -32,25 +30,42 @@ interface TemplateListSectionProps {
   userSearchInput: string;
 }
 
-function TemplateListSection({ userSearchInput }: TemplateListSectionProps) {
-  const [templateList, setTemplateList] = useState<TEMPLATE[]>(Template);
+function TemplateListSection({
+  userSearchInput,
+}: TemplateListSectionProps) {
+  const [templateList, setTemplateList] =
+    useState<TEMPLATE[]>(templates);
 
   useEffect(() => {
     if (userSearchInput) {
-      const filteredData = Template.filter((item) =>
-        item.name.toLowerCase().includes(userSearchInput.toLowerCase())
+      const filteredData = templates.filter(
+        (item: TEMPLATE) =>
+          item.name
+            .toLowerCase()
+            .includes(
+              userSearchInput.toLowerCase()
+            )
       );
+
       setTemplateList(filteredData);
     } else {
-      setTemplateList(Template);
+      setTemplateList(templates);
     }
   }, [userSearchInput]);
 
   return (
     <div className="px-3 py-5 md:px-5 md:py-10 lg:px-10 lg:py-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-      {templateList.map((item: TEMPLATE, index: number) => (
-        <TemplateCard key={index} {...item} />
-      ))}
+      {templateList.map(
+        (
+          item: TEMPLATE,
+          index: number
+        ) => (
+          <TemplateCard
+            key={index}
+            {...item}
+          />
+        )
+      )}
     </div>
   );
 }

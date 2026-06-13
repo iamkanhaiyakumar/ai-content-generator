@@ -1,18 +1,42 @@
 "use client";
-import React, { useState } from 'react';
-import SearchSection from './_components/SearchSection';
-import TemplateListSection from './_components/TemplateListSection';
+
+import React, {
+  useEffect,
+  useState,
+} from "react";
+
+import { useSearchParams } from "next/navigation";
+
+import SearchSection from "./_components/SearchSection";
+import TemplateListSection from "./_components/TemplateListSection";
 
 function DashBoard() {
-  const [userSearchInput, setUserSearchInput] = useState<string>("");
+  const [userSearchInput, setUserSearchInput] =
+    useState<string>("");
+
+  const searchParams = useSearchParams();
+
+  const templatePrompt =
+    searchParams.get("prompt");
+
+  useEffect(() => {
+    if (templatePrompt) {
+      setUserSearchInput(templatePrompt);
+    }
+  }, [templatePrompt]);
 
   return (
     <div>
-      {/* Search Section */}
-      <SearchSection onSearchInput={(value: string) => setUserSearchInput(value)} />
+      <SearchSection
+        initialValue={userSearchInput}
+        onSearchInput={(value: string) =>
+          setUserSearchInput(value)
+        }
+      />
 
-      {/* Template List Section */}
-      <TemplateListSection userSearchInput={userSearchInput} />
+      <TemplateListSection
+        userSearchInput={userSearchInput}
+      />
     </div>
   );
 }
