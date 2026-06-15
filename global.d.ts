@@ -13,3 +13,11 @@ declare global {
     domain?: string;
   }
 }
+
+declare module "*.png" {
+  const value: any;
+  export default value;
+}
+
+declare module "framer-motion";
+declare module "react-icons/fi";
