@@ -41,15 +41,17 @@ function SideNav() {
 
   return (
     <aside className=" h-full  bg-black border-r border-muted-foreground flex flex-col ">
-      <div className="flex justify-center py-5 border-b border-muted-foreground items-center gap-2 ">
-        <Image
-          src={'/logo.svg'}
-          alt="logo"
-          width={45}
-          height={45}
-          className="md:w-10 md:h-10 w-8 h-8"
-        />
-        <h2 className="text-white md:text-lg font-bold text-base">
+      <div className="flex justify-center py-5 border-b border-muted-foreground items-center gap-2">
+        <div className="flex shrink-0 items-center justify-center" style={{ width: 40, height: 40 }}>
+          <Image
+            src={'/logo.svg'}
+            alt="logo"
+            width={40}
+            height={40}
+            style={{ display: 'block' }}
+          />
+        </div>
+        <h2 className="self-center text-white md:text-lg font-bold text-base leading-none">
           AI Content Generator
         </h2>
       </div>
