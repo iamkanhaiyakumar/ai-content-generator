@@ -878,4 +878,63 @@ export default [
       },
     ],
   },
+  {
+    name: "Project README Generator",
+    desc: "Generates a complete and well-structured GitHub README from basic project information.",
+    category: "Documentation Tools",
+    icon: "https://img.icons8.com/color/96/readme.png",
+    aiPrompt:
+      "Generate a complete GitHub README in markdown format using projectName, projectDescription, techStack, keyFeatures, installationSteps, usageInstructions, liveDemoLink, and githubRepositoryLink. Structure the response with these sections in order: Project Title, Overview, Features, Tech Stack, Installation Guide, Usage Instructions, Screenshots (placeholder section), Demo Link (only include if liveDemoLink is provided), Contributing Guidelines, and License. If githubRepositoryLink is provided, include it in the overview.",
+    slug: "project-readme-generator",
+    form: [
+      {
+        label: "Project Name",
+        field: "input",
+        name: "projectName",
+        required: true,
+      },
+      {
+        label: "Project Description",
+        field: "textarea",
+        name: "projectDescription",
+        required: true,
+      },
+      {
+        label: "Tech Stack",
+        field: "textarea",
+        name: "techStack",
+        required: true,
+      },
+      {
+        label: "Key Features",
+        field: "textarea",
+        name: "keyFeatures",
+        required: true,
+      },
+      {
+        label: "Installation Steps",
+        field: "textarea",
+        name: "installationSteps",
+        required: true,
+      },
+      {
+        label: "Usage Instructions",
+        field: "textarea",
+        name: "usageInstructions",
+        required: true,
+      },
+      {
+        label: "Live Demo Link (Optional)",
+        field: "input",
+        name: "liveDemoLink",
+        required: false,
+      },
+      {
+        label: "GitHub Repository Link (Optional)",
+        field: "input",
+        name: "githubRepositoryLink",
+        required: false,
+      },
+    ],
+  },
 ];
