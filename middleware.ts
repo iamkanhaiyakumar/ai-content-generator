@@ -5,9 +5,16 @@ const isPublicRoute = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
-    const session = await auth();
-    if (!session.userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+    const { userId, redirectToSignIn } = await auth();
+    if (!userId) {
+      if (
+        request.nextUrl.pathname.startsWith("/api") ||
+        request.nextUrl.pathname.startsWith("/trpc")
+      ) {
+        return new NextResponse("Unauthorized", { status: 401 });
+      }
+
+      return redirectToSignIn();
     }
   }
   return NextResponse.next();
