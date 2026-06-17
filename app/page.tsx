@@ -53,7 +53,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Use Cases Section */}
+<!-- <<<<<<< fix/navbar-logo-alignment
+<!--       {/* Use Cases Section */} -->
+<!-- ======= -->
+<!--       {/* Use Cases Section — fixes issue #138 */} -->
+<!-- >>>>>>> master --> -->
       <UseCases />
 
       {/* Pricing Section */}

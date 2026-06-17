@@ -4,7 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
+import { useTheme } from "./theme-provider";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -15,6 +16,7 @@ const navLinks = [
 
 export default function PublicHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -70,6 +72,19 @@ export default function PublicHeader() {
 
         {/* CTA Button */}
         <div className="hidden items-center gap-3 md:flex">
+          {/* Dark / Light toggle */}
+          <button
+            id="theme-toggle-desktop"
+            onClick={toggleTheme}
+            aria-label="Toggle dark/light mode"
+            className="rounded-md p-2 text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
+          >
+            {theme === "dark" ? (
+              <Sun className="h-5 w-5 transition-transform duration-300 rotate-0 scale-100" />
+            ) : (
+              <Moon className="h-5 w-5 transition-transform duration-300 rotate-0 scale-100" />
+            )}
+          </button>
           <Link
             href="/sign-in"
             className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
@@ -85,13 +100,28 @@ export default function PublicHeader() {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <button
-          className="rounded-md p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 md:hidden"
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Toggle navigation menu"
-        >
-          {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          {/* Dark / Light toggle (mobile) */}
+          <button
+            id="theme-toggle-mobile"
+            onClick={toggleTheme}
+            aria-label="Toggle dark/light mode"
+            className="rounded-md p-2 text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
+          >
+            {theme === "dark" ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )}
+          </button>
+          <button
+            className="rounded-md p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label="Toggle navigation menu"
+          >
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
