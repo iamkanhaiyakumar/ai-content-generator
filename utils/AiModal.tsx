@@ -17,9 +17,9 @@ const {
     model: "gemini-1.5-flash",
   });
   
-  const generationConfig = {
-    temperature: 1,
-    topP: 0.95,
+ const generationConfig = {
+    temperature: 0.5, // Reduced from 1 to 0.5 for stable, high-quality, and factual output
+    topP: 0.9,        // Slightly tightened from 0.95 to maintain logical focus
     topK: 64,
     maxOutputTokens: 8192,
     responseMimeType: "text/plain",
