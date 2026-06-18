@@ -1,19 +1,32 @@
 import React, { useEffect, useState } from 'react';
-// import '@toast-ui/editor/dist/toastui-editor.css';
-// import { Editor } from '@toast-ui/react-editor';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Copy, XCircle } from 'lucide-react';
+import { CheckCircle2, Copy, XCircle, AlertTriangle, Shield } from 'lucide-react';
 
 interface Props {
   aiOutput: string;
+  safetyWarnings?: string[];
+  safetyScore?: number;
+  needsReview?: boolean;
 }
 
 const TOAST_DISPLAY_DURATION = 2000;
 
-function OutputSection({ aiOutput }: Props) {
+function OutputSection({ aiOutput, safetyWarnings = [], safetyScore = 0, needsReview = false }: Props) {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isErrorToast, setIsErrorToast] = useState(false);
   const [toastId, setToastId] = useState(0);
+
+  const getSafetyColor = (score: number): string => {
+    if (score >= 8) return "text-green-600";
+    if (score >= 6) return "text-yellow-600";
+    return "text-red-600";
+  };
+
+  const getSafetyBg = (score: number): string => {
+    if (score >= 8) return "bg-green-50";
+    if (score >= 6) return "bg-yellow-50";
+    return "bg-red-50";
+  };
 
   useEffect(() => {
     if (!toastMessage) return;
@@ -59,6 +72,42 @@ function OutputSection({ aiOutput }: Props) {
             </div>
           )}
         </div>
+      </div>
+
+      {safetyScore > 0 && (
+        <div className={`border-t p-4 ${getSafetyBg(safetyScore)}`}>
+          <div className='flex items-center gap-3'>
+            <Shield className={`w-5 h-5 ${getSafetyColor(safetyScore)}`} />
+            <div className='flex-1'>
+              <p className='font-semibold text-black'>Safety Score: {safetyScore}/10</p>
+              {needsReview && (
+                <p className='text-sm text-red-700 font-medium mt-1'>
+                  This content requires your review before use
+                </p>
+              )}
+              {safetyWarnings.length > 0 && (
+                <ul className='text-sm text-gray-700 mt-2 space-y-1'>
+                  {safetyWarnings.map((warning, idx) => (
+                    <li key={idx} className='flex items-start gap-2'>
+                      <AlertTriangle className='w-4 h-4 text-yellow-600 mt-0.5 flex-shrink-0' />
+                      <span>{warning}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className='p-5 border-t max-h-96 overflow-y-auto'>
+        {aiOutput ? (
+          <div className='prose prose-sm max-w-none dark:prose-invert'>
+            <p className='text-black whitespace-pre-wrap'>{aiOutput}</p>
+          </div>
+        ) : (
+          <p className='text-gray-400 text-center py-8'>Your generated content will appear here</p>
+        )}
       </div>
     </div>
   );

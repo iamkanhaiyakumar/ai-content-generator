@@ -10,6 +10,7 @@ import { ArrowLeft } from "lucide-react"; // Keep the icons import from lucide-r
 import Link from "next/link"; // Import Link from next/link
 import { chatSession } from "@/utils/AiModal";
 import { saveGeneratedContent } from "@/app/actions/dbActions";
+import { checkContentSafety, getSafetyWarnings, requiresReview } from "@/utils/contentSafetyFilter";
 import { useUser } from "@clerk/nextjs";
 
 import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
@@ -30,11 +31,13 @@ function CreateNewContent(props: PROPS) {
 
   const [loading, setLoading] = useState(false);
   const [aiOutput, setAiOutput] = useState<string>("");
+  const [safetyWarnings, setSafetyWarnings] = useState<string[]>([]);
+  const [safetyScore, setSafetyScore] = useState<number>(0);
+  const [needsReview, setNeedsReview] = useState(false);
   const { user } = useUser();
   const router = useRouter();
   const { totalUsage } = useContext(TotalUsageContext);
-  const [userSubscription, setUserSubscription] = useState(false); // Define userSubscription state
-  // const { updateCreditUsage, setUpdateCreditUsage } = useContext(UpdateCreditUsageContext);
+  const [userSubscription, setUserSubscription] = useState(false);
   
   /**
    * Used to generate  content from AI 
@@ -46,30 +49,39 @@ function CreateNewContent(props: PROPS) {
 
   const GenerateAIContent = async (formData: any) => {
       if(totalUsage>=100000&&!userSubscription){
-          
           console.log('Please upgrade your plan');
           router.push('/dashboard/billing');
           return;
       }
     setLoading(true);
+    setSafetyWarnings([]);
+    setSafetyScore(0);
+    setNeedsReview(false);
 
     try {
       const SelectedPrompt = selectedTemplate?.aiPrompt || "";
       const FinalAIPrompt = JSON.stringify(formData) + ", " + SelectedPrompt;
 
       const result = await chatSession.sendMessage(FinalAIPrompt);
-
       const aiResponse = await result.response.text();
-      console.log(aiResponse);
+
       setAiOutput(aiResponse);
+
+      const safetyResult = await checkContentSafety(aiResponse);
+      setSafetyScore(safetyResult.score);
+      const warnings = getSafetyWarnings(safetyResult);
+      setSafetyWarnings(warnings);
+      setNeedsReview(requiresReview(safetyResult));
+
+      console.log("Content safety score:", safetyResult.score);
+      console.log("Safety warnings:", warnings);
 
       await SaveInDb(formData, selectedTemplate?.slug, aiResponse);
     } catch (error) {
       console.error("Error generating AI content:", error);
+      setSafetyWarnings(["Error during safety check"]);
     } finally {
       setLoading(false);
-      
-      // setUpdateCreditUsage(Date.now());
     }
   };
 
@@ -108,7 +120,12 @@ function CreateNewContent(props: PROPS) {
 
         {/* Output Section */}
         <div className="col-span-2">
-          <OutputSection aiOutput={aiOutput} />
+          <OutputSection
+            aiOutput={aiOutput}
+            safetyWarnings={safetyWarnings}
+            safetyScore={safetyScore}
+            needsReview={needsReview}
+          />
         </div>
       </div>
     </div>
