@@ -3,14 +3,16 @@ import React, { useEffect, useState } from 'react';
 // import { Editor } from '@toast-ui/react-editor';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Copy, XCircle } from 'lucide-react';
+import OriginalityReport from './OriginalityReport';
 
 interface Props {
   aiOutput: string;
+  originalityResult?: any;
 }
 
 const TOAST_DISPLAY_DURATION = 2000;
 
-function OutputSection({ aiOutput }: Props) {
+function OutputSection({ aiOutput, originalityResult }: Props) {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isErrorToast, setIsErrorToast] = useState(false);
   const [toastId, setToastId] = useState(0);
@@ -59,6 +61,22 @@ function OutputSection({ aiOutput }: Props) {
             </div>
           )}
         </div>
+      </div>
+
+      {originalityResult && (
+        <div className='border-t p-5'>
+          <OriginalityReport result={originalityResult} />
+        </div>
+      )}
+
+      <div className='p-5 border-t max-h-96 overflow-y-auto'>
+        {aiOutput ? (
+          <div className='prose prose-sm max-w-none dark:prose-invert'>
+            <p className='text-black whitespace-pre-wrap'>{aiOutput}</p>
+          </div>
+        ) : (
+          <p className='text-gray-400 text-center py-8'>Your generated content will appear here</p>
+        )}
       </div>
     </div>
   );
