@@ -8,7 +8,7 @@ import Template from "@/app/(data)/Template";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react"; // Keep the icons import from lucide-react
 import Link from "next/link"; // Import Link from next/link
-import { chatSession } from "@/utils/AiModal";
+import { generateAiContent } from "@/app/actions/aiActions";
 import { saveGeneratedContent } from "@/app/actions/dbActions";
 import { useUser } from "@clerk/nextjs";
 
@@ -57,9 +57,8 @@ function CreateNewContent(props: PROPS) {
       const SelectedPrompt = selectedTemplate?.aiPrompt || "";
       const FinalAIPrompt = JSON.stringify(formData) + ", " + SelectedPrompt;
 
-      const result = await chatSession.sendMessage(FinalAIPrompt);
-
-      const aiResponse = await result.response.text();
+      const aiResponse = await generateAiContent(FinalAIPrompt);
+      
       console.log(aiResponse);
       setAiOutput(aiResponse);
 
