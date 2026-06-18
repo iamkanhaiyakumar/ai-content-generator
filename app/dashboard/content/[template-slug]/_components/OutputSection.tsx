@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from 'react';
-// import '@toast-ui/editor/dist/toastui-editor.css';
-// import { Editor } from '@toast-ui/react-editor';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Copy, XCircle } from 'lucide-react';
+import { CheckCircle2, Copy, XCircle, AlertCircle } from 'lucide-react';
 
 interface Props {
   aiOutput: string;
+  qualityScore?: number;
+  qualityFeedback?: string;
 }
 
 const TOAST_DISPLAY_DURATION = 2000;
 
-function OutputSection({ aiOutput }: Props) {
+function OutputSection({ aiOutput, qualityScore = 0, qualityFeedback = "" }: Props) {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isErrorToast, setIsErrorToast] = useState(false);
   const [toastId, setToastId] = useState(0);
+
+  const getScoreColor = (score: number): string => {
+    if (score >= 8) return "text-green-600";
+    if (score >= 6) return "text-yellow-600";
+    return "text-red-600";
+  };
+
+  const getScoreBg = (score: number): string => {
+    if (score >= 8) return "bg-green-50";
+    if (score >= 6) return "bg-yellow-50";
+    return "bg-red-50";
+  };
 
   useEffect(() => {
     if (!toastMessage) return;
@@ -59,6 +71,30 @@ function OutputSection({ aiOutput }: Props) {
             </div>
           )}
         </div>
+      </div>
+
+      {qualityScore > 0 && (
+        <div className={`border-t p-4 ${getScoreBg(qualityScore)}`}>
+          <div className='flex items-center gap-3 mb-2'>
+            <AlertCircle className={`w-5 h-5 ${getScoreColor(qualityScore)}`} />
+            <div>
+              <p className='font-semibold text-black'>Content Quality Score: {qualityScore}/10</p>
+              {qualityFeedback && (
+                <p className='text-sm text-gray-700 mt-1'>{qualityFeedback}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className='p-5 border-t max-h-96 overflow-y-auto'>
+        {aiOutput ? (
+          <div className='prose prose-sm max-w-none dark:prose-invert'>
+            <p className='text-black whitespace-pre-wrap'>{aiOutput}</p>
+          </div>
+        ) : (
+          <p className='text-gray-400 text-center py-8'>Your generated content will appear here</p>
+        )}
       </div>
     </div>
   );
