@@ -75,8 +75,7 @@ function CreateNewContent(props: PROPS) {
 
   const SaveInDb = async (formData: any, slug: any, aiRes: string) => {
     try {
-      const userEmail = user?.primaryEmailAddress?.emailAddress || "Unknown";
-      const result = await saveGeneratedContent(formData, slug, aiRes, userEmail);
+      const result = await saveGeneratedContent(formData, slug, aiRes);
 
       if (result.success) {
         console.log("Successfully saved to DB");
