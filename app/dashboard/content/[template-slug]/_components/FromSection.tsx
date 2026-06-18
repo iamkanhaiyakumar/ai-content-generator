@@ -7,6 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Loader } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
+import WritingStyleSelector from "./WritingStyleSelector";
+import { buildStylePrompt } from "@/utils/writingStyles";
 
 interface PROPS {
   selectedTemplate?: TEMPLATE;
@@ -16,8 +18,10 @@ interface PROPS {
 
 function FromSection({ selectedTemplate, userFormInput, loading }: PROPS) {
   const [formData, setFormData] = useState<any>({});
-  const [error, setError] = useState<string | null>(null); // For validation
-  const [successMessage, setSuccessMessage] = useState<string | null>(null); // For success message
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [selectedStyle, setSelectedStyle] = useState("professional");
+  const [selectedTone, setSelectedTone] = useState("neutral");
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -36,10 +40,16 @@ function FromSection({ selectedTemplate, userFormInput, loading }: PROPS) {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
     if (validateForm()) {
-      userFormInput(formData);
-      setSuccessMessage("Form submitted successfully!"); // Show success message
+      const stylePrompt = buildStylePrompt(selectedStyle, selectedTone);
+      const enhancedFormData = {
+        ...formData,
+        writingStyle: selectedStyle,
+        tone: selectedTone,
+        styleInstructions: stylePrompt,
+      };
+      userFormInput(enhancedFormData);
+      setSuccessMessage("Form submitted successfully!");
     }
   };
 
@@ -81,8 +91,17 @@ function FromSection({ selectedTemplate, userFormInput, loading }: PROPS) {
           </div>
         ))}
 
-        {error && <p className="text-red-500">{error}</p>} {/* Validation error */}
-        {successMessage && <p className="text-green-500">{successMessage}</p>} {/* Success message */}
+        <div className="my-6 border-t pt-6">
+          <WritingStyleSelector
+            onStyleChange={(style, tone) => {
+              setSelectedStyle(style);
+              setSelectedTone(tone);
+            }}
+          />
+        </div>
+
+        {error && <p className="text-red-500">{error}</p>}
+        {successMessage && <p className="text-green-500">{successMessage}</p>}
 
         <Button type="submit" className="w-full py-6" disabled={loading}>
           {loading && <Loader className="animate-spin" />} Generate
