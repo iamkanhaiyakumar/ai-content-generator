@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 // import { Editor } from '@toast-ui/react-editor';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Copy, XCircle } from 'lucide-react';
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface Props {
   aiOutput: string;
@@ -60,6 +62,14 @@ function OutputSection({ aiOutput }: Props) {
           )}
         </div>
       </div>
+      {/* Generated the output in the output section */}
+      <div className="p-5 border-t prose max-w-none text-gray-900">
+      <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      >
+        {aiOutput}
+      </ReactMarkdown>
+    </div>
     </div>
   );
 }

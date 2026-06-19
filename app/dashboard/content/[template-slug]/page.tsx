@@ -13,19 +13,26 @@ import { saveGeneratedContent } from "@/app/actions/dbActions";
 import { useUser } from "@clerk/nextjs";
 
 import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 
 
-interface PROPS {
-  params: {
-    "template-slug": string;
-  };
-}
+// interface PROPS {
+//   params: {
+//     "template-slug": string;
+//   };
+// }
 
-function CreateNewContent(props: PROPS) {
+// function CreateNewContent(props: PROPS) {
+//   const selectedTemplate: TEMPLATE | undefined = Template?.find(
+//     (items) => items.slug === props.params["template-slug"]
+//   );
+
+function CreateNewContent() {
+  const params = useParams();
+
   const selectedTemplate: TEMPLATE | undefined = Template?.find(
-    (items) => items.slug === props.params["template-slug"]
+    (items) => items.slug === params["template-slug"]
   );
 
   const [loading, setLoading] = useState(false);
