@@ -15,6 +15,6 @@ function DashBoard() {
       <TemplateListSection userSearchInput={userSearchInput} />
     </div>
   );
-}
+} 
 
 export default DashBoard;

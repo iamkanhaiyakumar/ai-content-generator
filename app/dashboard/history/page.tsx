@@ -7,6 +7,7 @@ import { desc, eq } from "drizzle-orm";
 import Image from "next/image";
 import React from "react";
 import { TEMPLATE as TEMPLATE_LIST } from "@/app/dashboard/_components/TemplateListSection";
+import jsPDF from "jspdf";
 
 export interface HISTORY {
   [x: string]: any;
@@ -56,6 +57,36 @@ async function History() {
     };
   };
 
+    // Function to export generated content as PDF/TXT
+    const exportAsTXT = (content: string) => {
+  const blob = new Blob([content], { type: "text/plain" });
+
+  const url = window.URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = "ai-content.txt";
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  document.body.removeChild(link);
+
+  window.URL.revokeObjectURL(url);
+};
+
+const exportAsPDF = (content: string) => {
+  const doc = new jsPDF();
+
+  const splitText = doc.splitTextToSize(content, 180);
+
+  doc.text(splitText, 10, 10);
+
+  doc.save("ai-content.pdf");
+};
+
   return (
     <div className="m-5 p-5 border rounded-lg bg-white">
       <h2 className="font-bold text-3xl">History</h2>
@@ -86,15 +117,25 @@ async function History() {
               <h2>{new Date(item?.createdAt).toLocaleDateString()}</h2>
               <h2>{item?.aiResponse?.split(" ").length}</h2>
               <h2>
-                <Button
+               <div className="flex gap-2">
+             <Button
                   variant="ghost"
-                  className="text-primary"
-                  onClick={() => navigator.clipboard.writeText(item?.aiResponse)}
+                 className="text-blue-500"
+                 onClick={() => exportAsTXT(item?.aiResponse)}
+                 >
+                 TXT
+              </Button>
+
+              <Button
+                 variant="ghost"
+                className="text-red-500"
+                onClick={() => exportAsPDF(item?.aiResponse)}
                 >
-                  Copy
-                </Button>
+                 PDF
+              </Button>
+             </div>
               </h2>
-            </div>
+         </div>
           );
         })
       ) : (
