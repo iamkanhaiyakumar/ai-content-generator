@@ -74,8 +74,18 @@ function CreateNewContent() {
       setAiOutput(aiResponse);
 
       await SaveInDb(formData, selectedTemplate?.slug, aiResponse);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error generating AI content:", error);
+      if (
+        error?.status === 429 ||
+        error?.message?.includes("429") ||
+        error?.message?.toLowerCase().includes("rate limit") ||
+        error?.message?.toLowerCase().includes("quota")
+      ) {
+        window.alert("API rate limit exceeded. Please try again later.");
+      } else {
+        window.alert("An error occurred while generating content. Please try again later.");
+      }
     } finally {
       setLoading(false);
       
