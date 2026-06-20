@@ -4,6 +4,7 @@ import { useState } from 'react';
 import SideNav from './_components/SideNav';
 import Header from './_components/Header';
 import { TotalUsageContext } from '../(context)/TotalUsageContext';
+import { SearchContext } from '../(context)/SearchContext';
 import UpdateCreditUsageContext from "../(context)/UpdateCreditUsageContext"
 import UserSubscriptionContext from '../(context)/UserSubscriptionContext';
 
@@ -16,8 +17,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [totalUsage, setTotalUsage] = useState<number>(0);
   const [userSubscription, setUserSubscription] = useState<boolean>(false);
   const [UpdateCreditUsageContext, setUpdateCreditUsage] = useState<any>();
+  const [userSearchInput, setUserSearchInput] = useState<string>("");
 
   return (
+    <SearchContext.Provider value={{ userSearchInput, setUserSearchInput }}>
     <TotalUsageContext.Provider value={{ totalUsage, setTotalUsage }}>
       {/* <UserSubscriptionContext.Provider value={{userSubscription, setUserSubscription}}> */}
       {/* <UpdateCreditUsageContext.Provider value={{ UpdateCreditUsageContext, setUpdateCreditUsage }} > //Commenting out this line due to error */}
@@ -36,6 +39,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* </UpdateCreditUsageContext.Provider> */}
       {/* </UserSubscriptionContext.Provider> */}
     </TotalUsageContext.Provider>
+    </SearchContext.Provider>
   );
 };
 

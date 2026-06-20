@@ -1,144 +1,195 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+"use client";
 
-const navItems = [
-  { name: "Features", href: "#features" },
-  { name: "How It Works", href: "#how-it-works" },
-  { name: "Use Cases", href: "#use-cases" },
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { Menu, Moon, Sun, X } from "lucide-react";
+import { useTheme } from "./theme-provider";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Features", href: "/#features" },
+  { label: "Use Cases", href: "/#use-cases" },   // ← was broken; now points to section
+  { label: "Pricing", href: "/#pricing" },
 ];
 
-const PublicHeader = () => {
+export default function PublicHeader() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (href.startsWith("/#")) {
+      const id = href.slice(2); // e.g. "use-cases"
+      if (pathname === "/") {
+        e.preventDefault();
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        setMenuOpen(false);
+      }
+      // If on another page, Next.js Link will navigate to / then the hash handles the rest
+    } else {
+      setMenuOpen(false);
+    }
+  };
+
   return (
-    <header className="bg-gray-900 shadow-md px-2 sm:px-3 md:px-0">
-      <div className="container mx-auto py-4">
-        <nav className="flex justify-between items-center">
-          <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="relative h-8 w-8 sm:h-10 sm:w-10">
-                <img
-                  src='https://cdni.iconscout.com/illustration/premium/thumb/confused-ai-robot-illustration-download-in-svg-png-gif-file-formats--server-storage-artificial-intelligence-database-pack-science-technology-illustrations-8990982.png?f=webp'
-                  className="rounded-lg"
-                  height={100}
-                  width={100}
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-base sm:text-lg font-bold text-white whitespace-nowrap">
-                  AI Content Generator
-                </span>
-                <span className="hidden sm:block text-xs text-gray-600 whitespace-nowrap">
-                  Your ideas , our intelligence
-                </span>
-              </div>
-            </Link>
+    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/90 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/90">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center justify-center" style={{ width: 32, height: 32 }}>
+            <Image
+              src="/logo.svg"
+              alt="AI Content Generator"
+              width={32}
+              height={32}
+              style={{ display: 'block' }}
+            />
           </div>
-          <div className="hidden md:flex space-x-6">
-            {navItems.map((item) => (
+          <span className="self-center text-lg font-bold leading-none text-gray-900 dark:text-white">
+            AI Content Generator
+          </span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden items-center gap-1 md:flex">
+          {navLinks.map(({ label, href }) => (
+            <Link
+              key={label}
+              href={href}
+              onClick={(e) => handleNavClick(e, href)}
+              className="rounded-md px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* CTA Button */}
+        <div className="hidden items-center gap-3 md:flex">
+          {/* Dark / Light toggle */}
+          <button
+            id="theme-toggle-desktop"
+            onClick={toggleTheme}
+            aria-label="Toggle dark/light mode"
+            className="rounded-md p-2 text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
+          >
+            {theme === "dark" ? (
+              <Sun className="h-5 w-5 transition-transform duration-300 rotate-0 scale-100" />
+            ) : (
+              <Moon className="h-5 w-5 transition-transform duration-300 rotate-0 scale-100" />
+            )}
+          </button>
+          {/* <Link
+            href="/sign-in"
+            className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+          >
+            Sign In
+          </Link>
+          <Link
+            href="/sign-up"
+            className="rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-violet-500"
+          >
+            Get Started
+          </Link> */}
+          
+          <SignedOut>
+            <Link
+              href="/sign-in"
+              onClick={() => setMenuOpen(false)}
+              className="rounded-md px-4 py-2.5 text-center text-sm font-medium"
+            >
+              Sign In
+            </Link>
+
+            <Link
+              href="/sign-up"
+              onClick={() => setMenuOpen(false)}
+              className="rounded-lg bg-violet-600 px-4 py-2.5 text-center text-sm font-semibold text-white"
+            >
+              Get Started
+            </Link>
+          </SignedOut>
+
+          <SignedIn>
+            <Link
+              href="/dashboard"
+              onClick={() => setMenuOpen(false)}
+              className="rounded-lg bg-violet-600 px-4 py-2.5 text-center text-sm font-semibold text-white"
+            >
+              Dashboard
+            </Link>
+
+            <div className="flex justify-center">
+              <UserButton />
+            </div>
+          </SignedIn>
+        </div>
+
+        {/* Mobile Menu Toggle */}
+        <div className="flex items-center gap-2 md:hidden">
+          {/* Dark / Light toggle (mobile) */}
+          <button
+            id="theme-toggle-mobile"
+            onClick={toggleTheme}
+            aria-label="Toggle dark/light mode"
+            className="rounded-md p-2 text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
+          >
+            {theme === "dark" ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )}
+          </button>
+          <button
+            className="rounded-md p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label="Toggle navigation menu"
+          >
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="border-t border-gray-200 bg-white px-4 pb-4 dark:border-gray-800 dark:bg-gray-950 md:hidden">
+          <nav className="mt-2 flex flex-col gap-1">
+            {navLinks.map(({ label, href }) => (
               <Link
-                key={item.name}
-                href={item.href}
-                className="text-gray-300 hover:text-white transition-colors"
+                key={label}
+                href={href}
+                onClick={(e) => handleNavClick(e, href)}
+                className="rounded-md px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
               >
-                {item.name}
+                {label}
               </Link>
             ))}
-          </div>
-          <div className="hidden md:flex items-center space-x-4">
-            <SignedIn>
-              <Link href="/dashboard">
-                <Button className="w-full border-[#704ef8] text-[#704ef8] hover:bg-[#704ef8] hover:text-white bg-slate-200">
-                  Dashboard
-                </Button>
-              </Link>
-              <UserButton />
-            </SignedIn>
-            <SignedOut>
-              <Link href="/sign-in">
-                <Button
-                  variant="outline"
-                  className="w-full border-[#704ef8] text-[#704ef8] hover:bg-[#704ef8] hover:text-white bg-slate-200"
-                >
-                  Log In
-                </Button>
-              </Link>
-              <Link href="/sign-up">
-                <Button className="w-full bg-[#704ef8] text-white hover:bg-[#5a3cc7]">
-                  Sign Up
-                </Button>
-              </Link>
-            </SignedOut>
-          </div>
-          <Sheet>
-            <div className="flex items-center gap-2 md:hidden">
-              <SignedIn>
-                <Link href="/dashboard">
-                  <Button
-                    className="w-full hidden md:flex border-[#704ef8] text-[#704ef8] hover:bg-[#704ef8] hover:text-white bg-slate-200"
-                    size={"sm"}
-                  >
-                     Dashboard
-                  </Button>
-                </Link>
-                <UserButton />
-              </SignedIn>
-              <SignedOut>
-                <Link href="/sign-in">
-                  <Button variant="outline" size={"sm"}>
-                    Log In
-                  </Button>
-                </Link>
-              </SignedOut>
-              <SheetTrigger asChild>
-                <button className="">
-                  <Menu className="h-6 w-6" />
-                </button>
-              </SheetTrigger>
-            </div>
-            <SheetContent
-              side="right"
-              className="w-[300px] sm:w-[400px] bg-gray-800"
+          </nav>
+          <div className="mt-3 flex flex-col gap-2 border-t border-gray-200 pt-3 dark:border-gray-800">
+            <Link
+              href="/sign-in"
+              onClick={() => setMenuOpen(false)}
+              className="rounded-md px-4 py-2.5 text-center text-sm font-medium text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
             >
-              <SheetHeader>
-                <SheetTitle className="text-left">
-                  AI Content Generator
-                </SheetTitle>
-              </SheetHeader>
-              <nav className="flex flex-col space-y-4 mt-8">
-                <SignedIn>
-                  
-                </SignedIn>
-                {navItems.map((item) => (
-                  <SheetClose key={item.name} className="text-left">
-                    <Link
-                      href={item.href}
-                      className="text-gray-300 hover:text-white transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  </SheetClose>
-                ))}
-                <Link href="/dashboard">
-                    <Button className="text-gray-300 hover:text-white transition-colors w-full">
-                      Dashboard
-                    </Button>
-                  </Link>
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </nav>
-      </div>
+              Sign In
+            </Link>
+            <Link
+              href="/sign-up"
+              onClick={() => setMenuOpen(false)}
+              className="rounded-lg bg-violet-600 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-violet-500"
+            >
+              Get Started
+            </Link>
+          </div>
+        </div>
+      )}
     </header>
   );
-};
-
-export default PublicHeader;
+}

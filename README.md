@@ -113,7 +113,7 @@ npm start
  1. NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY"
  2. CLERK_SECRET_KEY="your-CLERK_SECRET_KEY"
 
- 3. NEXT_PUBLIC_DATABASE_URL = "neonDB datbase url"
+ 3. DATABASE_URL = "neonDB datbase url"
 
 
 
@@ -227,3 +227,30 @@ Gityzer is licensed under the terms of the MIT License. check out <a href="./LIC
 </a>
 
 <p align="right">(<a href="#top">Back to top⬆️</a>)</p>
+
+## ✨ README Improvement Notes
+
+### 📌 Formatting Enhancements Needed
+- Improve heading hierarchy for better readability
+- Ensure consistent spacing between sections
+- Use proper Markdown formatting for code blocks and lists
+- Align all installation and usage steps properly
+
+### 🚀 Suggested Structure Upgrade
+- Introduction
+- Features
+- Tech Stack
+- Installation
+- Usage
+- Project Structure
+- Contribution Guidelines
+- License
+
+### 🛠️ Documentation Improvements
+- Add badges (optional): build, license, contributors
+- Add screenshots for better UI understanding
+- Standardize code blocks for commands
+
+### 🎯 Goal
+Improve onboarding experience for new contributors and users by making README more structured, readable, and professional.
+

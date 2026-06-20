@@ -9,24 +9,30 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react"; // Keep the icons import from lucide-react
 import Link from "next/link"; // Import Link from next/link
 import { chatSession } from "@/utils/AiModal";
-import { db } from "@/utils/db";
-import { AIOutput } from "@/utils/schema";
+import { saveGeneratedContent } from "@/app/actions/dbActions";
 import { useUser } from "@clerk/nextjs";
-import moment from "moment"; // Correct moment import
+
 import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 
 
-interface PROPS {
-  params: {
-    "template-slug": string;
-  };
-}
+// interface PROPS {
+//   params: {
+//     "template-slug": string;
+//   };
+// }
 
-function CreateNewContent(props: PROPS) {
+// function CreateNewContent(props: PROPS) {
+//   const selectedTemplate: TEMPLATE | undefined = Template?.find(
+//     (items) => items.slug === props.params["template-slug"]
+//   );
+
+function CreateNewContent() {
+  const params = useParams();
+
   const selectedTemplate: TEMPLATE | undefined = Template?.find(
-    (items) => items.slug === props.params["template-slug"]
+    (items) => items.slug === params["template-slug"]
   );
 
   const [loading, setLoading] = useState(false);
@@ -56,7 +62,10 @@ function CreateNewContent(props: PROPS) {
 
     try {
       const SelectedPrompt = selectedTemplate?.aiPrompt || "";
-      const FinalAIPrompt = JSON.stringify(formData) + ", " + SelectedPrompt;
+      const { tone, ...promptData } = formData;
+      const toneInstruction = tone ? ` Use a ${tone} tone.` : "";
+      const FinalAIPrompt =
+        JSON.stringify(promptData) + ", " + SelectedPrompt + toneInstruction;
 
       const result = await chatSession.sendMessage(FinalAIPrompt);
 
@@ -76,15 +85,14 @@ function CreateNewContent(props: PROPS) {
 
   const SaveInDb = async (formData: any, slug: any, aiRes: string) => {
     try {
-      const result = await db.insert(AIOutput).values({
-        formData: formData,
-        templateSlug: slug,
-        aiResponse: aiRes,
-        createdBy: user?.primaryEmailAddress?.emailAddress || "Unknown",
-        createdAt: moment().format("DD/MM/YYYY"),
-      });
+      const userEmail = user?.primaryEmailAddress?.emailAddress || "Unknown";
+      const result = await saveGeneratedContent(formData, slug, aiRes, userEmail);
 
-      console.log(result);
+      if (result.success) {
+        console.log("Successfully saved to DB");
+      } else {
+        console.error(result.error);
+      }
     } 
     catch (error) {
       console.error("Error saving to DB:", error);
