@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { UserButton } from "@clerk/nextjs";
 import { Search } from "lucide-react";
 import MobileSidebar from "./MobileSidebar";
-import { SearchContext } from "@/(context)/SearchContext";
+import { SearchContext } from "@/app/(context)/SearchContext";
 
 function Header() {
   const { setUserSearchInput } = useContext(SearchContext);

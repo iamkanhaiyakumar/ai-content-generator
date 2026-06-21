@@ -4,15 +4,15 @@ import React, { useContext, useState } from "react";
 import FromSection from "./_components/FromSection";
 import OutputSection from "./_components/OutputSection";
 import { TEMPLATE } from "../../_components/TemplateListSection";
-import Template from "@/(data)/Template";
+import Template from "@/app/(data)/Template";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react"; // Keep the icons import from lucide-react
 import Link from "next/link"; // Import Link from next/link
 import { chatSession } from "@/utils/AiModal";
-import { saveGeneratedContent } from "@/(actions)/dbActions";
+import { saveGeneratedContent } from "@/app/actions/dbActions";
 import { useUser } from "@clerk/nextjs";
 
-import { TotalUsageContext } from "@/(context)/TotalUsageContext";
+import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
 import { useRouter, useParams } from "next/navigation";
 
 
