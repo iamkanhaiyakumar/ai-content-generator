@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { FiChevronDown, FiMail, FiPhone } from 'react-icons/fi';
+import { ChevronDown, Mail, Phone } from 'lucide-react';
 
 interface Faq {
   question: string;
@@ -77,14 +77,14 @@ const faqs: Faq[] = [
 
 const contactMethods: ContactMethod[] = [
   {
-    icon: <FiMail className="w-6 h-6 text-[#704EF8]" />, // Set icon color
+    icon: <Mail className="w-6 h-6 text-[#704EF8]" />, // Set icon color
     title: "Email Support",
     description: "Get help via email",
     contact: "support@aicontentgenerator.com",
     action: "mailto:support@aicontentgenerator.com"
   },
   {
-    icon: <FiPhone className="w-6 h-6 text-[#704EF8]" />, // Set icon color
+    icon: <Phone className="w-6 h-6 text-[#704EF8]" />, // Set icon color
     title: "Phone Support",
     description: "Call us directly",
     contact: "+1 (555) 123-4567",
@@ -105,7 +105,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ faq, isOpen, onToggle }) => (
         <span className="text-2xl text-[#704EF8]">{faq.icon}</span> {/* Set icon color */}
         <span className="text-lg text-white font-bold">{faq.question}</span> {/* Set question color */}
       </span>
-      <FiChevronDown className={`transform transition-transform duration-300 ${isOpen ? "rotate-180" : ""} text-gray-600`} />
+      <ChevronDown className={`transform transition-transform duration-300 ${isOpen ? "rotate-180" : ""} text-gray-600`} />
     </button>
     <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
       <div className={`p-6 pt-0 text-white`}> {/* Set description color */}

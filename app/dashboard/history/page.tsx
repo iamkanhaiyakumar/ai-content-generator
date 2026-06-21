@@ -39,7 +39,7 @@ async function History() {
       createdBy: AIOutput.createdBy,
     })
     .from(AIOutput)
-    .where(eq(AIOutput.createdBy, user?.primaryEmailAddressId ?? ""))
+    .where(eq(AIOutput.createdBy, user?.primaryEmailAddress?.emailAddress ?? ""))
     .orderBy(desc(AIOutput.createdAt))
   ).map(item => ({
     ...item,

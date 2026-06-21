@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# The @netlify/plugin-nextjs handles Next.js SSR/ISR automatically.
+# Ensure NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY
+# are set in the Netlify dashboard under Site > Environment Variables.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
