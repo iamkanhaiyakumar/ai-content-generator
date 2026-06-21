@@ -13,7 +13,7 @@ const isProtectedRoute = createRouteMatcher([
   "/api/protected(.*)",
 ]);
 
-export default clerkMiddleware(async (auth, request) => {
+export default clerkMiddleware(async (auth: () => Promise<{ userId: string | null }>, request: import("next/server").NextRequest) => {
   // Protect all non-public routes
   if (!isPublicRoute(request)) {
     const session = await auth();
