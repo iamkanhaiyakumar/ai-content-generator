@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuthCheck } from '@/app/(hooks)/useAuthCheck';
+import { useAuthCheck } from '../(hooks)/useAuthCheck';
 import React from 'react';
 
 /**
