@@ -1,6 +1,6 @@
 "use client";
 
-import { TEMPLATE } from "@/app/dashboard/_components/TemplateListSection";
+import { TEMPLATE } from "@/dashboard/_components/TemplateListSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

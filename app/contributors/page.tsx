@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { AuthGuard } from '@/app/(components)/AuthGuard';
+import { AuthGuard } from '@/(components)/AuthGuard';
 
 interface Contributor {
   login: string;

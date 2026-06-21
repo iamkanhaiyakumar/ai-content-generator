@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button'; // Check if the file exists
 // import { Button } from '@/components/ui/button'
 import { useUser } from '@clerk/nextjs'
 import React, { useContext, useEffect, useState } from 'react'
-import { getUserTotalUsage } from '@/app/actions/dbActions';
+import { getUserTotalUsage } from '@/(actions)/dbActions';
 
-import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
+import { TotalUsageContext } from '@/(context)/TotalUsageContext';
 
 function UsageTrack() {
    const{user}=useUser();

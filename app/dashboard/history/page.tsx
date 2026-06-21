@@ -1,4 +1,4 @@
-import Template from "@/app/(data)/Template";
+import Template from "@/(data)/Template";
 import { Button } from "@/components/ui/button";
 import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
@@ -6,7 +6,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { desc, eq } from "drizzle-orm";
 import Image from "next/image";
 import React from "react";
-import { TEMPLATE as TEMPLATE_LIST } from "@/app/dashboard/_components/TemplateListSection";
+import { TEMPLATE as TEMPLATE_LIST } from "@/dashboard/_components/TemplateListSection";
 
 export interface HISTORY {
   [x: string]: any;
