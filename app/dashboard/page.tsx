@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import SearchSection from './_components/SearchSection';
 import TemplateListSection from './_components/TemplateListSection';
+import { SearchContext } from '../(context)/SearchContext';
 
 function DashBoard() {
-  const [userSearchInput, setUserSearchInput] = useState<string>("");
+  const { userSearchInput, setUserSearchInput } = useContext(SearchContext);
 
   return (
     <div>
