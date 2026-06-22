@@ -6,10 +6,11 @@ import OutputSection from "./_components/OutputSection";
 import { TEMPLATE } from "../../_components/TemplateListSection";
 import Template from "@/app/(data)/Template";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react"; // Keep the icons import from lucide-react
-import Link from "next/link"; // Import Link from next/link
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { chatSession } from "@/utils/AiModal";
 import { saveGeneratedContent } from "@/app/actions/dbActions";
+import { validateContentQuality, getQualityFeedback, isContentQualityAcceptable } from "@/utils/contentQualityValidator";
 import { useUser } from "@clerk/nextjs";
 
 import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
@@ -37,11 +38,12 @@ function CreateNewContent() {
 
   const [loading, setLoading] = useState(false);
   const [aiOutput, setAiOutput] = useState<string>("");
+  const [qualityFeedback, setQualityFeedback] = useState<string>("");
+  const [qualityScore, setQualityScore] = useState<number>(0);
   const { user } = useUser();
   const router = useRouter();
   const { totalUsage } = useContext(TotalUsageContext);
-  const [userSubscription, setUserSubscription] = useState(false); // Define userSubscription state
-  // const { updateCreditUsage, setUpdateCreditUsage } = useContext(UpdateCreditUsageContext);
+  const [userSubscription, setUserSubscription] = useState(false);
   
   /**
    * Used to generate  content from AI 
@@ -53,12 +55,13 @@ function CreateNewContent() {
 
   const GenerateAIContent = async (formData: any) => {
       if(totalUsage>=100000&&!userSubscription){
-          
           console.log('Please upgrade your plan');
           router.push('/dashboard/billing');
           return;
       }
     setLoading(true);
+    setQualityFeedback("");
+    setQualityScore(0);
 
     try {
       const SelectedPrompt = selectedTemplate?.aiPrompt || "";
@@ -68,18 +71,28 @@ function CreateNewContent() {
         JSON.stringify(promptData) + ", " + SelectedPrompt + toneInstruction;
 
       const result = await chatSession.sendMessage(FinalAIPrompt);
-
       const aiResponse = await result.response.text();
-      console.log(aiResponse);
+
       setAiOutput(aiResponse);
+
+      const score = await validateContentQuality(
+        aiResponse,
+        selectedTemplate?.name || "general content"
+      );
+
+      setQualityScore(score.overall);
+      const feedback = getQualityFeedback(score);
+      setQualityFeedback(feedback);
+
+      console.log("Content quality score:", score.overall);
+      console.log("Quality feedback:", feedback);
 
       await SaveInDb(formData, selectedTemplate?.slug, aiResponse);
     } catch (error) {
       console.error("Error generating AI content:", error);
+      setQualityFeedback("Error validating content quality");
     } finally {
       setLoading(false);
-      
-      // setUpdateCreditUsage(Date.now());
     }
   };
 
@@ -118,7 +131,11 @@ function CreateNewContent() {
 
         {/* Output Section */}
         <div className="col-span-2">
-          <OutputSection aiOutput={aiOutput} />
+          <OutputSection
+            aiOutput={aiOutput}
+            qualityScore={qualityScore}
+            qualityFeedback={qualityFeedback}
+          />
         </div>
       </div>
     </div>
