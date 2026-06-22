@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { UserButton } from "@clerk/nextjs";
 import { Search } from "lucide-react";
 import MobileSidebar from "./MobileSidebar";
+import { SearchContext } from "@/app/(context)/SearchContext";
 
 function Header() {
+  const { setUserSearchInput } = useContext(SearchContext);
+
   return (
     <header className="bg-white shadow-sm border-b-2 p-5 flex justify-between items-center">
       <div className="flex items-center gap-4">
@@ -13,6 +16,7 @@ function Header() {
           <input
             type="text"
             placeholder="Search...."
+            onChange={(e) => setUserSearchInput(e.target.value)}
             className="outline-none rounded-md text-black w-full"
           />
         </div>
