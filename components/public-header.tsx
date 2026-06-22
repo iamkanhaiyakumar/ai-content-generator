@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "./theme-provider";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -85,7 +86,7 @@ export default function PublicHeader() {
               <Moon className="h-5 w-5 transition-transform duration-300 rotate-0 scale-100" />
             )}
           </button>
-          <Link
+          {/* <Link
             href="/sign-in"
             className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
           >
@@ -96,7 +97,39 @@ export default function PublicHeader() {
             className="rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-violet-500"
           >
             Get Started
-          </Link>
+          </Link> */}
+          
+          <SignedOut>
+            <Link
+              href="/sign-in"
+              onClick={() => setMenuOpen(false)}
+              className="rounded-md px-4 py-2.5 text-center text-sm font-medium"
+            >
+              Sign In
+            </Link>
+
+            <Link
+              href="/sign-up"
+              onClick={() => setMenuOpen(false)}
+              className="rounded-lg bg-violet-600 px-4 py-2.5 text-center text-sm font-semibold text-white"
+            >
+              Get Started
+            </Link>
+          </SignedOut>
+
+          <SignedIn>
+            <Link
+              href="/dashboard"
+              onClick={() => setMenuOpen(false)}
+              className="rounded-lg bg-violet-600 px-4 py-2.5 text-center text-sm font-semibold text-white"
+            >
+              Dashboard
+            </Link>
+
+            <div className="flex justify-center">
+              <UserButton />
+            </div>
+          </SignedIn>
         </div>
 
         {/* Mobile Menu Toggle */}

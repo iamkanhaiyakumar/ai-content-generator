@@ -14,8 +14,18 @@ interface PROPS {
   loading: boolean;
 }
 
+const TONE_OPTIONS = [
+  { label: "💼 Professional", value: "Professional" },
+  { label: "😊 Friendly", value: "Friendly" },
+  { label: "😂 Witty/Funny", value: "Witty/Funny" },
+  { label: "📋 Formal", value: "Formal" },
+  { label: "🎯 Persuasive", value: "Persuasive" },
+  { label: "💡 Informative", value: "Informative" },
+];
+
 function FromSection({ selectedTemplate, userFormInput, loading }: PROPS) {
   const [formData, setFormData] = useState<any>({});
+  const [selectedTone, setSelectedTone] = useState<string>("Professional");
   const [error, setError] = useState<string | null>(null); // For validation
   const [successMessage, setSuccessMessage] = useState<string | null>(null); // For success message
 
@@ -38,13 +48,14 @@ function FromSection({ selectedTemplate, userFormInput, loading }: PROPS) {
     e.preventDefault();
     // Handle form submission logic here
     if (validateForm()) {
-      userFormInput(formData);
+      userFormInput({ ...formData, tone: selectedTone });
       setSuccessMessage("Form submitted successfully!"); // Show success message
     }
   };
 
   const resetForm = () => {
     setFormData({}); // Clear form data
+    setSelectedTone("Professional");
     setError(null); // Clear error message
     setSuccessMessage(null); // Clear success message
   };
@@ -60,6 +71,24 @@ function FromSection({ selectedTemplate, userFormInput, loading }: PROPS) {
       <p className="text-gray-500 text-sm">{selectedTemplate?.desc}</p>
 
       <form className="mt-6" onSubmit={onSubmit}>
+        <div className="mb-7">
+          <label className="font-bold block mb-2">Tone</label>
+          <div className="flex flex-wrap gap-2">
+            {TONE_OPTIONS.map((tone) => (
+              <Button
+                key={tone.value}
+                type="button"
+                variant={selectedTone === tone.value ? "default" : "outline"}
+                className="h-auto py-2"
+                onClick={() => setSelectedTone(tone.value)}
+                disabled={loading}
+              >
+                {tone.label}
+              </Button>
+            ))}
+          </div>
+        </div>
+
         {selectedTemplate?.form?.map((item, index) => (
           <div key={index} className="my-2 flex flex-col gap-2 mb-7">
             <label className="font-bold">{item.label}</label>

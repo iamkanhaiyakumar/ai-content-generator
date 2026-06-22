@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Copy, XCircle, AlertCircle } from 'lucide-react';
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface Props {
   aiOutput: string;
@@ -87,11 +89,10 @@ function OutputSection({ aiOutput, qualityScore = 0, qualityFeedback = "" }: Pro
         </div>
       )}
 
-      <div className='p-5 border-t max-h-96 overflow-y-auto'>
+      {/* Generated the output in the output section */}
+      <div className='p-5 border-t max-h-96 overflow-y-auto prose max-w-none text-gray-900'>
         {aiOutput ? (
-          <div className='prose prose-sm max-w-none dark:prose-invert'>
-            <p className='text-black whitespace-pre-wrap'>{aiOutput}</p>
-          </div>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{aiOutput}</ReactMarkdown>
         ) : (
           <p className='text-gray-400 text-center py-8'>Your generated content will appear here</p>
         )}

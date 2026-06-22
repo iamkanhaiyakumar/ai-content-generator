@@ -1,33 +1,47 @@
-# Security Policy for AI Content Generator
-Contact: mailto:security@aicontentgenerator.com
-Expires: 2024-12-31T23:59:59.000Z
-Encryption: 
-Acknowledgments: 
-Preferred-Languages: en
-Canonical:
-Policy: 
-Hiring:
+# Security Policy
 
-We take the security of our systems seriously. If you have found any issues that might affect the security of our AI Content Generator, please let us know.
+## Supported Versions
 
-We appreciate your efforts to responsibly disclose your findings, and will make every effort to acknowledge your contributions.
+| Version | Supported          |
+| ------- | ------------------ |
+| Latest  | :white_check_mark: |
+| Archive | :x:                |
 
-Please do NOT attempt to access or modify data of any users without explicit permission.
+## Reporting a Vulnerability
 
-# How to Report
-Please report vulnerabilities by emailing us at AIContentGenerator@gmail.com. Include as much detail as possible to help us identify and fix the issue swiftly.
-Do not share the vulnerability publicly until it has been addressed and a patch is available.
+We take the security of this project seriously. If you discover a security vulnerability, please follow the guidelines below to report it responsibly.
 
-# Security Updates
-We will notify users via GitHub releases for any critical security updates.
-Minor security patches will be included in regular updates as needed.
+### How to Report
 
-## Security Best Practices
-Make sure to use the latest version of AI Content Generator for the latest security features and patches.
-Follow password best practices, such as using strong, unique passwords for each account.
-Regularly update your dependencies to the latest versions.
+**Please do NOT create a public GitHub issue for security vulnerabilities.**
 
-# Acknowledgements
-We appreciate contributions from the community and researchers who help us improve the security of AI Content Generator. Thank you for keeping the platform secure for everyone!
+Instead, please report vulnerabilities by:
 
-Thank you for helping keep AI Content Generator and our users safe!
+1. **Email**: Send details to the repository maintainers
+2. **Include**:
+   - Description of the vulnerability
+   - Steps to reproduce the issue
+   - Potential impact assessment
+   - Suggested fix (if any)
+
+### What to Expect
+
+- **Acknowledgment**: You will receive a confirmation within 48 hours
+- **Assessment**: The team will evaluate the report within 5 business days
+- **Resolution**: We aim to address critical vulnerabilities within 30 days
+- **Disclosure**: Coordinated disclosure once the fix is deployed
+
+### Security Best Practices
+
+- Always use the latest version of the project
+- Keep dependencies updated
+- Follow OWASP guidelines for web application security
+- Review and rotate API keys and credentials regularly
+
+## Security Contacts
+
+For urgent security matters, please contact the project maintainers directly through GitHub.
+
+---
+
+*Last updated: May 2026*
