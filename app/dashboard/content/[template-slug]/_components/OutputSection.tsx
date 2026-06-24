@@ -3,16 +3,18 @@ import React, { useEffect, useState } from 'react';
 // import { Editor } from '@toast-ui/react-editor';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Copy, XCircle } from 'lucide-react';
+import OriginalityReport from './OriginalityReport';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 interface Props {
   aiOutput: string;
+  originalityResult?: any;
 }
 
 const TOAST_DISPLAY_DURATION = 2000;
 
-function OutputSection({ aiOutput }: Props) {
+function OutputSection({ aiOutput, originalityResult }: Props) {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isErrorToast, setIsErrorToast] = useState(false);
   const [toastId, setToastId] = useState(0);
@@ -62,14 +64,21 @@ function OutputSection({ aiOutput }: Props) {
           )}
         </div>
       </div>
+
+      {originalityResult && (
+        <div className='border-t p-5'>
+          <OriginalityReport result={originalityResult} />
+        </div>
+      )}
+
       {/* Generated the output in the output section */}
-      <div className="p-5 border-t prose max-w-none text-gray-900">
-      <ReactMarkdown
-      remarkPlugins={[remarkGfm]}
-      >
-        {aiOutput}
-      </ReactMarkdown>
-    </div>
+      <div className='p-5 border-t max-h-96 overflow-y-auto prose max-w-none text-gray-900'>
+        {aiOutput ? (
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{aiOutput}</ReactMarkdown>
+        ) : (
+          <p className='text-gray-400 text-center py-8'>Your generated content will appear here</p>
+        )}
+      </div>
     </div>
   );
 }
