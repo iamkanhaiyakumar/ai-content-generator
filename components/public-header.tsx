@@ -63,7 +63,7 @@ export default function PublicHeader() {
             <Link
               key={label}
               href={href}
-              onClick={(e) => handleNavClick(e, href)}
+              onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavClick(e, href)}
               className="rounded-md px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
             >
               {label}
@@ -99,6 +99,7 @@ export default function PublicHeader() {
             Get Started
           </Link> */}
           
+          
           <SignedOut>
             <Link
               href="/sign-in"
@@ -117,6 +118,7 @@ export default function PublicHeader() {
             </Link>
           </SignedOut>
 
+          
           <SignedIn>
             <Link
               href="/dashboard"
@@ -165,7 +167,7 @@ export default function PublicHeader() {
               <Link
                 key={label}
                 href={href}
-                onClick={(e) => handleNavClick(e, href)}
+                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavClick(e, href)}
                 className="rounded-md px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
               >
                 {label}

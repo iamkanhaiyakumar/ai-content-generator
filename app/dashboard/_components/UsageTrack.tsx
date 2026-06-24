@@ -1,4 +1,4 @@
-"user client"
+"use client"
 // Update this import path based on your directory structure
 import { Button } from '@/components/ui/button'; // Check if the file exists
 

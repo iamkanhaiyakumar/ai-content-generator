@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { AuthGuard } from '@/app/(components)/AuthGuard';
 
 interface Contributor {
   login: string;
@@ -25,7 +26,7 @@ const ContributorsPage = () => {
         }
 
         const data = await response.json();
-        console.log('fetched data=======',data); // Debug the fetched data
+        console.log('fetched data=======',data);
         setContributors(data);
       } catch (error: any) {
         setError(error.message);
@@ -63,4 +64,10 @@ const ContributorsPage = () => {
   );
 };
 
-export default ContributorsPage;
+export default function ContributorsPageWrapper() {
+  return (
+    <AuthGuard>
+      <ContributorsPage />
+    </AuthGuard>
+  );
+}

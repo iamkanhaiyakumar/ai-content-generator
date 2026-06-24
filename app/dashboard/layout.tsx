@@ -7,6 +7,7 @@ import { TotalUsageContext } from '../(context)/TotalUsageContext';
 import { SearchContext } from '../(context)/SearchContext';
 import UpdateCreditUsageContext from "../(context)/UpdateCreditUsageContext"
 import UserSubscriptionContext from '../(context)/UserSubscriptionContext';
+import { AuthGuard } from '../(components)/AuthGuard';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -20,26 +21,28 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [userSearchInput, setUserSearchInput] = useState<string>("");
 
   return (
-    <SearchContext.Provider value={{ userSearchInput, setUserSearchInput }}>
-    <TotalUsageContext.Provider value={{ totalUsage, setTotalUsage }}>
-      {/* <UserSubscriptionContext.Provider value={{userSubscription, setUserSubscription}}> */}
-      {/* <UpdateCreditUsageContext.Provider value={{ UpdateCreditUsageContext, setUpdateCreditUsage }} > //Commenting out this line due to error */}
-        <div className="flex min-h-screen">
-          {/* Desktop Sidebar */}
-          <aside className="sticky top-0 left-0 hidden w-64 bg-white text-gray-800 lg:block h-screen">
-            <SideNav />
-          </aside>
+    <AuthGuard>
+      <SearchContext.Provider value={{ userSearchInput, setUserSearchInput }}>
+      <TotalUsageContext.Provider value={{ totalUsage, setTotalUsage }}>
+        {/* <UserSubscriptionContext.Provider value={{userSubscription, setUserSubscription}}> */}
+        {/* <UpdateCreditUsageContext.Provider value={{ UpdateCreditUsageContext, setUpdateCreditUsage }} > //Commenting out this line due to error */}
+          <div className="flex min-h-screen">
+            {/* Desktop Sidebar */}
+            <aside className="sticky top-0 left-0 hidden w-64 bg-white text-gray-800 lg:block h-screen">
+              <SideNav />
+            </aside>
 
-          {/* Main Content */}
-          <div className="flex flex-1 flex-col">
-            <Header />
-            <main className="flex-1 ">{children}</main>
+            {/* Main Content */}
+            <div className="flex flex-1 flex-col">
+              <Header />
+              <main className="flex-1 ">{children}</main>
+            </div>
           </div>
-        </div>
-      {/* </UpdateCreditUsageContext.Provider> */}
-      {/* </UserSubscriptionContext.Provider> */}
-    </TotalUsageContext.Provider>
-    </SearchContext.Provider>
+        {/* </UpdateCreditUsageContext.Provider> */}
+        {/* </UserSubscriptionContext.Provider> */}
+      </TotalUsageContext.Provider>
+      </SearchContext.Provider>
+    </AuthGuard>
   );
 };
 
