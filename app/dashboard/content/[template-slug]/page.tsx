@@ -11,6 +11,11 @@ import Link from "next/link"; // Import Link from next/link
 import { chatSession } from "@/utils/AiModal";
 import { saveGeneratedContent } from "@/app/actions/dbActions";
 import { analyzeOriginality } from "@/utils/plagiarismDetector";
+import {
+  filterInputContent,
+  filterOutputContent,
+  CONTENT_FILTER_WARNING,
+} from "@/utils/contentFilter";
 import { useUser } from "@clerk/nextjs";
 
 import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
@@ -68,8 +73,22 @@ function CreateNewContent() {
       const FinalAIPrompt =
         JSON.stringify(promptData) + ", " + SelectedPrompt + toneInstruction;
 
+      const inputFilter = filterInputContent(FinalAIPrompt);
+      if (inputFilter.flagged) {
+        setAiOutput(CONTENT_FILTER_WARNING);
+        setLoading(false);
+        return;
+      }
+
       const result = await chatSession.sendMessage(FinalAIPrompt);
       const aiResponse = await result.response.text();
+
+      const outputFilter = filterOutputContent(aiResponse);
+      if (outputFilter.flagged) {
+        setAiOutput(CONTENT_FILTER_WARNING);
+        setLoading(false);
+        return;
+      }
 
       setAiOutput(aiResponse);
 
