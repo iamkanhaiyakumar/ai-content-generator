@@ -13,27 +13,22 @@ const isProtectedRoute = createRouteMatcher([
   "/api/protected(.*)",
 ]);
 
-export default clerkMiddleware(async (auth: () => Promise<{ userId: string | null }>, request: import("next/server").NextRequest) => {
-  // Protect all non-public routes
+export default clerkMiddleware((auth, request) => {
   if (!isPublicRoute(request)) {
-    const session = await auth();
-    
-    // If attempting to access protected route without auth, redirect to sign-in
-    if (isProtectedRoute(request) && !session.userId) {
+    if (isProtectedRoute(request) && !auth.userId) {
       const signInUrl = new URL("/sign-in", request.url);
       signInUrl.searchParams.set("redirect_url", request.url);
       return NextResponse.redirect(signInUrl);
     }
-    
-    // For API routes, return 401 if not authenticated
-    if (request.nextUrl.pathname.startsWith("/api/") && !session.userId) {
+
+    if (request.nextUrl.pathname.startsWith("/api/") && !auth.userId) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
       );
     }
   }
-  
+
   return NextResponse.next();
 });
 
