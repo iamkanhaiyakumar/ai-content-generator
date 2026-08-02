@@ -125,7 +125,7 @@ const ContactSupport: React.FC<ContactSupportProps> = ({ methods }) => {
   return (
     <div className={`p-6 rounded-xl bg-black shadow-md`}>
       <div className="flex flex-wrap gap-2 mb-4">
-        {methods.map((method, index) => (
+        {(methods ?? []).map((method, index) => (
           <button
             key={index}
             className={`px-4 py-2 font-semibold rounded-lg transition-all duration-300 ${selectedMethodIndex === index ? 'bg-[#704EF8] text-white' : 'text-gray-600 hover:bg-gray-100'}`}
