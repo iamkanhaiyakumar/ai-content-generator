@@ -193,7 +193,7 @@ const FaqPage: React.FC = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${selectedCategory === category ? 'bg-[#704EF8] text-white' : 'bg-black text-gray-600 hover:bg-gray-100'}`}
               >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
+                {category[0].toUpperCase() + category.slice(1)}
               </button>
             ))}
           </div>
