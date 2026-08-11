@@ -55,15 +55,15 @@ export default [
   },
   {
     name: "Blog Title",
-    desc: "An AI tool that generate blog title depends on yout blog information",
+    desc: "An AI tool that generate blog title depends on your blog information",
     category: "Blog",
     icon: "https://cdn-icons-png.flaticon.com/128/4186/4186534.png",
     aiPrompt:
-      "Give me 5 blog topic idea in bullet wise only based on give niche & outline and give me result in Rich text editor format",
+      "Act as an SEO Specialist. Generate 5 highly engaging and SEO-optimized blog titles based on the given niche and outline. Incorporate power words, numbers, and emotional triggers to maximize CTR (Click-Through Rate). Target long-tail keywords. Output purely as a bulleted list in Rich Text format.",
     slug: "generate-blog-title",
     form: [
       {
-        label: "Enter your blog ",
+        label: "Enter your blog niche/topic",
         field: "input",
         name: "niche",
         required: true,
@@ -77,12 +77,12 @@ export default [
   },
   {
     name: "Blog Content",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
+    desc: "An AI tool that serves as your personal SEO content writer, generating high-ranking, engaging blog posts.",
     category: "blog",
     icon: "https://cdn-icons-png.flaticon.com/128/4905/4905454.png",
     slug: "blog-content-generation",
     aiPrompt:
-      "Generate Blog Content based on topic and outline in rich text editor format",
+      "Act as an expert SEO Content Writer. Generate a comprehensive, high-ranking blog post based on the given topic and outline. You MUST include: 1. A catchy H1 title. 2. Proper heading hierarchy (H2, H3). 3. LSI (Latent Semantic Indexing) keywords naturally integrated. 4. A keyword density of 1.5% to 2% for the primary topic. 5. Short paragraphs for high readability and user intent satisfaction. 6. A compelling conclusion with a Call-to-Action (CTA). Output strictly in Rich Text Editor format.",
     form: [
       {
         label: "Enter your blog topic",
@@ -116,15 +116,15 @@ export default [
   },
   {
     name: "Youtube SEO Title",
-    desc: "An AI tool that serves as your personal blog post title writer, generating catchy and viral-worthy titles in your chosen language.",
+    desc: "Generate catchy, viral-worthy, and highly searchable YouTube titles.",
     category: "Youtube Tools",
     icon: "https://cdn-icons-png.flaticon.com/128/402/402075.png",
     slug: "youtube-seo-title",
     aiPrompt:
-      "Give me Best SEO optimized high ranked 5 title ideas bullet wise only bases on keywords and outline and give me result in HTML tags format",
+      "Act as an Expert YouTube SEO Strategist. Generate 5 highly clickable, high-ranking YouTube video titles based on the given keywords and outline. The titles MUST: 1. Keep the main keyword near the beginning. 2. Use psychological trigger words (e.g., 'Secret', 'Proven', 'Fast'). 3. Be under 60 characters to prevent truncation on mobile screens. 4. Satisfy viewer search intent. Output strictly as a bulleted list in HTML tags format.",
     form: [
       {
-        label: "Enter your youtube video topic keyowords",
+        label: "Enter your youtube video topic keywords",
         field: "input",
         name: "keywords",
         required: true,
