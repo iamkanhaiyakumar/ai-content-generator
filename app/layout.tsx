@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Outfit } from "next/font/google";
 import ChatbaseEmbed from "@/components/ChatbaseEmbed";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/components/language-provider";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -51,10 +52,12 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body className={outfit.className}>
           <ThemeProvider>
-            <main>
-              {children}
-              <ChatbaseEmbed />
-            </main>
+            <LanguageProvider>
+              <main>
+                {children}
+                <ChatbaseEmbed />
+              </main>
+            </LanguageProvider>
           </ThemeProvider>
         </body>
       </html>
