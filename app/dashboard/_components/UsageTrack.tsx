@@ -20,7 +20,7 @@ function UsageTrack() {
 
     const GetData=async()=>{
       if (user?.primaryEmailAddress?.emailAddress) {
-        const total = await getUserTotalUsage(user.primaryEmailAddress.emailAddress);
+        const total = await getUserTotalUsage();
         setTotalUsage(total);
         console.log(total);
       }

@@ -4,14 +4,19 @@ import { db } from "@/utils/db";
 import { AIOutput } from "@/utils/schema";
 import { eq } from "drizzle-orm";
 import moment from "moment";
+import { currentUser } from "@clerk/nextjs/server";
 
 export async function saveGeneratedContent(
   formData: any,
   slug: string,
-  aiRes: string,
-  userEmail: string
+  aiRes: string
 ) {
   try {
+    const user = await currentUser();
+    const userEmail = user?.primaryEmailAddress?.emailAddress;
+    
+    if (!userEmail) throw new Error("Unauthorized");
+
     const result = await db.insert(AIOutput).values({
       formData: formData,
       templateSlug: slug,
@@ -27,8 +32,13 @@ export async function saveGeneratedContent(
   }
 }
 
-export async function getUserTotalUsage(userEmail: string) {
+export async function getUserTotalUsage() {
   try {
+    const user = await currentUser();
+    const userEmail = user?.primaryEmailAddress?.emailAddress;
+
+    if (!userEmail) return 0;
+
     const results = await db
       .select({ aiResponse: AIOutput.aiResponse })
       .from(AIOutput)
