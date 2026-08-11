@@ -2,6 +2,7 @@
 
 import PublicHeader from "@/components/public-header";
 import PublicFooter from "@/components/public-footer";
+import { useLanguage } from "@/components/language-provider";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { TypewriterEffect } from "@/components/ui/typewriter-effect";
 import Pricing from "@/components/ui/pricing";
@@ -10,6 +11,7 @@ import Review from "@/components/ui/review";
 import UseCases from "@/components/ui/use-cases";
 
 export default function Home() {
+  const { t } = useLanguage();
   return (
     <main className="relative min-h-screen overflow-hidden bg-white dark:bg-gray-950">
       <PublicHeader />
@@ -19,7 +21,7 @@ export default function Home() {
         <BackgroundBeams />
         <div className="relative z-10 mx-auto max-w-3xl">
           <h1 className="mb-6 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
-            AI-Powered Content Generation
+            {t("hero.title")}
           </h1>
           <TypewriterEffect
             words={[
@@ -37,7 +39,7 @@ export default function Home() {
               href="/sign-up"
               className="rounded-xl bg-violet-600 px-8 py-3 text-base font-semibold text-white shadow-md transition hover:bg-violet-500"
             >
-              Get Started Free
+              {t("hero.getStartedFree")}
             </a>
             <a
               href="#use-cases"

@@ -6,18 +6,21 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "./theme-provider";
+import { useLanguage } from "./language-provider";
+import LanguageSwitcher from "./language-switcher";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Features", href: "/#features" },
-  { label: "Use Cases", href: "/#use-cases" },   // ← was broken; now points to section
-  { label: "Pricing", href: "/#pricing" },
+  { key: "nav.home", href: "/" },
+  { key: "nav.features", href: "/#features" },
+  { key: "nav.useCases", href: "/#use-cases" },   // ← was broken; now points to section
+  { key: "nav.pricing", href: "/#pricing" },
 ];
 
 export default function PublicHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { t } = useLanguage();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -59,14 +62,14 @@ export default function PublicHeader() {
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-1 md:flex">
-          {navLinks.map(({ label, href }) => (
+          {navLinks.map(({ key, href }) => (
             <Link
-              key={label}
+              key={key}
               href={href}
               onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavClick(e, href)}
               className="rounded-md px-4 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
             >
-              {label}
+              {t(key)}
             </Link>
           ))}
         </nav>
@@ -86,6 +89,8 @@ export default function PublicHeader() {
               <Moon className="h-5 w-5 transition-transform duration-300 rotate-0 scale-100" />
             )}
           </button>
+          {/* Language switcher */}
+          <LanguageSwitcher />
           {/* <Link
             href="/sign-in"
             className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
@@ -106,7 +111,7 @@ export default function PublicHeader() {
               onClick={() => setMenuOpen(false)}
               className="rounded-md px-4 py-2.5 text-center text-sm font-medium"
             >
-              Sign In
+              {t("cta.signIn")}
             </Link>
 
             <Link
@@ -114,7 +119,7 @@ export default function PublicHeader() {
               onClick={() => setMenuOpen(false)}
               className="rounded-lg bg-violet-600 px-4 py-2.5 text-center text-sm font-semibold text-white"
             >
-              Get Started
+              {t("cta.getStarted")}
             </Link>
           </SignedOut>
 
@@ -125,7 +130,7 @@ export default function PublicHeader() {
               onClick={() => setMenuOpen(false)}
               className="rounded-lg bg-violet-600 px-4 py-2.5 text-center text-sm font-semibold text-white"
             >
-              Dashboard
+              {t("cta.dashboard")}
             </Link>
 
             <div className="flex justify-center">
@@ -149,6 +154,7 @@ export default function PublicHeader() {
               <Moon className="h-5 w-5" />
             )}
           </button>
+          <LanguageSwitcher />
           <button
             className="rounded-md p-2 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
             onClick={() => setMenuOpen((o) => !o)}
@@ -163,14 +169,14 @@ export default function PublicHeader() {
       {menuOpen && (
         <div className="border-t border-gray-200 bg-white px-4 pb-4 dark:border-gray-800 dark:bg-gray-950 md:hidden">
           <nav className="mt-2 flex flex-col gap-1">
-            {navLinks.map(({ label, href }) => (
+            {navLinks.map(({ key, href }) => (
               <Link
-                key={label}
+                key={key}
                 href={href}
                 onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavClick(e, href)}
                 className="rounded-md px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
               >
-                {label}
+                {t(key)}
               </Link>
             ))}
           </nav>
@@ -180,14 +186,14 @@ export default function PublicHeader() {
               onClick={() => setMenuOpen(false)}
               className="rounded-md px-4 py-2.5 text-center text-sm font-medium text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
             >
-              Sign In
+              {t("cta.signIn")}
             </Link>
             <Link
               href="/sign-up"
               onClick={() => setMenuOpen(false)}
               className="rounded-lg bg-violet-600 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-violet-500"
             >
-              Get Started
+              {t("cta.getStarted")}
             </Link>
           </div>
         </div>
