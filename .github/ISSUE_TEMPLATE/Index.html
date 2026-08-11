@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Content Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">AI Content Generator</h1>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mt-4">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Form to input content generation request -->
+        <form action="/generate" method="POST">
+            <div class="form-group">
+                <label for="prompt">Enter Your Prompt</label>
+                <textarea class="form-control" id="prompt" name="prompt" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="max_tokens">Max Tokens</label>
+                <input type="number" class="form-control" id="max_tokens" name="max_tokens" min="50" max="500" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Generate Content</button>
+        </form>
+
+        <hr>
+
+        <!-- Section to display content generation history -->
+        <h2 class="text-center mt-4">Content Generation History</h2>
+        <div class="list-group">
+            {% if content_history %}
+                {% for entry in content_history %}
+                    <div class="list-group-item">
+                        <h5><strong>Prompt:</strong> {{ entry.prompt }}</h5>
+                        <p><strong>Generated Content:</strong> {{ entry.content }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center">No content generated yet.</p>
+            {% endif %}
+        </div>
+
+        <!-- Button to clear history -->
+        <form action="/clear_history" method="POST" class="mt-4">
+            <button type="submit" class="btn btn-danger btn-block">Clear Content History</button>
+        </form>
+    </div>
+</body>
+</html>
